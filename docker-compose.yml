@@ -3,7 +3,7 @@ version: "3.3"
 services:
   # MySQL
   db:
-    container_name: "db"
+    container_name: "research_db"
     # path配下のDockerfile読み込み
     build: ./docker/mysql
     # コンテナが落ちたら再起動する
