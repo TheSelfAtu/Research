@@ -11,5 +11,4 @@ window.onload = () => {
     ReactDOM.render(<App />, document.getElementById("app"));
   }
   window.AudioContext = window.AudioContext || window.webkitAudioContext;
-
 };
