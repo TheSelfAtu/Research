@@ -3,7 +3,7 @@ export const research1Data = {
       sound1: {
         type: "saw",
         frequency: "800",
-        length: 0.2,
+        length: 2,
       },
       sound2: {
         type: "square",

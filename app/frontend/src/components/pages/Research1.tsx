@@ -14,14 +14,14 @@ declare global {
 export function Research1(): JSX.Element {
   const [name, setName] = useState("");
   const [questionNumber, setQuestionNumber] = useState(1);
-  const [question, setquestion] = useState({
-    Q1: "",
-    Q2: "",
-    Q3: "",
-    Q4: "",
-    Q5: "",
-    Q6: "",
-    Q7: "",
+  const [questionResults, setquestionResults] = useState({
+    1: "",
+    2: "",
+    3: "",
+    4: "",
+    5: "",
+    6: "",
+    7: "",
   });
   const [dialogOpen, setDialogOpen] = useState(false);
 
@@ -31,14 +31,9 @@ export function Research1(): JSX.Element {
     try {
       await postFire("/post-topic", {
         name: name,
-        Q1: question["Q1"],
-        Q2: question["Q2"],
-        Q3: question["Q3"],
-        Q4: question["Q4"],
-        Q5: question["Q5"],
-        Q6: question["Q6"],
-        Q7: question["Q7"],
+        Q1: questionResults["Q1"],
       });
+      setDialogOpen(false);
     } catch (e) {
       // 結果の送信に失敗した場合はエラーを表示
       alert("結果の送信に失敗しました");
