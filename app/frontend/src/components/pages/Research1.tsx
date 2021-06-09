@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useCallback } from "react";
-import AlertDialog from "../organisms/Dialog";
+import AlertDialog from "../organisms/AlertDialog";
 import Button from "@material-ui/core/Button";
 import { beepSound } from "../../Common/beepSound";
 import { Description } from "../organisms/Description";
 import { postFire } from "../../Common/postFire";
+
 declare global {
   interface Window {
     webkitAudioContext: any;

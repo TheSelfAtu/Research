@@ -7,6 +7,7 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import { beepSound } from "../../Common/beepSound";
 import { BeepButton } from "../atoms/BeepButton";
+import { research1Data } from "../../data/research1Data";
 
 interface AlertDialog {
   dialogOpen: boolean;
@@ -22,7 +23,9 @@ export default function AlertDialog(props: AlertDialog): JSX.Element {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">{"危険操作検証"}</DialogTitle>
+        <DialogTitle id="alert-dialog-title">
+          <span>第{props.questionNumber}問</span>
+        </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
             危険な操作だと感じるボタンをクリックしてください
@@ -30,14 +33,22 @@ export default function AlertDialog(props: AlertDialog): JSX.Element {
         </DialogContent>
         <DialogActions>
           <BeepButton
-            soundConfig={props.soundConfig.questionNumber.sound1}
             questionNumber={props.questionNumber}
             setQuestionNumber={props.setQuestionNumber}
+            type={research1Data[props.questionNumber]["sound1"]["type"]}
+            frequency={
+              research1Data[props.questionNumber]["sound1"]["frequency"]
+            }
+            length={research1Data[props.questionNumber]["sound1"]["length"]}
           ></BeepButton>
           <BeepButton
-            soundConfig={props.soundConfig.questionNumber.sound2}
             questionNumber={props.questionNumber}
             setQuestionNumber={props.setQuestionNumber}
+            type={research1Data[props.questionNumber]["sound2"]["type"]}
+            frequency={
+              research1Data[props.questionNumber]["sound2"]["frequency"]
+            }
+            length={research1Data[props.questionNumber]["sound2"]["length"]}
           ></BeepButton>
         </DialogActions>
       </Dialog>

@@ -1,11 +1,14 @@
-import { soundConfig } from "../../data/Research1";
 import Button from "@material-ui/core/Button";
 import { beepSound } from "../../Common/beepSound";
+
 type beepSoundType = "sine" | "sawtooth" | "triangle";
 
 interface BeepButtonProps {
-  questionNumber: number;
+  questionNumber: any;
   setQuestionNumber: any;
+  type: string;
+  frequency: number;
+  length: number;
 }
 export function BeepButton(props: BeepButtonProps) {
   return (
@@ -13,7 +16,7 @@ export function BeepButton(props: BeepButtonProps) {
       variant="contained"
       color="secondary"
       onMouseEnter={() => {
-        beepSound(soundConfig.type, soundConfig.frequency, soundConfig.length);
+        beepSound(props.type, props.frequency, props.length);
       }}
       onClick={() => {
         props.setQuestionNumber(props.questionNumber + 1);
