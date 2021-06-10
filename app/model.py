@@ -13,7 +13,9 @@ class UserTable(Base):
     name = Column(String(30), nullable=False)
     age = Column(Integer)
 
-
+class Test(BaseModel):
+    name:str
+    age:int
 # POSTやPUTのとき受け取るRequest Bodyのモデルを定義
 class User(BaseModel):
     id: int

@@ -1,14 +1,14 @@
 export const research1Data = {
     1: {
       sound1: {
-        type: "saw",
+        type: "sawtooth",
         frequency: "800",
         length: 2,
       },
       sound2: {
         type: "square",
         frequency: "800",
-        length: 0.2,
+        length: 2,
       },
     },
     2: {
@@ -20,12 +20,12 @@ export const research1Data = {
       sound2: {
         type: "triangle",
         frequency: "800",
-        length: 0.2,
+        length: 2,
       },
     },
     3: {
       sound1: {
-        type: "saw",
+        type: "sawtooth",
         frequency: "800",
         length: 0.2,
       },
@@ -42,14 +42,14 @@ export const research1Data = {
         length: 0.2,
       },
       sound2: {
-        type: "saw",
+        type: "sawtooth",
         frequency: "400",
         length: 0.2,
       },
     },
     5: {
       sound1: {
-        type: "saw",
+        type: "sawtooth",
         frequency: "480",
         length: 0.2,
       },

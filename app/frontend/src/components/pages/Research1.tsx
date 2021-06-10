@@ -29,10 +29,17 @@ export function Research1(): JSX.Element {
   const postResultToDB = useCallback(async () => {
     // 結果を送信する
     try {
-      await postFire("/post-topic", {
-        name: name,
-        Q1: questionResults["Q1"],
+      await postFire("/test", {
+        name: "tsuchida",
+        age: "24",
       });
+      alert("success");
+      // await postFire("/test", {
+      //   id: "100",
+      //   name: "tsuchida",
+      //   age: "24",
+      //   // Q1: questionResults["1"],
+      // });
       setDialogOpen(false);
     } catch (e) {
       // 結果の送信に失敗した場合はエラーを表示
@@ -44,6 +51,14 @@ export function Research1(): JSX.Element {
   return (
     <div>
       <Description></Description>
+      <Button
+        onClick={() => {
+          postResultToDB();
+          alert("done");
+        }}
+      >
+        test
+      </Button>
       <Button
         variant="contained"
         onClick={() => {
