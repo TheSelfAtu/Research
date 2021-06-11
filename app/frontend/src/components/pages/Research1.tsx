@@ -16,13 +16,13 @@ export function Research1(): JSX.Element {
   const [name, setName] = useState("");
   const [questionNumber, setQuestionNumber] = useState(1);
   const [questionResults, setquestionResults] = useState({
-    1: "",
-    2: "",
-    3: "",
-    4: "",
-    5: "",
-    6: "",
-    7: "",
+    Q1: "",
+    Q2: "",
+    Q3: "",
+    Q4: "",
+    Q5: "",
+    Q6: "",
+    Q7: "",
   });
   const [dialogOpen, setDialogOpen] = useState(false);
 
