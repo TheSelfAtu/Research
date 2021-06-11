@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from typing import List  # ネストされたBodyを定義するために必要
 from starlette.middleware.cors import CORSMiddleware  # CORSを回避するために必要
 from db import session  # DBと接続するためのセッション
-from model import UserTable, User  ,Test# 今回使うモデルをインポート
+from model import UserTable, User  ,Data# 今回使うモデルをインポート
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 # from fastapi import APIRouter
@@ -43,13 +43,13 @@ def read_user(user_id: int):
 @app.post("/test")
 # クエリでnameとstrを受け取る
 # /user?name="三郎"&age=10
-async def create_user(test:Test):
+def create_test(data:Data):
     # user = UserTable()
     # user.name = test.name
     # user.age = test.age
     # session.add(user)
     # session.commit()
-    return "wtest"
+    return data
 
 
 # ユーザ情報を登録 POST

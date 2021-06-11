@@ -13,9 +13,9 @@ class UserTable(Base):
     name = Column(String(30), nullable=False)
     age = Column(Integer)
 
-class Test(BaseModel):
-    name:str
-    age:int
+class Data(BaseModel):
+    user:str
+    
 # POSTやPUTのとき受け取るRequest Bodyのモデルを定義
 class User(BaseModel):
     id: int
@@ -30,3 +30,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+    print(BaseModel,"hello")

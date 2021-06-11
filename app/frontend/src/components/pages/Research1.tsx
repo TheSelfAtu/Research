@@ -4,6 +4,7 @@ import Button from "@material-ui/core/Button";
 import { beepSound } from "../../Common/beepSound";
 import { Description } from "../organisms/Description";
 import { postFire } from "../../Common/postFire";
+import axios from "axios";
 
 declare global {
   interface Window {
@@ -28,37 +29,23 @@ export function Research1(): JSX.Element {
   // トピックを投稿する関数
   const postResultToDB = useCallback(async () => {
     // 結果を送信する
-    try {
-      await postFire("/test", {
-        name: "tsuchida",
-        age: "24",
+    axios
+      .post("/research1", questionResults)
+      .then((response) => {
+        setDialogOpen(false);
+        alert(
+          "ご協力ありがとうございました。ブラウザを閉じていただいても大丈夫です"
+        );
+      })
+      .catch((err) => {
+        alert("データの送信に失敗しました");
       });
-      alert("success");
-      // await postFire("/test", {
-      //   id: "100",
-      //   name: "tsuchida",
-      //   age: "24",
-      //   // Q1: questionResults["1"],
-      // });
-      setDialogOpen(false);
-    } catch (e) {
-      // 結果の送信に失敗した場合はエラーを表示
-      alert("結果の送信に失敗しました");
-      return;
-    }
   }, []);
 
   return (
     <div>
       <Description></Description>
-      <Button
-        onClick={() => {
-          postResultToDB();
-          alert("done");
-        }}
-      >
-        test
-      </Button>
+
       <Button
         variant="contained"
         onClick={() => {
@@ -71,6 +58,9 @@ export function Research1(): JSX.Element {
         dialogOpen={dialogOpen}
         questionNumber={questionNumber}
         setQuestionNumber={setQuestionNumber}
+        questionResults={questionResults}
+        setQuestionResults={setquestionResults}
+        postResultToDB={postResultToDB}
       ></AlertDialog>
     </div>
   );

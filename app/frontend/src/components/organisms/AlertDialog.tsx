@@ -13,6 +13,9 @@ interface AlertDialog {
   dialogOpen: boolean;
   questionNumber: number;
   setQuestionNumber: React.Dispatch<React.SetStateAction<number>>;
+  questionResults: object;
+  setQuestionResults: any;
+  postResultToDB: () => {};
 }
 
 export default function AlertDialog(props: AlertDialog): JSX.Element {
@@ -40,6 +43,9 @@ export default function AlertDialog(props: AlertDialog): JSX.Element {
               research1Data[props.questionNumber]["sound1"]["frequency"]
             }
             length={research1Data[props.questionNumber]["sound1"]["length"]}
+            questionResults={props.questionResults}
+            setQuestionResults={props.setQuestionResults}
+            postResultToDB={props.postResultToDB}
           ></BeepButton>
           <BeepButton
             questionNumber={props.questionNumber}
@@ -49,6 +55,9 @@ export default function AlertDialog(props: AlertDialog): JSX.Element {
               research1Data[props.questionNumber]["sound2"]["frequency"]
             }
             length={research1Data[props.questionNumber]["sound2"]["length"]}
+            questionResults={props.questionResults}
+            setQuestionResults={props.setQuestionResults}
+            postResultToDB={props.postResultToDB}
           ></BeepButton>
         </DialogActions>
       </Dialog>
