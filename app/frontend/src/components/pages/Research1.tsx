@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import AlertDialog from "../organisms/AlertDialog";
 import Button from "@material-ui/core/Button";
-import { beepSound } from "../../Common/beepSound";
 import { Description } from "../organisms/Description";
 import { postFire } from "../../Common/postFire";
 import axios from "axios";
@@ -29,10 +28,11 @@ export function Research1(): JSX.Element {
   // トピックを投稿する関数
   const postResultToDB = useCallback(async () => {
     // 結果を送信する
+    console.log(questionResults, "question");
+
     axios
       .post("/research1", questionResults)
       .then((response) => {
-        setDialogOpen(false);
         alert(
           "ご協力ありがとうございました。ブラウザを閉じていただいても大丈夫です"
         );
@@ -40,8 +40,13 @@ export function Research1(): JSX.Element {
       .catch((err) => {
         alert("データの送信に失敗しました");
       });
-  }, []);
+  }, [questionResults, questionNumber]);
 
+  useEffect(() => {
+    if (questionNumber == Object.keys(questionResults).length + 1) {
+      postResultToDB();
+    }
+  });
   return (
     <div>
       <Description></Description>
@@ -54,14 +59,16 @@ export function Research1(): JSX.Element {
       >
         実験を開始します
       </Button>
-      <AlertDialog
-        dialogOpen={dialogOpen}
-        questionNumber={questionNumber}
-        setQuestionNumber={setQuestionNumber}
-        questionResults={questionResults}
-        setQuestionResults={setquestionResults}
-        postResultToDB={postResultToDB}
-      ></AlertDialog>
+      {questionNumber <= Object.keys(questionResults).length && (
+        <AlertDialog
+          dialogOpen={dialogOpen}
+          questionNumber={questionNumber}
+          setQuestionNumber={setQuestionNumber}
+          questionResults={questionResults}
+          setQuestionResults={setquestionResults}
+          postResultToDB={postResultToDB}
+        ></AlertDialog>
+      )}
     </div>
   );
 }

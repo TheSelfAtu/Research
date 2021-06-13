@@ -19,8 +19,9 @@ export function BeepButton(props: BeepButtonProps) {
   const type = props.type;
   const frequency = props.frequency;
   const length = props.length;
-  const soundConfig = type + frequency + "Hz" + length + "s";
+  const soundConfig = type + "-" + frequency + "Hz" + "-" + length + "s";
   const QplusNumber = "Q" + props.questionNumber;
+  const changeObj = { [QplusNumber]: soundConfig };
   return (
     <Button
       variant="contained"
@@ -29,18 +30,12 @@ export function BeepButton(props: BeepButtonProps) {
         beepSound(type, frequency, length);
       }}
       onClick={() => {
-        console.log(props.questionResults, soundConfig, QplusNumber);
-
         props.setQuestionResults({
           ...props.questionResults,
-          Q1: soundConfig,
-          // QplusNumber: soundConfig,
+          ...changeObj,
         });
 
         props.setQuestionNumber(props.questionNumber + 1);
-        if (questionNumber == Object.keys(questionResults).length - 1) {
-          props.postResultToDB();
-        }
       }}
     >
       マウスを重ねると音がなります

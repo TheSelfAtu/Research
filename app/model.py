@@ -13,8 +13,10 @@ class UserTable(Base):
     name = Column(String(30), nullable=False)
     age = Column(Integer)
 
+
 class Research1Table(Base):
     __tablename__ = 'research1'
+
     id = Column(Integer, primary_key=True, autoincrement=True)
     Q1 = Column(String(30), nullable=False)
     Q2 = Column(String(30), nullable=False)
@@ -24,14 +26,15 @@ class Research1Table(Base):
     Q6 = Column(String(30), nullable=False)
     Q7 = Column(String(30), nullable=False)
 
-    
+
 # POSTやPUTのとき受け取るRequest Bodyのモデルを定義
 class User(BaseModel):
     id: int
     name: str
     age: int
+
+
 class Research1(BaseModel):
-    id: int
     Q1: str
     Q2: str
     Q3: str
@@ -48,4 +51,4 @@ def main():
 
 if __name__ == "__main__":
     main()
-    print(BaseModel,"hello")
+    print(BaseModel, "hello")
