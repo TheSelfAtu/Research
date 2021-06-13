@@ -46,6 +46,12 @@ def read_user(user_id: int):
     return user
 
 
+@app.get("/research1")
+def readResearch1Results():
+    results = session.query(Research1Table).all()
+    return results
+
+
 @app.post("/research1")
 def create_test(questionResults: Research1):
     research1 = Research1Table()
