@@ -2,76 +2,112 @@ export const research1Data = {
   1: {
     sound1: {
       type: "sawtooth",
-      frequency: "800",
-      length: 0.05,
+      frequency: "400",
+      length: 0.1,
     },
     sound2: {
       type: "sawtooth",
-      frequency: "700",
-      length: 0.05,
+      frequency: "600",
+      length: 0.1,
     },
   },
   2: {
     sound1: {
       type: "sawtooth",
-      frequency: "800",
-      length: 0.05,
+      frequency: "400",
+      length: 0.1,
     },
     sound2: {
-      type: "triangle",
-      frequency: "600",
-      length: 0.05,
+      type: "sawtooth",
+      frequency: "800",
+      length: 0.1,
     },
   },
   3: {
     sound1: {
       type: "sawtooth",
-      frequency: "800",
-      length: 0.05,
+      frequency: "400",
+      length: 0.1,
     },
     sound2: {
       type: "sawtooth",
-      frequency: "500",
-      length: 0.05,
+      frequency: "1000",
+      length: 0.1,
     },
   },
   4: {
     sound1: {
       type: "sawtooth",
-      frequency: "900",
-      length: 0.05,
+      frequency: "400",
+      length: 0.1,
     },
     sound2: {
       type: "sawtooth",
-      frequency: "800",
-      length: 0.05,
+      frequency: "1200",
+      length: 0.1,
     },
   },
   5: {
     sound1: {
       type: "sawtooth",
-      frequency: "480",
-      length: 0.05,
+      frequency: "600",
+      length: 0.1,
     },
     sound2: {
       type: "sawtooth",
-      frequency: "1000",
-      length: 0.05,
+      frequency: "800",
+      length: 0.1,
     },
   },
   6: {
     sound1: {
       type: "sawtooth",
-      frequency: "800",
-      length: 0.05,
+      frequency: "600",
+      length: 0.1,
     },
     sound2: {
       type: "sawtooth",
-      frequency: "1100",
-      length: 0.05,
+      frequency: "1000",
+      length: 0.1,
     },
   },
   7: {
+    sound1: {
+      type: "sawtooth",
+      frequency: "600",
+      length: 0.1,
+    },
+    sound2: {
+      type: "sawtooth",
+      frequency: "1200",
+      length: 0.1,
+    },
+  },
+  8: {
+    sound1: {
+      type: "sawtooth",
+      frequency: "800",
+      length: 0.1,
+    },
+    sound2: {
+      type: "sawtooth",
+      frequency: "1000",
+      length: 0.1,
+    },
+  },
+  9: {
+    sound1: {
+      type: "sawtooth",
+      frequency: "800",
+      length: 0.1,
+    },
+    sound2: {
+      type: "sawtooth",
+      frequency: "1200",
+      length: 0.1,
+    },
+  },
+  10: {
     sound1: {
       type: "sawtooth",
       frequency: "1000",
@@ -79,7 +115,127 @@ export const research1Data = {
     },
     sound2: {
       type: "sawtooth",
-      frequency: "1300",
+      frequency: "1200",
+      length: 0.1,
+    },
+  },
+  11: {
+    sound1: {
+      type: "square",
+      frequency: "400",
+      length: 0.1,
+    },
+    sound2: {
+      type: "square",
+      frequency: "600",
+      length: 0.1,
+    },
+  },
+  12: {
+    sound1: {
+      type: "square",
+      frequency: "400",
+      length: 0.1,
+    },
+    sound2: {
+      type: "square",
+      frequency: "800",
+      length: 0.1,
+    },
+  },
+  13: {
+    sound1: {
+      type: "square",
+      frequency: "400",
+      length: 0.1,
+    },
+    sound2: {
+      type: "square",
+      frequency: "1000",
+      length: 0.1,
+    },
+  },
+  14: {
+    sound1: {
+      type: "square",
+      frequency: "400",
+      length: 0.1,
+    },
+    sound2: {
+      type: "square",
+      frequency: "1200",
+      length: 0.1,
+    },
+  },
+  15: {
+    sound1: {
+      type: "square",
+      frequency: "600",
+      length: 0.1,
+    },
+    sound2: {
+      type: "square",
+      frequency: "800",
+      length: 0.1,
+    },
+  },
+  16: {
+    sound1: {
+      type: "square",
+      frequency: "600",
+      length: 0.1,
+    },
+    sound2: {
+      type: "square",
+      frequency: "1000",
+      length: 0.1,
+    },
+  },
+  17: {
+    sound1: {
+      type: "square",
+      frequency: "600",
+      length: 0.1,
+    },
+    sound2: {
+      type: "square",
+      frequency: "1200",
+      length: 0.1,
+    },
+  },
+  18: {
+    sound1: {
+      type: "square",
+      frequency: "800",
+      length: 0.1,
+    },
+    sound2: {
+      type: "square",
+      frequency: "1000",
+      length: 0.1,
+    },
+  },
+  19: {
+    sound1: {
+      type: "square",
+      frequency: "800",
+      length: 0.1,
+    },
+    sound2: {
+      type: "square",
+      frequency: "1200",
+      length: 0.1,
+    },
+  },
+  20: {
+    sound1: {
+      type: "square",
+      frequency: "1000",
+      length: 0.1,
+    },
+    sound2: {
+      type: "square",
+      frequency: "1200",
       length: 0.1,
     },
   },
@@ -89,7 +245,7 @@ export const research1Data = {
 //     sound1: {
 //       type: "sawtooth",
 //       frequency: "800",
-//       length: 0.05,
+//       length: 0.1,
 //     },
 //     sound2: {
 //       type: "square",
