@@ -15,15 +15,7 @@ declare global {
 export function Research1(): JSX.Element {
   const [name, setName] = useState("");
   const [questionNumber, setQuestionNumber] = useState(1);
-  const [questionResults, setquestionResults] = useState({
-    Q1: "",
-    Q2: "",
-    Q3: "",
-    Q4: "",
-    Q5: "",
-    Q6: "",
-    Q7: "",
-  });
+  const [questionResults, setquestionResults] = useState({});
   const [dialogOpen, setDialogOpen] = useState(false);
 
   // トピックを投稿する関数

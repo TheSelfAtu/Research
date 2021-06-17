@@ -126,5 +126,8 @@ dist/
 # Temporary folders
 tmp/
 temp/
-__pycache__/
+__pycache_
+*__pycache__/
+*.py[cod]
+*$py.class
 # End of https://www.toptal.com/developers/gitignore/api/node
