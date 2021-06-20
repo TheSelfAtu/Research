@@ -3,7 +3,9 @@
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, scoped_session
-
+from sqlalchemy import exc
+from sqlalchemy import event
+from sqlalchemy.pool import Pool
 
 # 接続したいDBの基本情報を設定
 user_name = "user"
@@ -23,6 +25,7 @@ ENGINE = create_engine(
     DATABASE,
     encoding="utf-8",
     echo=True,
+    pool_recycle=5
 )
 
 # Sessionの作成
@@ -34,6 +37,17 @@ session = scoped_session(
         bind=ENGINE
     )
 )
+
+
+@event.listens_for(Pool, "checkout")
+def ping_connection(dbapi_connection, connection_record, connection_proxy):
+    cursor = dbapi_connection.cursor()
+    try:
+        cursor.execute("SELECT 1")
+    except:
+        raise exc.DisconnectionError()
+    cursor.close()
+
 
 # modelで使用する
 Base = declarative_base()
