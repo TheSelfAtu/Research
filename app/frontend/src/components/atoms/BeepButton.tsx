@@ -1,5 +1,5 @@
 import Button from "@material-ui/core/Button";
-import { beepSound } from "../../Common/beepSound";
+import { beepSound, changeSound } from "../../Common/beepSound";
 
 type beepSoundType = "sine" | "sawtooth" | "triangle";
 
@@ -27,7 +27,8 @@ export function BeepButton(props: BeepButtonProps) {
       variant="contained"
       color="secondary"
       onMouseEnter={() => {
-        beepSound(type, frequency, length);
+        // beepSound(type, frequency, length);
+        changeSound("sine", 440, 5);
       }}
       onClick={() => {
         props.setQuestionResults({
