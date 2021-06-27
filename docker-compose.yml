@@ -6,6 +6,7 @@ services:
     container_name: "research_db"
     # path配下のDockerfile読み込み
     build: ./docker/mysql
+    command: bash -c 'usermod -o -u 1000 mysql; groupmod -o -g 500 mysql; chown -R mysql:root /var/run/mysqld/; /entrypoint.sh mysqld --user=mysql --console'
     # コンテナが落ちたら再起動する
     restart: always
     tty: true

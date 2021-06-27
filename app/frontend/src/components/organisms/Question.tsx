@@ -11,9 +11,13 @@ interface Question {
   setQuestionResults: React.Dispatch<React.SetStateAction<{}>>;
 }
 
+const marginStyle = {
+  marginLeft: 10,
+};
+
 export function Question(props: Question): JSX.Element {
   const [questionResults, setquestionResults] = useState({});
-  const [selectValue, setSelectValue] = useState<null | unknown | Number>(-1);
+  const [selectValue, setSelectValue] = useState<null | unknown | Number>(0);
   const sound1SrcURL =
     "static/sounds/" +
     props.data["sound1"]["type"] +
@@ -42,6 +46,7 @@ export function Question(props: Question): JSX.Element {
         id={String(props.questionNumber) + "-2"}
       ></audio>
       <Button
+        style={marginStyle}
         variant="contained"
         color="secondary"
         onMouseEnter={() => {
@@ -56,6 +61,7 @@ export function Question(props: Question): JSX.Element {
         マウスを重ねると音がなります
       </Button>
       <Button
+        style={marginStyle}
         variant="contained"
         color="secondary"
         onMouseEnter={() => {
@@ -74,6 +80,7 @@ export function Question(props: Question): JSX.Element {
       </Button>
       <FormControl>
         <Select
+          style={marginStyle}
           labelId="demo-simple-select-label"
           id=""
           value={selectValue}
@@ -103,12 +110,12 @@ export function Question(props: Question): JSX.Element {
             console.log(props.questionResults);
           }}
         >
-          <MenuItem value={-1}>-</MenuItem>
+          <MenuItem value={0}>-</MenuItem>
+          <MenuItem value={-2}>-2</MenuItem>
+          <MenuItem value={-1}>-1</MenuItem>
+          <MenuItem value={0}>0</MenuItem>
           <MenuItem value={1}>1</MenuItem>
           <MenuItem value={2}>2</MenuItem>
-          <MenuItem value={3}>3</MenuItem>
-          <MenuItem value={4}>4</MenuItem>
-          <MenuItem value={5}>5</MenuItem>
         </Select>
       </FormControl>
     </div>

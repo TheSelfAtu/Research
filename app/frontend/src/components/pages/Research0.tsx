@@ -1,9 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
-import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import { Description } from "../organisms/Description";
 import { Question } from "../organisms/Question";
-import { postFire } from "../../Common/postFire";
 import axios from "axios";
 import { research0Data } from "../../data/research0Data";
 declare global {
