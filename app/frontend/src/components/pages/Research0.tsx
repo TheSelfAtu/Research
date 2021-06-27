@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
 import TextField from "@material-ui/core/TextField";
-import AlertDialog from "../organisms/AlertDialog";
 import Button from "@material-ui/core/Button";
 import { Description } from "../organisms/Description";
 import { Question } from "../organisms/Question";
@@ -15,16 +14,14 @@ declare global {
 
 export function Research0(): JSX.Element {
   const [name, setName] = useState("");
-  const [questionNumber, setQuestionNumber] = useState(1);
   const [questionResults, setquestionResults] = useState({});
 
   // トピックを投稿する関数
   const postResultToDB = useCallback(async () => {
     // 結果を送信する
-    console.log(questionResults, "question");
 
     axios
-      .post("/research1", { ...questionResults, ...{ name: name } })
+      .post("/research0", { ...questionResults, ...{ name: name } })
       .then((response) => {
         alert(
           "ご協力ありがとうございました。ブラウザを閉じていただいても大丈夫です"
@@ -33,13 +30,8 @@ export function Research0(): JSX.Element {
       .catch((err) => {
         alert("データの送信に失敗しました");
       });
-  }, [questionResults, questionNumber, name]);
+  }, [questionResults, name]);
 
-  useEffect(() => {
-    if (questionNumber == Object.keys(research0Data).length + 1) {
-      postResultToDB();
-    }
-  });
   return (
     <div>
       <Description></Description>
@@ -55,8 +47,18 @@ export function Research0(): JSX.Element {
         }}
       ></input>
       {research0Data.map((data, index) => {
-        return <Question data={data} questionNumber={index + 1}></Question>;
+        return (
+          <Question
+            data={data}
+            questionNumber={index + 1}
+            questionResults={questionResults}
+            setQuestionResults={setquestionResults}
+          ></Question>
+        );
       })}
+      <Button variant="outlined" onClick={() => postResultToDB()}>
+        結果を送信する
+      </Button>
     </div>
   );
 }

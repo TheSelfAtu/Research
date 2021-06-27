@@ -10,7 +10,7 @@ services:
     restart: always
     tty: true
     environment:
-      MYSQL_DATABASE: sample_db
+      MYSQL_DATABASE: research_db
       MYSQL_USER: user
       MYSQL_PASSWORD: password # ユーザのパスワード
       MYSQL_ROOT_PASSWORD: password # ルートパスワード

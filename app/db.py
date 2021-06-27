@@ -11,7 +11,7 @@ from sqlalchemy.pool import Pool
 user_name = "user"
 password = "password"
 host = "db"  # docker-composeで定義したMySQLのサービス名
-database_name = "sample_db"
+database_name = "research_db"
 
 DATABASE = 'mysql://%s:%s@%s/%s?charset=utf8' % (
     user_name,
