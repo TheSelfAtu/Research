@@ -130,4 +130,7 @@ __pycache_
 *__pycache__/
 *.py[cod]
 *$py.class
+
+# mysql
+mysql*
 # End of https://www.toptal.com/developers/gitignore/api/node

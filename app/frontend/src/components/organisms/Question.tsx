@@ -17,7 +17,9 @@ const marginStyle = {
 
 export function Question(props: Question): JSX.Element {
   const [questionResults, setquestionResults] = useState({});
-  const [selectValue, setSelectValue] = useState<null | unknown | Number>(0);
+  const [selectValue, setSelectValue] = useState<
+    null | unknown | string | Number
+  >("-");
   const sound1SrcURL =
     "static/sounds/" +
     props.data["sound1"]["type"] +
@@ -110,7 +112,7 @@ export function Question(props: Question): JSX.Element {
             console.log(props.questionResults);
           }}
         >
-          <MenuItem value={0}>-</MenuItem>
+          <MenuItem value={"-"}>-</MenuItem>
           <MenuItem value={-2}>-2</MenuItem>
           <MenuItem value={-1}>-1</MenuItem>
           <MenuItem value={0}>0</MenuItem>

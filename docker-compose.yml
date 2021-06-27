@@ -21,6 +21,7 @@ services:
       - ./docker/mysql/initdb.d:/docker-entrypoint-initdb.d # 定義どおりにテーブル作成
       - ./docker/mysql/conf.d:/etc/mysql/conf.d # MySQLの基本設定(文字化け対策)
       - ./log/mysql:/var/log/mysql # ログの保存
+      - ./log/mysql/data:/var/lib/mysql # databaseの保存
     networks:
       - local-net
 
