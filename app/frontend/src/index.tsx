@@ -13,7 +13,9 @@ window.onload = () => {
   // }
   if (document.getElementById("research0")) {
     ReactDOM.render(<Research0 />, document.getElementById("research0"));
-    console.log("re");
+  }
+  if (document.getElementById("research1")) {
+    ReactDOM.render(<Research1 />, document.getElementById("research1"));
   }
   window.AudioContext = window.AudioContext || window.webkitAudioContext;
 };

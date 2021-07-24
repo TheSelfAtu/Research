@@ -28,6 +28,21 @@ export function changeSound(soundType:string,frequency:number=440,length:number)
   oscillator.stop(length);
 }
 
-export function makeFetchSound(){
-  
+export function makeSound(){
+  const ctx = new AudioContext()
+  for (let k = 1;k < 3; k++){
+    const gainNode = ctx.createGain();
+    gainNode.gain.value = 0.5;
+    let oscillator = ctx.createOscillator();
+    oscillator.type = "sine"
+    oscillator.frequency.value = (k+1) * 440
+    oscillator.connect(ctx.destination)
+    oscillator.start();
+    // oscillator.stop(length);
+  }
+  // 音量の初期値を0.5にする
+  // oscillator.connect(gainNode).connect(ctx.destination);
+  // gainNode.gain.setValueAtTime(0,0)
+  // gainNode.gain.linearRampToValueAtTime(1,2)
+
 }

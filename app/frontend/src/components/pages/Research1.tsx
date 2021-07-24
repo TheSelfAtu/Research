@@ -3,6 +3,7 @@ import TextField from "@material-ui/core/TextField";
 import AlertDialog from "../organisms/AlertDialog";
 import Button from "@material-ui/core/Button";
 import { Description } from "../organisms/Description";
+import { SoundButton } from "../atoms/SoundButton";
 import { postFire } from "../../Common/postFire";
 import axios from "axios";
 import { research1Data } from "../../data/research1Data";
@@ -54,14 +55,7 @@ export function Research1(): JSX.Element {
           setName(e.target.value);
         }}
       ></input>
-      <Button
-        variant="contained"
-        onClick={() => {
-          setDialogOpen(true);
-        }}
-      >
-        実験を開始します
-      </Button>
+      <SoundButton></SoundButton>
       {questionNumber <= Object.keys(research1Data).length && (
         <AlertDialog
           dialogOpen={dialogOpen}
