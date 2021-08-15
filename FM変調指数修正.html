@@ -150,10 +150,11 @@
           op[1].frequency.value = 440;
           op[2].frequency.value = op[1].frequency.value * OP[2].ratio;
           op[3].frequency.value = op[1].frequency.value * OP[3].ratio;
-          //op[4].frequency.value = op[1].frequency.value*OP[4].ratio;
-          op[4].frequency.value = 600; //
+          op[4].frequency.value = op[1].frequency.value * OP[4].ratio;
+          // op[4].frequency.value = 600;
           gain[1].gain.value = 0.5;
-          gain[4].gain.value = 440; //変調指数
+          gain[4].gain.value = 1000; //変調指数
+          // gain[4].gain.value = 440; //変調指数
         }
         // function Enverope_up(t0,GAIN,OP,AtkLevel){
         //     const t1 = t0 + OP.atack;
