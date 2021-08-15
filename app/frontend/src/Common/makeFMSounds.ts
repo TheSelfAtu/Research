@@ -1,5 +1,4 @@
 export function makeFMSounds() {
-  // const audioctx = new AudioContext();
   const envelopParams = {
     level: 1,
     ratio: getRandom(1, 10),
@@ -8,37 +7,52 @@ export function makeFMSounds() {
     sustain: getRandom_f(0, 1),
     release: getRandom_f(0, 0.5),
   };
-  const operatorObj = GenerateOperator();
-  Object.keys(operatorObj).forEach((key) => {
-      operatorObj[key].oscillatorNode.start()
+  const operatorsInfo = setAlgorithm();
+  Object.keys(operatorsInfo).forEach((key) => {
+    const startTime = operatorsInfo[key].startTime;
+    const gainNode = operatorsInfo[key].gainNode;
+    operatorsInfo[key].oscillatorNode.start();
+    setEnvelop(startTime, gainNode, envelopParams, 1);
+  });
+  Object.keys(operatorsInfo).forEach((key) => {
+    operatorsInfo[key].oscillatorNode.start();
   });
 }
 
-function GenerateOperator() {
+function setAlgorithm() {
   const algoNum: number = 0;
-  const audioctx:AudioContext = new AudioContext();
+  const audioctx: AudioContext = new AudioContext();
+  const startTime: number = audioctx.currentTime;
   // if(algoNum==0){
   let operatorObj: any = {};
   operatorObj["operator1"] = {
+    startTime: startTime,
     oscillatorNode: new OscillatorNode(audioctx),
     gainNode: new GainNode(audioctx),
     operatorType: "carrier",
     destination: "speaker",
   };
+
   operatorObj["operator2"] = {
+    startTime: startTime,
     oscillatorNode: new OscillatorNode(audioctx),
     gainNode: new GainNode(audioctx),
     operatorType: "modulator",
     destination: "operator1",
   };
   Object.keys(operatorObj).forEach((key) => {
-    const oscillatorNode:OscillatorNode = operatorObj[key].oscillatorNode;
-    const gainNode:GainNode = operatorObj[key].gainNode;
-    const destination:string = operatorObj[key].destination;
+    const oscillatorNode: OscillatorNode = operatorObj[key].oscillatorNode;
+    const gainNode: GainNode = operatorObj[key].gainNode;
+    const destination: string = operatorObj[key].destination;
     if (destination == "speaker") {
       oscillatorNode.connect(gainNode).connect(audioctx.destination);
     } else {
-        console.log("os",oscillatorNode,"op",operatorObj[destination].oscillatorNode.frequency)
+      console.log(
+        "os",
+        oscillatorNode,
+        "op",
+        operatorObj[destination].oscillatorNode.frequency
+      );
       oscillatorNode
         .connect(gainNode)
         .connect(operatorObj[destination].oscillatorNode.frequency);
