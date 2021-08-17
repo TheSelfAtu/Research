@@ -5,11 +5,11 @@ export function makeFMSounds(fmParams: fmParamsType) {
   //   アルゴリズムをセット
   const operatorsInfo = setAlgorithm();
   //   エンベロープをセット
-  Object.keys(operatorsInfo).forEach((key) => {
-    const startTime = operatorsInfo[key].startTime;
-    const gainNode = operatorsInfo[key].gainNode;
-    setEnvelop(startTime, gainNode, fmParams, 1);
-  });
+  //   Object.keys(operatorsInfo).forEach((key) => {
+  //     const startTime = operatorsInfo[key].startTime;
+  //     const gainNode = operatorsInfo[key].gainNode;
+  //     setEnvelop(startTime, gainNode, fmParams, 1);
+  //   });
   // 周波数や変調指数などをセット
   Object.keys(operatorsInfo).forEach((key) => {
     const operatorParam = operatorsInfo[key];
@@ -64,10 +64,15 @@ function setAlgorithm() {
 }
 
 function setParams(operatorParams: operatorParams, fmParams: fmParamsType) {
-  operatorParams.oscillatorNode.frequency.value = fmParams.frequency;
+  operatorParams.oscillatorNode.frequency.value = 220;
+  //   operatorParams.oscillatorNode.frequency.value = fmParams.frequency;
   if (operatorParams.destination != "speaker") {
     //   オペレーターがモジュレータの場合、変調指数を変更　＝＞振幅を変える
+    console.log("modu indx", fmParams.modulationIndex);
+    operatorParams.gainNode.gain.value = 1000;
     operatorParams.gainNode.gain.value = fmParams.modulationIndex;
+    operatorParams.oscillatorNode.frequency.value = 440;
+    console.log(operatorParams.destination);
   }
 }
 
