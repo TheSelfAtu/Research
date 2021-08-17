@@ -1,19 +1,21 @@
-export function makeFMSounds() {
-  const envelopParams = {
-    level: 1,
-    ratio: getRandom(1, 10),
-    atack: 1 / Math.tan(getRandom_f(Math.atan(2), Math.PI / 2)),
-    decay: getRandom_f(0, 1),
-    sustain: getRandom_f(0, 1),
-    release: getRandom_f(0, 0.5),
-  };
+import { fmParamsType } from "../@types/fmParams";
+import { operatorParams } from "../@types/operatorParams";
+
+export function makeFMSounds(fmParams: fmParamsType) {
+  //   アルゴリズムをセット
   const operatorsInfo = setAlgorithm();
+  //   エンベロープをセット
   Object.keys(operatorsInfo).forEach((key) => {
     const startTime = operatorsInfo[key].startTime;
     const gainNode = operatorsInfo[key].gainNode;
-    operatorsInfo[key].oscillatorNode.start();
-    setEnvelop(startTime, gainNode, envelopParams, 1);
+    setEnvelop(startTime, gainNode, fmParams, 1);
   });
+  // 周波数や変調指数などをセット
+  Object.keys(operatorsInfo).forEach((key) => {
+    const operatorParam = operatorsInfo[key];
+    setParams(operatorParam, fmParams);
+  });
+  //   音を再生
   Object.keys(operatorsInfo).forEach((key) => {
     operatorsInfo[key].oscillatorNode.start();
   });
@@ -24,7 +26,10 @@ function setAlgorithm() {
   const audioctx: AudioContext = new AudioContext();
   const startTime: number = audioctx.currentTime;
   // if(algoNum==0){
-  let operatorObj: any = {};
+  //   1オペレータ、1キャリアのアルゴリズム
+  let operatorObj:
+    | { [key: string]: operatorParams }
+    | { [key: string]: never } = {};
   operatorObj["operator1"] = {
     startTime: startTime,
     oscillatorNode: new OscillatorNode(audioctx),
@@ -44,15 +49,10 @@ function setAlgorithm() {
     const oscillatorNode: OscillatorNode = operatorObj[key].oscillatorNode;
     const gainNode: GainNode = operatorObj[key].gainNode;
     const destination: string = operatorObj[key].destination;
+    // 出力先に接続
     if (destination == "speaker") {
       oscillatorNode.connect(gainNode).connect(audioctx.destination);
     } else {
-      console.log(
-        "os",
-        oscillatorNode,
-        "op",
-        operatorObj[destination].oscillatorNode.frequency
-      );
       oscillatorNode
         .connect(gainNode)
         .connect(operatorObj[destination].oscillatorNode.frequency);
@@ -63,14 +63,14 @@ function setAlgorithm() {
   // }
 }
 
-function getRandom(min: number, max: number) {
-  var random = Math.floor(Math.random() * (max + 1 - min)) + min;
-  return random;
+function setParams(operatorParams: operatorParams, fmParams: fmParamsType) {
+  operatorParams.oscillatorNode.frequency.value = fmParams.frequency;
+  if (operatorParams.destination != "speaker") {
+    //   オペレーターがモジュレータの場合、変調指数を変更　＝＞振幅を変える
+    operatorParams.gainNode.gain.value = fmParams.modulationIndex;
+  }
 }
-function getRandom_f(min: number, max: number) {
-  var random = Math.random() * (max - min) + min;
-  return random;
-}
+
 function setEnvelop(
   t0: number,
   gainNode: GainNode,

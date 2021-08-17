@@ -1,1 +1,1 @@
-export type soundType = "sine" | "sawtooth" | "triangle"
+export type soundType = "sine" | "sawtooth" | "triangle";
