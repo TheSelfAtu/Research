@@ -4,7 +4,9 @@ export function generateFMParameters() {
   const frequencyCandidate = [440];
   const ratioCandidate = [1, 2, 3, 4];
   const fmParams: fmParamsType = {
-    atack: 1 / Math.tan(getRandom_f(Math.atan(2), Math.PI / 2)),
+    atack:
+      Math.floor((1 / Math.tan(getRandom_f(Math.atan(2), Math.PI / 2))) * 100) /
+      100,
     decay: getRandom_f(0, 1),
     sustain: getRandom_f(0, 1),
     release: getRandom_f(0, 0.5),
@@ -21,11 +23,13 @@ export function generateFMParameters() {
 }
 
 function getRandom(min: number, max: number) {
-  var random = Math.floor(Math.random() * (max + 1 - min)) + min;
+  let random = Math.floor(Math.random() * (max + 1 - min)) + min;
+  random = Math.floor(random * 100) / 100;
   return random;
 }
 
 function getRandom_f(min: number, max: number) {
-  var random = Math.random() * (max - min) + min;
+  let random = Math.random() * (max - min) + min;
+  random = Math.floor(random * 100) / 100;
   return random;
 }

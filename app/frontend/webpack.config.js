@@ -8,18 +8,18 @@ module.exports = {
   },
   module: {
     rules: [
-      { exclude: [path.resolve(__dirname, "node_modules/"), /\node_modules$/], test: /\.(ts|tsx)$/, use: "ts-loader" },
       {
-        test: /\.css$/i,
-        use: ["style-loader", "css-loader"],
+        exclude: [path.resolve(__dirname, "node_modules/"), /\node_modules$/],
+        test: /\.(ts|tsx)$/,
+        use: "ts-loader",
       },
       {
         test: /\.s[ac]ss$/,
         use: ["style-loader", "css-loader", "sass-loader"],
       },
       {
-        test: /\.(eot|svg|ttf|woff|woff2|png|jpg|gif)$/,
-        type: "asset",
+        test: /\.css$/i,
+        use: ["style-loader", "css-loader"],
       },
 
       // Add your rules for custom modules here
