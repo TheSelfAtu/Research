@@ -1,6 +1,8 @@
 export type operatorParams = {
   startTime: number;
+  audioContext: AudioContext;
   oscillatorNode: OscillatorNode;
+  analyserNode: AnalyserNode;
   gainNode: GainNode;
   operatorType: "carrier" | "modulator";
   destination:

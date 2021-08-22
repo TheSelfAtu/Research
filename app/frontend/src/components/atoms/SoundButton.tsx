@@ -3,9 +3,10 @@ import { makeSound } from "../../Common/beepSound";
 import { makeFMSounds } from "../../Common/makeFMSounds";
 import { generateFMParameters } from "../../Common/generateFMParameters";
 import { fmParamsType } from "../../@types/fmParams";
+import { fmParamsList } from "../../@types/fmParams";
 
 interface SoundButtonProps {
-  soundParameter: fmParamsType;
+  soundParamsList: fmParamsList;
 }
 export function SoundButton(props: SoundButtonProps) {
   return (
@@ -13,7 +14,7 @@ export function SoundButton(props: SoundButtonProps) {
       variant="contained"
       color="primary"
       onClick={() => {
-        makeFMSounds(props.soundParameter);
+        makeFMSounds(props.soundParamsList);
       }}
     >
       クリックすると音が鳴ります
