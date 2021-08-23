@@ -9,7 +9,7 @@ export function ParametersTable(props: ParametersTableProps) {
       <tbody>
         <tr>
           <th>operator</th>
-          <th>atack</th>
+          <th>attack</th>
           <th>decay</th>
           <th>sustain</th>
           <th>release</th>

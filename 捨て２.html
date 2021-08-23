@@ -169,8 +169,8 @@
         gain2[1].connect(ana2);
         audioctx2.suspend();
         ///////�A���S���Y���R
-        op3[3].connect(gain3[3]).connect(op3[2].frequency);
         op3[4].connect(gain3[4]).connect(op3[1].frequency);
+        op3[3].connect(gain3[3]).connect(op3[2].frequency);
         op3[2].connect(gain3[2]).connect(op3[1].frequency);
         op3[1].connect(gain3[1]).connect(audioctx3.destination);
         gain3[1].connect(ana3);
