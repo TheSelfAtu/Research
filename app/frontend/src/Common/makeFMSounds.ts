@@ -146,10 +146,11 @@ function setEnvelop(
   AtkLevel: number
 ) {
   const t1 = t0 + envelopParams.atack;
-  const d = envelopParams.decay;
-  const s = AtkLevel * envelopParams.sustain;
+  const decay = envelopParams.decay;
+  const sustain = AtkLevel * envelopParams.sustain;
+  const release = envelopParams.release;
   gainNode.gain.setValueAtTime(0, t0);
   gainNode.gain.linearRampToValueAtTime(AtkLevel, t1);
-  gainNode.gain.linearRampToValueAtTime(s, t1 + d);
-  gainNode.gain.setValueAtTime(s, t1 + d);
+  gainNode.gain.linearRampToValueAtTime(sustain, t1 + decay);
+  gainNode.gain.linearRampToValueAtTime(0, t1 + decay + release);
 }

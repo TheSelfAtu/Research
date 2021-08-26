@@ -83,37 +83,6 @@ class User(BaseModel):
     age: int
 
 
-class Research0(BaseModel):
-    name: str
-    Q1: str
-    Q2: str
-    Q3: str
-    Q4: str
-    Q5: str
-    Q6: str
-    Q7: str
-    Q8: str
-    Q9: str
-    Q10: str
-    Q11: str
-    Q12: str
-    Q13: str
-    Q14: str
-    Q15: str
-    Q16: str
-    Q17: str
-    Q18: str
-    Q19: str
-    Q20: str
-    Q21: str
-    Q22: str
-    Q23: str
-    Q24: str
-    Q25: str
-    Q26: str
-    Q27: str
-    Q28: str
-
 
 class Research1(BaseModel):
     name: str
