@@ -2,6 +2,7 @@ import { fmParamsType, fmParamsList } from "../../@types/fmParams";
 
 interface ParametersTableProps {
   fmParamsList: fmParamsList;
+  algorithmNum: string;
 }
 export function ParametersTable(props: ParametersTableProps) {
   return (
@@ -16,6 +17,7 @@ export function ParametersTable(props: ParametersTableProps) {
           <th>frequency</th>
           <th>ratioToFrequency</th>
           <th>modulationIndex</th>
+          <th>algoNum</th>
         </tr>
         {Object.keys(props.fmParamsList).map((key: string) => {
           return (
@@ -28,6 +30,7 @@ export function ParametersTable(props: ParametersTableProps) {
               <td>{props.fmParamsList[key].frequency}</td>
               <td>{props.fmParamsList[key].ratioToFoundamentalFrequency}</td>
               <td>{props.fmParamsList[key].modulationIndex}</td>
+              <td>{props.algorithmNum}</td>
             </tr>
           );
         })}

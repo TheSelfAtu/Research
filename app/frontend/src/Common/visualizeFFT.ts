@@ -1,9 +1,10 @@
 export function visualizeFFT(
   audioContext: AudioContext,
-  analyserNode: AnalyserNode
+  analyserNode: AnalyserNode,
+  geneNumber: string
 ) {
   const canvasElement: HTMLCanvasElement = document.getElementById(
-    "canvas"
+    geneNumber
   ) as HTMLCanvasElement;
   const canvasContext: CanvasRenderingContext2D = canvasElement?.getContext(
     "2d"

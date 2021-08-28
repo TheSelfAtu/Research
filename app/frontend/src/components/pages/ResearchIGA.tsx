@@ -68,7 +68,7 @@ export function ResearchIGA(): JSX.Element {
           genesParameters={genesParameters}
           setGenesParameters={setGenesParameters}
           geneNumber={geneNum}
-          algorithmNum={optionValue.algorithmNum}
+          algorithmNum={optionValue.algorithm}
           genesFitnessValue={optionValue.fitness}
           soundParamsList={optionValue.fmParamsList}
         ></Option>
@@ -81,6 +81,15 @@ export function ResearchIGA(): JSX.Element {
     <div>
       <h1>{generationCount}世代目</h1>
       {genesParameters && OptionsEL(genesParameters)}
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={() => {
+          postResult();
+        }}
+      >
+        回答を送信
+      </Button>
     </div>
   );
 }

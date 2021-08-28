@@ -4,7 +4,7 @@ import random
 MODULATION_INDEX_CANDIDATE = [0, 1, 10, 100, 200, 500,1000]
 FREQUENCY_CANDIDATE = [440, 880]
 RATIO_CANDIDATE = [1, 1.5, 2]
-
+ALGORITHM_CANDIDATE = [1,2,3,4]
 def make_gene_params() :
     """
     ランダムな初期値を与えた 遺伝子のパラメーターを生成する。
@@ -23,7 +23,7 @@ def make_gene_params() :
       "operator3": make_fm_params(),
       "operator4": make_fm_params(),
     },
-    "algorithm":2,
+    "algorithm":ALGORITHM_CANDIDATE[math.floor(random.random() * len(ALGORITHM_CANDIDATE))],
     "fitness":""
     }
 

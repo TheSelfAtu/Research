@@ -2,7 +2,7 @@ import { fmParamsType, fmParamsList } from "../@types/fmParams";
 import { operatorParams } from "../@types/operatorParams";
 import { visualizeFFT } from "./visualizeFFT";
 
-export function makeFMSounds(fmParamsList: fmParamsList) {
+export function makeFMSounds(fmParamsList: fmParamsList, geneNumber: string) {
   //   アルゴリズムをセット
   const operatorsInfo = setAlgorithm();
   // エンベロープをセット;
@@ -23,7 +23,7 @@ export function makeFMSounds(fmParamsList: fmParamsList) {
     if (operatorsInfo[key].destination == "speaker") {
       const audioContext: AudioContext = operatorsInfo[key].audioContext;
       const analyserNode: AnalyserNode = operatorsInfo[key].analyserNode;
-      visualizeFFT(audioContext, analyserNode);
+      visualizeFFT(audioContext, analyserNode, geneNumber);
     }
   });
 

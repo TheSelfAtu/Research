@@ -7,6 +7,7 @@ import { fmParamsList } from "../../@types/fmParams";
 
 interface SoundButtonProps {
   soundParamsList: fmParamsList;
+  geneNumber: string;
 }
 export function SoundButton(props: SoundButtonProps) {
   return (
@@ -14,7 +15,7 @@ export function SoundButton(props: SoundButtonProps) {
       variant="contained"
       color="primary"
       onClick={() => {
-        makeFMSounds(props.soundParamsList);
+        makeFMSounds(props.soundParamsList, props.geneNumber);
       }}
     >
       クリックすると音が鳴ります

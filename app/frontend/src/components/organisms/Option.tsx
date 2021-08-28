@@ -13,17 +13,25 @@ interface OptionProps {
 }
 
 export function Option(props: OptionProps) {
+  console.log("al", props.algorithmNum);
+
   return (
     <div>
-      <SoundButton soundParamsList={props.soundParamsList}></SoundButton>
+      <SoundButton
+        soundParamsList={props.soundParamsList}
+        geneNumber={props.geneNumber}
+      ></SoundButton>
       <SelectFitness
         geneNumber={props.geneNumber}
         genesParameters={props.genesParameters}
         setGenesParameters={props.setGenesParameters}
         fitnessValue={props.genesFitnessValue}
       ></SelectFitness>
-      <Canvas></Canvas>
-      <ParametersTable fmParamsList={props.soundParamsList}></ParametersTable>
+      <Canvas geneNumber={props.geneNumber}></Canvas>
+      <ParametersTable
+        fmParamsList={props.soundParamsList}
+        algorithmNum={props.algorithmNum}
+      ></ParametersTable>
     </div>
   );
 }
