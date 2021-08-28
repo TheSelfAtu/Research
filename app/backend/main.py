@@ -6,6 +6,7 @@ from model import UserTable, User, Research1Table, Research1  # 今回使うモ�
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
+from utils.geneticAlgorithm.make_gene_params import make_gene_params
 
 app = FastAPI()
 template_file_path = "./static/templates/index.html"
@@ -27,6 +28,21 @@ app.add_middleware(
 async def main():
     return FileResponse(template_file_path)
 # router = APIRouter()
+
+@app.get("/genetic-algorithm/make-ramdom/all")
+async def rep_first_genes():
+    return {
+        "gene1":make_gene_params(),
+        "gene2":make_gene_params(),
+        "gene3":make_gene_params(),
+        "gene4":make_gene_params(),
+        "gene5":make_gene_params(),
+        "gene6":make_gene_params(),
+        "gene7":make_gene_params(),
+        "gene8":make_gene_params(),
+        "gene9":make_gene_params(),
+        "gene10":make_gene_params()
+        }
 
 # テーブルにいる全ユーザ情報を取得 GET
 

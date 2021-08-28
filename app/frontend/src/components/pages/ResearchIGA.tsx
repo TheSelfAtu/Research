@@ -15,6 +15,7 @@ declare global {
 }
 
 export function ResearchIGA(): JSX.Element {
+  // 被験者指名、ニックネーム
   const [name, setName] = useState("");
   // 世代数
   const [generationCount, setGenerationCount] = useState(1);
@@ -22,81 +23,40 @@ export function ResearchIGA(): JSX.Element {
   const [genesParameters, setGenesParameters] = useState<genesParams | null>(
     null
   );
-  // const [optinJSXEl, setOptionJSXEl] = useState([{ key: -1, content: <Option fileHandlers={fileHandlers} /> }]);
 
-  const [fmParamsList, setFMParamslist] = useState<fmParamsList[] | null>(null);
-  const [genesFitness, setGenesFitness] = useState<genesFitness>({
-    gene1: "",
-    gene2: "",
-    gene3: "",
-    gene4: "",
-    gene5: "",
-    gene6: "",
-    gene7: "",
-    gene8: "",
-    gene9: "",
-    gene10: "",
-  });
-  const geneNumInEachGeneration = 10;
+  // 世代の適応度、および音生成パラメータを送信。次世代の音生成パラメータの格納
+  const postResult = useCallback(async () => {
+    // 結果を送信する
+    console.log(genesParameters, "genes");
 
-  // const postResult = useCallback(async () => {
-  //   // 結果を送信する
-  //   console.log(genesParameters, "genes");
-
-  //   axios
-  //     .post("/research1", { ...questionResults, ...{ algorithmNum: 1 } })
-  //     .then((response) => {
-  //       const nextGenerationParams: genesParams = response.data;
-  //       setGenesParameters(nextGenerationParams);
-  //       setGenerationCount(generationCount + 1);
-  //     })
-  //     .catch((err) => {
-  //       alert("データの送信に失敗しました");
-  //     });
-  // }, [genesFitness, name]);
+    axios
+      .post("/research1", genesParameters)
+      .then((response) => {
+        const nextGenerationParams: genesParams = response.data;
+        setGenesParameters(nextGenerationParams);
+        setGenerationCount(generationCount + 1);
+      })
+      .catch((err) => {
+        alert("データの送信に失敗しました");
+      });
+  }, [genesParameters, name]);
 
   {
     /* 1世代目はランダムにパラメータを生成 */
   }
   useEffect(() => {
     if (generationCount == 1) {
-      const items = [];
-      for (let i = 0; i < geneNumInEachGeneration; i++) {
-        const soundParamsList: fmParamsList = {
-          operator1: generateFMParameters(),
-          operator2: generateFMParameters(),
-          operator3: generateFMParameters(),
-          operator4: generateFMParameters(),
-        };
-        items.push(soundParamsList);
-      }
-      setFMParamslist(items);
+      axios
+        .get("/genetic-algorithm/make-ramdom/all")
+        .then((response) => {
+          const nextGenerationParams: genesParams = response.data;
+          setGenesParameters(nextGenerationParams);
+        })
+        .catch((err) => {
+          alert("データの受信に失敗しました");
+        });
     }
   }, []);
-
-  // サーバーから受け取った遺伝子情報をフォーマットして格納
-  // useEffect(() => {
-  //   const items = [];
-  //   if (!genesParameters) {
-  //     return;
-  //   }
-  //   Object.keys(genesParameters).forEach((key) => {
-  //     if (!genesParameters.hasOwnProperty(key)) {
-  //       return;
-  //     }
-  //     items.push(genesParameters[key]);
-  //   });
-  //   for (let i = 0; i < items.length; i++) {
-  //     const soundParamsList: fmParamsList = {
-  //       operator1: items[i]["operator1"],
-  //       operator2: items[i]["operator2"],
-  //       operator3: items[i]["operator3"],
-  //       operator4: items[i]["operator4"],
-  //     };
-  //     items.push(soundParamsList);
-  //   }
-  //   setFMParamslist(items);
-  // }, [genesParameters]);
 
   // サーバーから受け取った遺伝子情報をフォーマットして格納
   const OptionsEL = (genesParameters: genesParams) => {
@@ -106,6 +66,7 @@ export function ResearchIGA(): JSX.Element {
       Options.push(
         <Option
           genesParameters={genesParameters}
+          setGenesParameters={setGenesParameters}
           geneNumber={geneNum}
           algorithmNum={optionValue.algorithmNum}
           genesFitnessValue={optionValue.fitness}

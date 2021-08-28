@@ -16,7 +16,12 @@ export function Option(props: OptionProps) {
   return (
     <div>
       <SoundButton soundParamsList={props.soundParamsList}></SoundButton>
-      <SelectFitness fitnessValue={props.genesFitnessValue}></SelectFitness>
+      <SelectFitness
+        geneNumber={props.geneNumber}
+        genesParameters={props.genesParameters}
+        setGenesParameters={props.setGenesParameters}
+        fitnessValue={props.genesFitnessValue}
+      ></SelectFitness>
       <Canvas></Canvas>
       <ParametersTable fmParamsList={props.soundParamsList}></ParametersTable>
     </div>

@@ -1,10 +1,11 @@
 import { fmParamsType } from "../@types/fmParams";
+
 export function generateFMParameters() {
   const modulationIndexCandidate = [0.1, 1, 10, 100, 200, 500];
   const frequencyCandidate = [440, 880];
   const ratioCandidate = [1, 1.5, 2];
   const fmParams: fmParamsType = {
-    atack:
+    attack:
       Math.floor((1 / Math.tan(getRandom_f(Math.atan(2), Math.PI / 2))) * 100) /
       100,
     decay: getRandom_f(0, 1),

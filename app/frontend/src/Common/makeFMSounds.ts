@@ -89,7 +89,7 @@ function setEnvelop(
   envelopParams: any,
   AtkLevel: number
 ) {
-  const t1 = t0 + envelopParams.atack;
+  const t1 = t0 + envelopParams.attack;
   const decay = envelopParams.decay;
   const sustain = AtkLevel * envelopParams.sustain;
   const release = AtkLevel * envelopParams.release;

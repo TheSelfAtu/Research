@@ -17,7 +17,7 @@ export type fmParamsList = {
 };
 
 export type fmParamsType = {
-  atack: number;
+  attack: number;
   decay: number;
   sustain: number;
   release: number;

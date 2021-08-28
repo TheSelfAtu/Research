@@ -18,11 +18,10 @@ export function ParametersTable(props: ParametersTableProps) {
           <th>modulationIndex</th>
         </tr>
         {Object.keys(props.fmParamsList).map((key: string) => {
-          console.log("table", props.fmParamsList[key].atack);
           return (
             <tr>
               <td>{key}</td>
-              <td>{props.fmParamsList[key].atack}</td>
+              <td>{props.fmParamsList[key].attack}</td>
               <td>{props.fmParamsList[key].decay}</td>
               <td>{props.fmParamsList[key].sustain}</td>
               <td>{props.fmParamsList[key].release}</td>
