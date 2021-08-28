@@ -4,7 +4,7 @@ module.exports = {
     main: "./src/index.tsx",
   },
   output: {
-    path: path.resolve(__dirname, "../static/js"),
+    path: path.resolve(__dirname, "../backend/static/js"),
   },
   module: {
     rules: [

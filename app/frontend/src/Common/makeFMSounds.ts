@@ -90,13 +90,13 @@ function setEnvelop(
   AtkLevel: number
 ) {
   const t1 = t0 + envelopParams.atack;
-  const d = envelopParams.decay;
-  const s = AtkLevel * envelopParams.sustain;
-  const r = AtkLevel * envelopParams.release;
+  const decay = envelopParams.decay;
+  const sustain = AtkLevel * envelopParams.sustain;
+  const release = AtkLevel * envelopParams.release;
   gainNode.gain.setValueAtTime(0, t0);
   gainNode.gain.linearRampToValueAtTime(AtkLevel, t1);
-  gainNode.gain.linearRampToValueAtTime(s, t1 + d);
-  gainNode.gain.linearRampToValueAtTime(0, t1 + d + r);
+  gainNode.gain.linearRampToValueAtTime(sustain, t1 + decay);
+  gainNode.gain.linearRampToValueAtTime(0, t1 + decay + release);
 }
 
 function setOperatorInfo(

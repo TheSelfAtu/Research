@@ -18,7 +18,6 @@
 //   const [questionResults, setquestionResults] = useState({});
 //   const [dialogOpen, setDialogOpen] = useState(false);
 
-//   // トピックを投稿する関数
 //   const postResultToDB = useCallback(async () => {
 //     // 結果を送信する
 //     console.log(questionResults, "question");
