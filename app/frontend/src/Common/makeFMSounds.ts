@@ -75,8 +75,8 @@ function setParams(operatorParams: operatorParams, fmParams: fmParamsType) {
   operatorParams.oscillatorNode.frequency.value = fmParams.frequency;
   if (operatorParams.destination != "speaker") {
     //   オペレーターがモジュレータの場合、変調指数を変更　＝＞振幅を変える
-    operatorParams.gainNode.gain.value = fmParams.modulationIndex;
-    // operatorParams.gainNode.gain.value = 200;
+    // operatorParams.gainNode.gain.value = fmParams.modulationIndex;
+    operatorParams.gainNode.gain.value = 1000;
     // operatorParams.oscillatorNode.frequency.value = 440;
     operatorParams.oscillatorNode.frequency.value =
       frequency * fmParams.ratioToFoundamentalFrequency;

@@ -68,7 +68,7 @@ export function ResearchIGA(): JSX.Element {
           genesParameters={genesParameters}
           setGenesParameters={setGenesParameters}
           geneNumber={geneNum}
-          algorithmNum={optionValue.algorithm}
+          algorithmNum={optionValue.algorithmNum}
           genesFitnessValue={optionValue.fitness}
           soundParamsList={optionValue.fmParamsList}
         ></Option>
