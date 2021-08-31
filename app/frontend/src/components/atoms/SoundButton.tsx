@@ -1,11 +1,9 @@
 import Button from "@material-ui/core/Button";
-import { makeSound } from "../../Common/beepSound";
 import { makeFMSounds } from "../../Common/makeFMSounds";
-import { generateFMParameters } from "../../Common/generateFMParameters";
-import { fmParamsType } from "../../@types/fmParams";
 import { fmParamsList } from "../../@types/fmParams";
 
 interface SoundButtonProps {
+  algoNum: string;
   soundParamsList: fmParamsList;
   geneNumber: string;
 }
@@ -15,7 +13,7 @@ export function SoundButton(props: SoundButtonProps) {
       variant="contained"
       color="primary"
       onClick={() => {
-        makeFMSounds(props.soundParamsList, props.geneNumber);
+        makeFMSounds(props.algoNum, props.soundParamsList, props.geneNumber);
       }}
     >
       クリックすると音が鳴ります

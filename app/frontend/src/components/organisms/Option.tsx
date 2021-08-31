@@ -13,11 +13,10 @@ interface OptionProps {
 }
 
 export function Option(props: OptionProps) {
-  console.log("al", props.algorithmNum);
-
   return (
     <div>
       <SoundButton
+        algoNum={props.algorithmNum}
         soundParamsList={props.soundParamsList}
         geneNumber={props.geneNumber}
       ></SoundButton>

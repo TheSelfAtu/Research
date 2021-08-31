@@ -13,7 +13,6 @@ export type genesParams = {
 
 export type fmParamsList = {
   [key: string]: fmParamsType;
-  fitness?: number;
 };
 
 export type fmParamsType = {

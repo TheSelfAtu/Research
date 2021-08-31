@@ -3,6 +3,8 @@ import MenuItem from "@material-ui/core/MenuItem";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
+import { makeStyles } from "@material-ui/core/styles";
+
 import { fmParamsList, genesParams } from "../../@types/fmParams";
 
 interface SelectFitnessProps {
@@ -12,10 +14,22 @@ interface SelectFitnessProps {
   setGenesParameters: React.Dispatch<React.SetStateAction<genesParams | null>>;
 }
 
+const useStyles = makeStyles((theme) => ({
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 120,
+  },
+  selectEmpty: {
+    marginTop: theme.spacing(2),
+  },
+}));
+
 export function SelectFitness(props: SelectFitnessProps) {
+  const classes = useStyles();
+
   return (
     <div>
-      <FormControl>
+      <FormControl className={classes.formControl}>
         <InputLabel id="fitness">適応度</InputLabel>
         <Select
           labelId="fitness"
