@@ -122,8 +122,9 @@ function setEnvelop(
   gainNode.gain.linearRampToValueAtTime(AtkLevel, t1);
   // sustainまでゲインを線形的に減少
   gainNode.gain.setTargetAtTime(sustain, t1, t1 + decay);
+  gainNode.gain.setTargetAtTime(sustain, t1, t1 + decay + 0.5);
   // sustainからゲインを0まで減少
-  gainNode.gain.setTargetAtTime(0, t1 + decay, t1 + decay + release);
+  gainNode.gain.setTargetAtTime(0, t1 + decay + 0.5, t1 + decay + release);
 }
 
 function setAlgorithm(

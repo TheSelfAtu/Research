@@ -6,8 +6,9 @@ MODULATION_INDEX_CANDIDATE = [0, 1, 10, 100, 200, 500, 1000]
 MODULATION_INDEX_CANDIDATE = list(range(0, 3000, 100))
 FREQUENCY_CANDIDATE = [440, 880]
 # FREQUENCY_CANDIDATE = [440]
-RATIO_CANDIDATE = [0.01, 1, 2]
-RATIO_CANDIDATE = [random.random() for i in range(5)] + [0.01, 1, 2]
+# RATIO_CANDIDATE = [0.05]
+RATIO_CANDIDATE = [0.01,0.05, 1, 2,3]
+# RATIO_CANDIDATE = [random.random() for i in range(5)] + [0.01, 1, 2,3]
 ALGORITHM_CANDIDATE = [0]
 # ALGORITHM_CANDIDATE = [3]
 
@@ -56,9 +57,10 @@ def make_fm_params():
     return {
         # "attack": math.floor((1 / math.tan(get_random_f(math.atan(2), math.pi / 2))) * 100) / 100,
         "attack": get_random_f(0, 0),
-        "decay": get_random_f(0, 0),
-        "sustain": get_random_f(1, 1),
-        "release": get_random_f(0, 0.3),
+        # "decay": get_random_f(0, 0.1),
+        "decay": get_random_f(0, 0.5),
+        "sustain": get_random_f(0.5, 1),
+        "release": get_random_f(0, 0),
         "frequency": FREQUENCY_CANDIDATE[math.floor(random.random() * len(FREQUENCY_CANDIDATE))],
         "ratioToFoundamentalFrequency": RATIO_CANDIDATE[math.floor(random.random() * len(RATIO_CANDIDATE))],
         "modulationIndex": MODULATION_INDEX_CANDIDATE[math.floor(random.random() * len(MODULATION_INDEX_CANDIDATE))]
