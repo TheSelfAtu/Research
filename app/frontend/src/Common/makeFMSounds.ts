@@ -33,7 +33,6 @@ export function makeFMSounds(
   // アナライザーをセット
   const audioContext = new AudioContext();
   visualizeFFT(audioContext, analyzerNodeForSpeaker, geneNumber);
-  console.log("here");
 
   //   音を再生
   Object.keys(operatorsInfo).forEach((key) => {
@@ -57,7 +56,6 @@ function setOperatorsInfo(algoNum: string) {
   } = {};
 
   // オペレーターに関する情報をセット
-  // console.log("ossdsdfsdf", operatorsInfo.destinationNode.oscillatorNode);
   setAlgorithm(algoNum, startTime, audioContext, operatorsInfo);
   for (let operatorParams of Object.values(operatorsInfo)) {
     for (let [destinationNode, gainNode] of Object.entries(
@@ -66,13 +64,6 @@ function setOperatorsInfo(algoNum: string) {
       operatorParams.oscillatorNode.connect(gainNode);
       if (!(destinationNode == "gainNodeToSpeaker")) {
         // 接続先オペレーターの周波数変調を行うために接続
-        console.log(
-          "ossdsdfsdf",
-          destinationNode,
-          operatorsInfo,
-          operatorsInfo.destinationNode
-        );
-        const s = String(destinationNode);
         gainNode.connect(
           operatorsInfo[destinationNode].oscillatorNode.frequency
         );
@@ -82,7 +73,6 @@ function setOperatorsInfo(algoNum: string) {
       }
     }
   }
-  // console.log("oaaa");
 
   return {
     operatorsInfo: operatorsInfo,
@@ -97,20 +87,21 @@ function setOperatorsInfo(algoNum: string) {
  * @param {fmParamsType} fmParams
  */
 function setParams(operatorParams: operatorParams, fmParams: fmParamsType) {
-  const frequency = fmParams.frequency;
   //キャリアの周波数を設定
   operatorParams.oscillatorNode.frequency.value = fmParams.frequency;
 
-  // モジュレーターの周波数を設定
   if (!operatorParams.destination.hasOwnProperty("gainNodeToSpeaker")) {
+    // モジュレーターの周波数を設定
     // operatorParams.oscillatorNode.frequency.value = 440;
     operatorParams.oscillatorNode.frequency.value =
-      frequency * fmParams.ratioToFoundamentalFrequency;
-  }
-  for (let gainNodeToDestinaion of Object.values(operatorParams.destination)) {
+      fmParams.frequency * fmParams.ratioToFoundamentalFrequency;
     //   オペレーターがモジュレータの場合、変調指数を変更　＝＞振幅を変える
-    gainNodeToDestinaion.gain.value = fmParams.modulationIndex;
-    // operatorParams.gainNode.gain.value = 1000;
+    for (let gainNodeToDestinaion of Object.values(
+      operatorParams.destination
+    )) {
+      gainNodeToDestinaion.gain.value = fmParams.modulationIndex;
+      // operatorParams.gainNode.gain.value = 1000;
+    }
   }
 }
 
@@ -120,16 +111,19 @@ function setEnvelop(
   envelopParams: any,
   AtkLevel: number
 ) {
-  console.log(gainNode, "gain");
-
   const t1 = t0 + envelopParams.attack;
+  console.log("t0", t0, "t1", t1);
+
   const decay = envelopParams.decay;
   const sustain = AtkLevel * envelopParams.sustain;
-  const release = AtkLevel * envelopParams.release;
+  const release = envelopParams.release;
   gainNode.gain.setValueAtTime(0, t0);
+  // ゲインの最大までゲインを線形的に増加
   gainNode.gain.linearRampToValueAtTime(AtkLevel, t1);
-  gainNode.gain.linearRampToValueAtTime(sustain, t1 + decay);
-  gainNode.gain.linearRampToValueAtTime(0, t1 + decay + release);
+  // sustainまでゲインを線形的に減少
+  gainNode.gain.setTargetAtTime(sustain, t1, t1 + decay);
+  // sustainからゲインを0まで減少
+  gainNode.gain.setTargetAtTime(0, t1 + decay, t1 + decay + release);
 }
 
 function setAlgorithm(
@@ -138,8 +132,6 @@ function setAlgorithm(
   audioContext: AudioContext,
   operatorsInfo: { [key: string]: operatorParams | GainNode }
 ) {
-  console.log("out", algoNum);
-
   if (algoNum == "0") {
     //   1オペレータ、1キャリアのアルゴリズム
     operatorsInfo["operator1"] = {
@@ -281,7 +273,6 @@ function setAlgorithm(
       analyserNode: new AnalyserNode(audioContext),
       destination: { operator3: new GainNode(audioContext) },
     };
-    console.log("algo");
   }
   // 以下は現在の実装ではアルゴリズムが組めない
   // if (algoNum == "5") {
