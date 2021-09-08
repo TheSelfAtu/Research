@@ -19,12 +19,13 @@ export function ParametersTable(props: ParametersTableProps) {
           <th>modulationIndex</th>
           <th>algoNum</th>
         </tr>
-        {Object.keys(props.fmParamsList).map((key: string) => {
+        {Object.keys(props.fmParamsList).map((key: string, index: number) => {
           return (
             <tr
               key={
                 props.fmParamsList[key].sustain +
-                props.fmParamsList[key].modulationIndex
+                props.fmParamsList[key].modulationIndex +
+                index
               }
             >
               <td>{key}</td>
