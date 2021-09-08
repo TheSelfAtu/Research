@@ -4,6 +4,7 @@ import random
 # MODULATION_INDEX_CANDIDATE = [0]
 MODULATION_INDEX_CANDIDATE = [0, 1, 10, 100, 200, 500, 1000]
 MODULATION_INDEX_CANDIDATE = list(range(0, 3000, 100))
+MODULATION_INDEX_CANDIDATE = [500]
 FREQUENCY_CANDIDATE = [440, 880]
 # FREQUENCY_CANDIDATE = [440]
 RATIO_CANDIDATE = [0.01, 1, 2]
@@ -54,15 +55,26 @@ def make_gene_params():
 
 def make_fm_params():
     return {
-        # "attack": math.floor((1 / math.tan(get_random_f(math.atan(2), math.pi / 2))) * 100) / 100,
-        "attack": get_random_f(0, 0),
-        "decay": get_random_f(0, 0),
-        "sustain": get_random_f(1, 1),
-        "release": get_random_f(0, 0.3),
-        "frequency": FREQUENCY_CANDIDATE[math.floor(random.random() * len(FREQUENCY_CANDIDATE))],
-        "ratioToFoundamentalFrequency": RATIO_CANDIDATE[math.floor(random.random() * len(RATIO_CANDIDATE))],
+        "attack": 0,
+        "decay": 0,
+        "sustain": 1,
+        "release": 0.2,
+        "frequency": 440,
+        "ratioToFoundamentalFrequency": 1,
         "modulationIndex": MODULATION_INDEX_CANDIDATE[math.floor(random.random() * len(MODULATION_INDEX_CANDIDATE))]
     }
+
+# def make_fm_params():
+#     return {
+#         # "attack": math.floor((1 / math.tan(get_random_f(math.atan(2), math.pi / 2))) * 100) / 100,
+#         "attack": get_random_f(0, 0),
+#         "decay": get_random_f(0, 0),
+#         "sustain": get_random_f(1, 1),
+#         "release": get_random_f(0, 0.3),
+#         "frequency": FREQUENCY_CANDIDATE[math.floor(random.random() * len(FREQUENCY_CANDIDATE))],
+#         "ratioToFoundamentalFrequency": RATIO_CANDIDATE[math.floor(random.random() * len(RATIO_CANDIDATE))],
+#         "modulationIndex": MODULATION_INDEX_CANDIDATE[math.floor(random.random() * len(MODULATION_INDEX_CANDIDATE))]
+#     }
 
 
 def get_random_param(min: int, max: int):

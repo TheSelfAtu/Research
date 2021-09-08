@@ -12,6 +12,14 @@ export function makeFMSounds(
   const operatorsInfo = operatorsInfoWithGainNode["operatorsInfo"];
   const gainNodeToSpeaker = operatorsInfoWithGainNode["gainNodeToSpeaker"];
   const analyzerNodeForSpeaker = operatorsInfoWithGainNode["analyzerNode"];
+
+  // 周波数や変調指数などをセット
+  Object.keys(operatorsInfo).forEach((key) => {
+    const operatorParams = operatorsInfo[key];
+    const fmParams = fmParamsList[key];
+    setParams(operatorParams, fmParams);
+  });
+
   // エンベロープをセット;
   Object.keys(operatorsInfo).forEach((key) => {
     Object.keys(operatorsInfo[key].destination).forEach(
@@ -22,12 +30,6 @@ export function makeFMSounds(
         setEnvelop(startTime, gainNode, fmParams, 1);
       }
     );
-  });
-  // 周波数や変調指数などをセット
-  Object.keys(operatorsInfo).forEach((key) => {
-    const operatorParams = operatorsInfo[key];
-    const fmParams = fmParamsList[key];
-    setParams(operatorParams, fmParams);
   });
 
   // アナライザーをセット
@@ -112,16 +114,15 @@ function setEnvelop(
   AtkLevel: number
 ) {
   const t1 = t0 + envelopParams.attack;
-  console.log("t0", t0, "t1", t1);
-
   const decay = envelopParams.decay;
   const sustain = AtkLevel * envelopParams.sustain;
   const release = envelopParams.release;
+  const gainValue = gainNode.gain.value;
   gainNode.gain.setValueAtTime(0, t0);
   // ゲインの最大までゲインを線形的に増加
-  gainNode.gain.linearRampToValueAtTime(AtkLevel, t1);
+  gainNode.gain.linearRampToValueAtTime(gainValue, t1);
   // sustainまでゲインを線形的に減少
-  gainNode.gain.setTargetAtTime(sustain, t1, t1 + decay);
+  gainNode.gain.setTargetAtTime(sustain * gainValue, t1, t1 + decay);
   // sustainからゲインを0まで減少
   gainNode.gain.setTargetAtTime(0, t1 + decay, t1 + decay + release);
 }
