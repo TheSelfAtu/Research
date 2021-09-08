@@ -27,7 +27,9 @@ export function makeFMSounds(
         const fmParams = fmParamsList[key];
         const startTime = operatorsInfo[key].startTime;
         const gainNode = operatorsInfo[key].destination[gainNodeDestination];
-        setEnvelop(startTime, gainNode, fmParams, 1);
+        if (gainNodeDestination == "gainNodeToSpeaker") {
+          setEnvelop(startTime, gainNode, fmParams);
+        }
       }
     );
   });
@@ -107,15 +109,10 @@ function setParams(operatorParams: operatorParams, fmParams: fmParamsType) {
   }
 }
 
-function setEnvelop(
-  t0: number,
-  gainNode: GainNode,
-  envelopParams: any,
-  AtkLevel: number
-) {
+function setEnvelop(t0: number, gainNode: GainNode, envelopParams: any) {
   const t1 = t0 + envelopParams.attack;
   const decay = envelopParams.decay;
-  const sustain = AtkLevel * envelopParams.sustain;
+  const sustain = envelopParams.sustain;
   const release = envelopParams.release;
   const gainValue = gainNode.gain.value;
   gainNode.gain.setValueAtTime(0, t0);
