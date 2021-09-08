@@ -56,6 +56,7 @@ export function ResearchIGA(): JSX.Element {
       for (const [geneNum, geneParam] of Object.entries(genesParams)) {
         Options.push(
           <Option
+            key={geneNum}
             genesParameters={genesParams}
             setGenesParameters={setGenesParams}
             geneNumber={geneNum}
