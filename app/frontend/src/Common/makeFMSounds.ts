@@ -121,11 +121,8 @@ function setEnvelop(t0: number, gainNode: GainNode, envelopParams: any) {
   // ゲインの最大までゲインを線形的に増加
   gainNode.gain.linearRampToValueAtTime(gainValue, t1);
   // sustainまでゲインを線形的に減少
-  // gainNode.gain.setTargetAtTime(sustain * gainValue, t1, t1 + decay);
   gainNode.gain.setTargetAtTime(sustain * gainValue, t1, decay);
-  // gainNode.gain.setTargetAtTime(sustain * gainValue, t1, t1 + decay + 1);
   // sustainからゲインを0まで減少
-  // gainNode.gain.setTargetAtTime(0, t1 + decay + 1, t1 + decay + release);
   gainNode.gain.setTargetAtTime(0, t1 + decay, release);
 }
 
