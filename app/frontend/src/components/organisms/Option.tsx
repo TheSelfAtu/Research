@@ -2,7 +2,8 @@ import { SoundButton } from "../atoms/SoundButton";
 import { SelectFitness } from "../atoms/SelectFitness";
 import { Canvas } from "../molecules/Canvas";
 import { ParametersTable } from "../molecules/ParametersTable";
-import { fmParamsList, chromosomesParams } from "../../@types/fmParams";
+import { fmParamsList } from "../../@types/fmParams";
+import { chromosomesParams } from "../../@types/chromosomesParams";
 
 interface OptionProps {
   chromosomesParams: chromosomesParams;

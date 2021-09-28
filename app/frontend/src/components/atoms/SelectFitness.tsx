@@ -5,7 +5,8 @@ import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import { makeStyles } from "@material-ui/core/styles";
 
-import { fmParamsList, chromosomesParams } from "../../@types/fmParams";
+import { fmParamsList } from "../../@types/fmParams";
+import { chromosomesParams } from "../../@types/chromosomesParams";
 
 interface SelectFitnessProps {
   fitnessValue: string;

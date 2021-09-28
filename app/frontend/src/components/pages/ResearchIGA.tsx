@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import { Option } from "../organisms/Option";
-import { chromosomesParams } from "../../@types/fmParams";
+import { chromosomesParams } from "../../@types/chromosomesParams";
 
 import axios from "axios";
 
@@ -36,7 +36,7 @@ export function ResearchIGA(): JSX.Element {
   useEffect(() => {
     if (generationCount == 1) {
       axios
-        .get("/genetic-algorithm/make-ramdom/all")
+        .get("/manipulation/make-ramdom/all")
         .then((response) => {
           const firstGenerationParams: chromosomesParams = response.data;
           setChromosomesParams(firstGenerationParams);
