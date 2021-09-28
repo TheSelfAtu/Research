@@ -19,7 +19,7 @@ export function ResearchIGA(): JSX.Element {
   const postResult = useCallback(async () => {
     // 結果を送信する
     axios
-      .post("/research1", chromosomesParams)
+      .post("/manipulation", chromosomesParams)
       .then((response) => {
         const nextGenerationParams: chromosomesParams = response.data;
         setChromosomesParams(nextGenerationParams);

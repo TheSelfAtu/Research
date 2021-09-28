@@ -1,3 +1,4 @@
+from typing import List
 from fastapi import APIRouter
 from db import session  # DBと接続するためのセッション
 from model import UserTable, User, Research1Table  # 今回使うモデルをインポート
