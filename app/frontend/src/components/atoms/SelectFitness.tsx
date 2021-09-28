@@ -5,15 +5,18 @@ import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import { makeStyles } from "@material-ui/core/styles";
 
-import { fmParamsList, genesParams } from "../../@types/fmParams";
+import { fmParamsList, chromosomesParams } from "../../@types/fmParams";
 
 interface SelectFitnessProps {
   fitnessValue: string;
-  geneNumber: string;
-  genesParameters: genesParams;
-  setGenesParameters: React.Dispatch<React.SetStateAction<genesParams | null>>;
+  chromosomeNumber: string;
+  chromosomesParams: chromosomesParams;
+  setChromosomesParams: React.Dispatch<
+    React.SetStateAction<chromosomesParams | null>
+  >;
 }
 
+// スタイルを修正
 const useStyles = makeStyles((theme) => ({
   formControl: {
     margin: theme.spacing(1),
@@ -37,14 +40,15 @@ export function SelectFitness(props: SelectFitnessProps) {
           defaultValue="-"
           value={props.fitnessValue}
           onChange={(event) => {
-            const geneNumber: keyof genesParams =
-              props.geneNumber as keyof genesParams;
-            let prevGenesParams = props.genesParameters[geneNumber];
-            prevGenesParams.fitness = event.target.value as string;
+            const chromosomeNumber: keyof chromosomesParams =
+              props.chromosomeNumber as keyof chromosomesParams;
+            let prevChromosomesParams =
+              props.chromosomesParams[chromosomeNumber];
+            prevChromosomesParams.fitness = event.target.value as string;
 
-            props.setGenesParameters({
-              ...props.genesParameters,
-              [props.geneNumber]: prevGenesParams,
+            props.setChromosomesParams({
+              ...props.chromosomesParams,
+              [props.chromosomeNumber]: prevChromosomesParams,
             });
           }}
         >

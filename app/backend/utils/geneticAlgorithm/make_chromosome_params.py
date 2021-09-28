@@ -24,7 +24,7 @@ RELEASE_CANDIDATE = [1]
 RELEASE_CANDIDATE = [0.1, 0.2, 0.3, 0.4, 0.5]
 
 
-def make_gene_params():
+def make_chromosome_params():
     """
     ランダムな初期値を与えた 遺伝子のパラメーターを生成する。
 

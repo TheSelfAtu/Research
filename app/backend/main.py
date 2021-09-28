@@ -6,7 +6,7 @@ from model import UserTable, User, Research1Table, Research1  # 今回使うモ�
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
-from utils.geneticAlgorithm.make_gene_params import make_gene_params
+from utils.geneticAlgorithm.make_chromosome_params import make_chromosome_params
 
 app = FastAPI()
 template_file_path = "./static/templates/index.html"
@@ -32,16 +32,16 @@ async def main():
 @app.get("/genetic-algorithm/make-ramdom/all")
 async def rep_first_genes():
     return {
-        "gene1":make_gene_params(),
-        "gene2":make_gene_params(),
-        "gene3":make_gene_params(),
-        "gene4":make_gene_params(),
-        "gene5":make_gene_params(),
-        "gene6":make_gene_params(),
-        "gene7":make_gene_params(),
-        "gene8":make_gene_params(),
-        "gene9":make_gene_params(),
-        "gene10":make_gene_params()
+        "chromosome1":make_chromosome_params(),
+        "chromosome2":make_chromosome_params(),
+        "chromosome3":make_chromosome_params(),
+        "chromosome4":make_chromosome_params(),
+        "chromosome5":make_chromosome_params(),
+        "chromosome6":make_chromosome_params(),
+        "chromosome7":make_chromosome_params(),
+        "chromosome8":make_chromosome_params(),
+        "chromosome9":make_chromosome_params(),
+        "chromosome10":make_chromosome_params()
         }
 
 # テーブルにいる全ユーザ情報を取得 GET

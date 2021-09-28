@@ -2,14 +2,17 @@ import { SoundButton } from "../atoms/SoundButton";
 import { SelectFitness } from "../atoms/SelectFitness";
 import { Canvas } from "../molecules/Canvas";
 import { ParametersTable } from "../molecules/ParametersTable";
-import { fmParamsList, genesParams } from "../../@types/fmParams";
+import { fmParamsList, chromosomesParams } from "../../@types/fmParams";
+
 interface OptionProps {
-  genesParameters: genesParams;
-  setGenesParameters: React.Dispatch<React.SetStateAction<genesParams | null>>;
-  geneNumber: string;
+  chromosomesParams: chromosomesParams;
+  setChromosomesParameters: React.Dispatch<
+    React.SetStateAction<chromosomesParams | null>
+  >;
+  chromosomeNumber: string;
   soundParamsList: fmParamsList;
   algorithmNum: string;
-  genesFitnessValue: string;
+  chromosomesFitnessValue: string;
 }
 
 export function Option(props: OptionProps) {
@@ -18,15 +21,15 @@ export function Option(props: OptionProps) {
       <SoundButton
         algoNum={props.algorithmNum}
         soundParamsList={props.soundParamsList}
-        geneNumber={props.geneNumber}
+        chromosomeNum={props.chromosomeNumber}
       ></SoundButton>
       <SelectFitness
-        geneNumber={props.geneNumber}
-        genesParameters={props.genesParameters}
-        setGenesParameters={props.setGenesParameters}
-        fitnessValue={props.genesFitnessValue}
+        chromosomeNumber={props.chromosomeNumber}
+        chromosomesParams={props.chromosomesParams}
+        setChromosomesParams={props.setChromosomesParameters}
+        fitnessValue={props.chromosomesFitnessValue}
       ></SelectFitness>
-      <Canvas geneNumber={props.geneNumber}></Canvas>
+      <Canvas chromosomeNumber={props.chromosomeNumber}></Canvas>
       <ParametersTable
         fmParamsList={props.soundParamsList}
         algorithmNum={props.algorithmNum}

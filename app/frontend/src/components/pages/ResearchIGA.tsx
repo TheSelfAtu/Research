@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import { Option } from "../organisms/Option";
-import { genesParams } from "../../@types/fmParams";
+import { chromosomesParams } from "../../@types/fmParams";
 
 import axios from "axios";
 
@@ -12,24 +12,23 @@ export function ResearchIGA(): JSX.Element {
   // 世代数
   const [generationCount, setGenerationCount] = useState(1);
   // １つの世代に存在する遺伝子の情報
-  const [genesParams, setGenesParams] = useState<genesParams | null>(null);
+  const [chromosomesParams, setChromosomesParams] =
+    useState<chromosomesParams | null>(null);
 
   // 世代の適応度、および音生成パラメータを送信。次世代の音生成パラメータの格納
   const postResult = useCallback(async () => {
     // 結果を送信する
-    console.log(genesParams, "genes");
-
     axios
-      .post("/research1", genesParams)
+      .post("/research1", chromosomesParams)
       .then((response) => {
-        const nextGenerationParams: genesParams = response.data;
-        setGenesParams(nextGenerationParams);
+        const nextGenerationParams: chromosomesParams = response.data;
+        setChromosomesParams(nextGenerationParams);
         setGenerationCount(generationCount + 1);
       })
       .catch((err) => {
         alert("データの送信に失敗しました");
       });
-  }, [genesParams, name]);
+  }, [chromosomesParams, name]);
 
   {
     /* 1世代目はランダムにパラメータを生成 */
@@ -39,8 +38,8 @@ export function ResearchIGA(): JSX.Element {
       axios
         .get("/genetic-algorithm/make-ramdom/all")
         .then((response) => {
-          const nextGenerationParams: genesParams = response.data;
-          setGenesParams(nextGenerationParams);
+          const firstGenerationParams: chromosomesParams = response.data;
+          setChromosomesParams(firstGenerationParams);
         })
         .catch((err) => {
           alert("データの受信に失敗しました");
@@ -52,17 +51,19 @@ export function ResearchIGA(): JSX.Element {
   const OptionsEL = () => {
     // 1つの遺伝子の評価をするためのコンポーネントのリスト
     const Options: JSX.Element[] = [];
-    if (genesParams) {
-      for (const [geneNum, geneParam] of Object.entries(genesParams)) {
+    if (chromosomesParams) {
+      for (const [chromosomeNum, chromosomeParam] of Object.entries(
+        chromosomesParams
+      )) {
         Options.push(
           <Option
-            key={geneNum}
-            genesParameters={genesParams}
-            setGenesParameters={setGenesParams}
-            geneNumber={geneNum}
-            algorithmNum={geneParam.algorithmNum}
-            genesFitnessValue={geneParam.fitness}
-            soundParamsList={geneParam.fmParamsList}
+            key={chromosomeNum}
+            chromosomesParams={chromosomesParams}
+            setChromosomesParameters={setChromosomesParams}
+            chromosomeNumber={chromosomeNum}
+            algorithmNum={chromosomeParam.algorithmNum}
+            chromosomesFitnessValue={chromosomeParam.fitness}
+            soundParamsList={chromosomeParam.fmParamsList}
           ></Option>
         );
       }

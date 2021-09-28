@@ -1,14 +1,54 @@
-export type genesParams = {
-  gene1: { fmParamsList: fmParamsList; fitness: string; algorithmNum: string };
-  gene2: { fmParamsList: fmParamsList; fitness: string; algorithmNum: string };
-  gene3: { fmParamsList: fmParamsList; fitness: string; algorithmNum: string };
-  gene4: { fmParamsList: fmParamsList; fitness: string; algorithmNum: string };
-  gene5: { fmParamsList: fmParamsList; fitness: string; algorithmNum: string };
-  gene6: { fmParamsList: fmParamsList; fitness: string; algorithmNum: string };
-  gene7: { fmParamsList: fmParamsList; fitness: string; algorithmNum: string };
-  gene8: { fmParamsList: fmParamsList; fitness: string; algorithmNum: string };
-  gene9: { fmParamsList: fmParamsList; fitness: string; algorithmNum: string };
-  gene10: { fmParamsList: fmParamsList; fitness: string; algorithmNum: string };
+export type chromosomesParams = {
+  chromosome1: {
+    fmParamsList: fmParamsList;
+    fitness: string;
+    algorithmNum: string;
+  };
+  chromosome2: {
+    fmParamsList: fmParamsList;
+    fitness: string;
+    algorithmNum: string;
+  };
+  chromosome3: {
+    fmParamsList: fmParamsList;
+    fitness: string;
+    algorithmNum: string;
+  };
+  chromosome4: {
+    fmParamsList: fmParamsList;
+    fitness: string;
+    algorithmNum: string;
+  };
+  chromosome5: {
+    fmParamsList: fmParamsList;
+    fitness: string;
+    algorithmNum: string;
+  };
+  chromosome6: {
+    fmParamsList: fmParamsList;
+    fitness: string;
+    algorithmNum: string;
+  };
+  chromosome7: {
+    fmParamsList: fmParamsList;
+    fitness: string;
+    algorithmNum: string;
+  };
+  chromosome8: {
+    fmParamsList: fmParamsList;
+    fitness: string;
+    algorithmNum: string;
+  };
+  chromosome9: {
+    fmParamsList: fmParamsList;
+    fitness: string;
+    algorithmNum: string;
+  };
+  chromosome10: {
+    fmParamsList: fmParamsList;
+    fitness: string;
+    algorithmNum: string;
+  };
 };
 
 export type fmParamsList = {

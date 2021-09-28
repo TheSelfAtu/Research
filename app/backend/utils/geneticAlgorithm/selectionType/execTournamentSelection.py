@@ -1,4 +1,9 @@
-    def _exec_tournament_selection(self) -> List[Chromosome]:
+from typing import List
+from heapq import nlargest
+from random import choices
+Chromosomes = List[str,dict]
+
+def exec_tournament_selection(self) ->  List[Chromosomes]:
         """
         トーナメント選択を行い、交叉などで利用するための2つの個体
         （染色体）を取得する。
@@ -11,6 +16,6 @@
             設定される。
         """
         participants_num: int = len(self._population) // 2
-        participants: List[Chromosome] = choices(self._population, k=participants_num)
-        selected_chromosomes: List[Chromosome] = nlargest(n=2, iterable=participants)
+        participants: List[Chromosomes] = choices(self._population, k=participants_num)
+        selected_chromosomes: List[Chromosomes] = nlargest(n=2, iterable=participants)
         return selected_chromosomes
