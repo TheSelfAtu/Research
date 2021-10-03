@@ -23,7 +23,7 @@ async def make_generation_chromosomes():
     }
 
 @router.post("/manipulation")
-async def gene_manipulation(chromosomes_params: ChromosomesParams):
+async def gene_manipulation(chromosomes_params: ChromosomesParams)->ChromosomesParams:
     next_generation_chromosomes: list[dict] = []
     generation_chromosome_num : int = 10
     # エリート個体を次世代に残す
@@ -33,3 +33,19 @@ async def gene_manipulation(chromosomes_params: ChromosomesParams):
     for i in range(len(next_generation_chromosomes),generation_chromosome_num):
         parents = exec_tournament_selection(dict(chromosomes_params))
         offspring = exec_blx_alpha(parents)
+        offspring["fitness"]=""
+        offspring["algorithmNum"]= "0"
+        next_generation_chromosomes.append(offspring)
+    print(next_generation_chromosomes)
+    return {
+        "chromosome1": next_generation_chromosomes[0],
+        "chromosome2": next_generation_chromosomes[1],
+        "chromosome3": next_generation_chromosomes[2],
+        "chromosome4": next_generation_chromosomes[3],
+        "chromosome5": next_generation_chromosomes[4],
+        "chromosome6": next_generation_chromosomes[5],
+        "chromosome7": next_generation_chromosomes[6],
+        "chromosome8": next_generation_chromosomes[7],
+        "chromosome9": next_generation_chromosomes[8],
+        "chromosome10": next_generation_chromosomes[9]
+    }
