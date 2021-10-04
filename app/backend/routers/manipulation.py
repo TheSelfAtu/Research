@@ -34,9 +34,8 @@ async def gene_manipulation(chromosomes_params: ChromosomesParams)->ChromosomesP
         parents = exec_tournament_selection(dict(chromosomes_params))
         offspring = exec_blx_alpha(parents)
         offspring["fitness"]=""
-        offspring["algorithmNum"]= "0"
+        offspring["algorithmNum"]= "1"
         next_generation_chromosomes.append(offspring)
-    print(next_generation_chromosomes)
     return {
         "chromosome1": next_generation_chromosomes[0],
         "chromosome2": next_generation_chromosomes[1],

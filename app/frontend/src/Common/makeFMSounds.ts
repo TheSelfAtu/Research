@@ -8,7 +8,8 @@ export function makeFMSounds(
   geneNumber: string
 ) {
   //   アルゴリズムをセット
-  const operatorsInfoWithGainNode = setOperatorsInfo(algoNum);
+  const algorithmNum = "1";
+  const operatorsInfoWithGainNode = setOperatorsInfo(algorithmNum);
   const operatorsInfo = operatorsInfoWithGainNode["operatorsInfo"];
   const gainNodeToSpeaker = operatorsInfoWithGainNode["gainNodeToSpeaker"];
   const analyzerNodeForSpeaker = operatorsInfoWithGainNode["analyzerNode"];
