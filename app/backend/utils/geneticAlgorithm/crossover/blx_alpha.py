@@ -1,6 +1,6 @@
 import random
 
-def exec_blx_alpha(parents_chromosomes: list) -> dict:
+def exec_blx_alpha(parents_chromosomes: list, func_repair_gene) -> dict:
     offspring = {"fmParamsList":{}}
     parents1 = parents_chromosomes[0]
     parents2 = parents_chromosomes[1]
@@ -16,6 +16,8 @@ def exec_blx_alpha(parents_chromosomes: list) -> dict:
             offspring_param_range:tuple = culc_offspring_param_range(chromosome1_operator_param_value,chromosome2_operator_param_value)
             # 子孫のパラメータを範囲内からランダムに決定
             offspring_param = random.uniform(offspring_param_range[0], offspring_param_range[1])
+            # パラメータの修正
+            offspring_param = func_repair_gene(param_name,offspring_param)
             operator_param = {param_name:offspring_param}
             offspring_operators_params[operator_num].update(operator_param) 
         offspring["fmParamsList"].update(offspring_operators_params)
@@ -26,7 +28,7 @@ def culc_offspring_param_range(param1,param2,expand_rate=0.5)->tuple:
     param2 = float(param2)
     param_range = abs(param1-param2)
     expanded_range = param_range * expand_rate
-    if param1 > param2 :
+    if param1 >= param2 :
         return (param2-expanded_range,param1+expanded_range)
     else :
         return (param1-expanded_range,param2+expanded_range)
