@@ -8,7 +8,7 @@ export function makeFMSounds(
   geneNumber: string
 ) {
   //   アルゴリズムをセット
-  const algorithmNum = "1";
+  const algorithmNum = algoNum;
   const operatorsInfoWithGainNode = setOperatorsInfo(algorithmNum);
   const operatorsInfo = operatorsInfoWithGainNode["operatorsInfo"];
   const gainNodeToSpeaker = operatorsInfoWithGainNode["gainNodeToSpeaker"];
@@ -133,6 +133,9 @@ function setAlgorithm(
   audioContext: AudioContext,
   operatorsInfo: { [key: string]: operatorParams | GainNode }
 ) {
+  algoNum = "4";
+  console.log("algoNum", algoNum);
+
   if (algoNum == "0") {
     //   1オペレータ、1キャリアのアルゴリズム
     operatorsInfo["operator1"] = {
