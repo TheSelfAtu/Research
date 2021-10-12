@@ -116,7 +116,6 @@ function setEnvelop(t0: number, gainNode: GainNode, envelopParams: any) {
   const sustain = envelopParams.sustain;
   const release = envelopParams.release;
   const gainValue = gainNode.gain.value;
-  console.log(t1 + decay + release, "time", t1, decay, release);
 
   gainNode.gain.setValueAtTime(0, t0);
   // ゲインの最大までゲインを線形的に増加

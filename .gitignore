@@ -134,3 +134,6 @@ __pycache_
 # mysql
 mysql*
 # End of https://www.toptal.com/developers/gitignore/api/node
+
+# bundle js file
+main.js
