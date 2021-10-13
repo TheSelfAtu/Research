@@ -6,7 +6,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 
 interface Question {
   data: any;
-  questionNumber: Number;
+  questionNumber: number;
   questionResults: any;
   setQuestionResults: React.Dispatch<React.SetStateAction<{}>>;
 }
@@ -18,7 +18,7 @@ const marginStyle = {
 export function Question(props: Question): JSX.Element {
   const [questionResults, setquestionResults] = useState({});
   const [selectValue, setSelectValue] = useState<
-    null | unknown | string | Number
+    null | unknown | string | number
   >("-");
   const sound1SrcURL =
     "static/sounds/" +

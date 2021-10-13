@@ -56,14 +56,14 @@ function setOperatorsInfo(algoNum: string) {
   const analyzerNode = new AnalyserNode(audioContext);
   gainNodeToSpeaker.connect(analyzerNode);
 
-  let operatorsInfo: {
+  const operatorsInfo: {
     [key: string]: operatorParams;
   } = {};
 
   // オペレーターに関する情報をセット
   setAlgorithm(algoNum, startTime, audioContext, operatorsInfo);
-  for (let operatorParams of Object.values(operatorsInfo)) {
-    for (let [destinationNode, gainNode] of Object.entries(
+  for (const operatorParams of Object.values(operatorsInfo)) {
+    for (const [destinationNode, gainNode] of Object.entries(
       operatorParams.destination
     )) {
       operatorParams.oscillatorNode.connect(gainNode);
@@ -101,7 +101,7 @@ function setParams(operatorParams: operatorParams, fmParams: fmParamsType) {
     operatorParams.oscillatorNode.frequency.value =
       fmParams.frequency * fmParams.ratioToFoundamentalFrequency;
     //   オペレーターがモジュレータの場合、変調指数を変更　＝＞振幅を変える
-    for (let gainNodeToDestinaion of Object.values(
+    for (const gainNodeToDestinaion of Object.values(
       operatorParams.destination
     )) {
       gainNodeToDestinaion.gain.value = fmParams.modulationIndex;

@@ -43,7 +43,7 @@ export function SelectFitness(props: SelectFitnessProps) {
           onChange={(event) => {
             const chromosomeNumber: keyof chromosomesParams =
               props.chromosomeNumber as keyof chromosomesParams;
-            let prevChromosomesParams =
+            const prevChromosomesParams =
               props.chromosomesParams[chromosomeNumber];
             prevChromosomesParams.fitness = event.target.value as string;
 

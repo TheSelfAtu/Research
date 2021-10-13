@@ -21,7 +21,7 @@ export function visualizeFFT(
   canvasContext.lineJoin = "miter";
 
   // Flag for starting or stopping sound
-  let isStop = true;
+  const isStop = true;
 
   analyserNode.minDecibels = -150; // Default -100 dB
   analyserNode.maxDecibels = 0; // Default  -30 dB
@@ -56,8 +56,8 @@ export function visualizeFFT(
     canvasContext.beginPath();
 
     for (let i = 0, len = spectrums.length; i < len; i++) {
-      let x = Math.floor((i / len) * innerWidth) + paddingLeft;
-      let y =
+      const x = Math.floor((i / len) * innerWidth) + paddingLeft;
+      const y =
         Math.floor(
           -1 * ((spectrums[i] - analyserNode.maxDecibels) / range) * innerHeight
         ) + paddingTop;
@@ -69,7 +69,7 @@ export function visualizeFFT(
       }
 
       if (i % n500Hz === 0) {
-        let text = 500 * (i / n500Hz) + " Hz"; // index -> frequency
+        const text = 500 * (i / n500Hz) + " Hz"; // index -> frequency
 
         // Draw grid (X)
         canvasContext.fillStyle = "rgba(255, 0, 0, 1.0)";
@@ -94,7 +94,7 @@ export function visualizeFFT(
       i <= analyserNode.maxDecibels;
       i += 10
     ) {
-      let gy =
+      const gy =
         Math.floor(
           -1 * ((i - analyserNode.maxDecibels) / range) * innerHeight
         ) + paddingTop;
@@ -109,5 +109,5 @@ export function visualizeFFT(
       canvasContext.fillText(i + " dB", 3, gy);
     }
   }
-  let timerid = window.setTimeout(drawWave, 500, analyserNode);
+  const timerid = window.setTimeout(drawWave, 500, analyserNode);
 }

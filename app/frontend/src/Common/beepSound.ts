@@ -1,6 +1,6 @@
 export function beepSound(
   soundType: string,
-  frequency: number = 440,
+  frequency = 440,
   length: number
 ) {
   const ctx = new AudioContext();
@@ -8,7 +8,7 @@ export function beepSound(
   const gainNode = ctx.createGain();
   // 音量の初期値を0.5にする
   gainNode.gain.value = 0.05;
-  let oscillator = ctx.createOscillator();
+  const oscillator = ctx.createOscillator();
   oscillator.type = soundType as "sine" | "sawtooth" | "triangle";
   oscillator.frequency.setValueAtTime(frequency, 0);
   oscillator.connect(gainNode).connect(ctx.destination);
@@ -18,7 +18,7 @@ export function beepSound(
 
 export function changeSound(
   soundType: string,
-  frequency: number = 440,
+  frequency = 440,
   length: number
 ) {
   const ctx = new AudioContext();
@@ -26,7 +26,7 @@ export function changeSound(
   const gainNode = ctx.createGain();
   // 音量の初期値を0.5にする
   gainNode.gain.value = 0.05;
-  let oscillator = ctx.createOscillator();
+  const oscillator = ctx.createOscillator();
   oscillator.type = soundType as "sine" | "sawtooth" | "triangle";
   oscillator.frequency.setValueAtTime(frequency, 0);
   oscillator.connect(gainNode).connect(ctx.destination);
@@ -41,7 +41,7 @@ export function makeSound() {
   for (let k = 1; k < 3; k++) {
     const gainNode = ctx.createGain();
     gainNode.gain.value = 0.5;
-    let oscillator = ctx.createOscillator();
+    const oscillator = ctx.createOscillator();
     oscillator.type = "sine";
     oscillator.frequency.value = (k + 1) * 440;
     oscillator.connect(ctx.destination);
