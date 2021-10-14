@@ -22,7 +22,7 @@ jobs:
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
           
 
-      - name: Test with pytest
-        run: |
-          cd app/backend/utils/
-          python -m unittest  python3 -m unittest discover geneticAlgorithm.tests
+      - name: Change current directory
+        run: cd app/backend/utils/
+      - name: Unit Test   
+        run: python3 -m unittest discover geneticAlgorithm.tests
