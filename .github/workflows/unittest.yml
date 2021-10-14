@@ -23,6 +23,6 @@ jobs:
           
 
       - name: Test with pytest
-        run: 
+        run: |
           cd app/backend/utils/
           python -m unittest  python3 -m unittest discover geneticAlgorithm.tests
