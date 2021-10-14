@@ -28,3 +28,4 @@ jobs:
         run: pwd
       - name: Unit Test   
         run: python3 -m unittest discover geneticAlgorithm.tests
+        working-directory: ./app/backend/utils
