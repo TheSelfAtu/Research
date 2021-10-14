@@ -1,5 +1,5 @@
 import unittest
-from gene_repair.fm_params.ratio_frequency import *
+from ..gene_repair.fm_params.ratio_frequency import *
 
 
 class Repair(unittest.TestCase):
