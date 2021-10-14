@@ -1,6 +1,8 @@
 import math
 import random
 from .gene_candidate.candidates01 import make_fm_params
+# from .gene_candidate.sawtooth import make_fm_params
+
 
 def make_chromosome_params():
     """
@@ -20,8 +22,6 @@ def make_chromosome_params():
             "operator3": make_fm_params(),
             "operator4": make_fm_params(),
         },
-        "algorithmNum": 4,
+        "algorithmNum": 1,
         "fitness": ""
     }
-
-

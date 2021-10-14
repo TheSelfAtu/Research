@@ -11,7 +11,6 @@ export function makeFMSounds(
   const algorithmNum = algoNum;
   const operatorsInfoWithGainNode = setOperatorsInfo(algorithmNum);
   const operatorsInfo = operatorsInfoWithGainNode["operatorsInfo"];
-  const gainNodeToSpeaker = operatorsInfoWithGainNode["gainNodeToSpeaker"];
   const analyzerNodeForSpeaker = operatorsInfoWithGainNode["analyzerNode"];
 
   // 周波数や変調指数などをセット
@@ -86,7 +85,7 @@ function setOperatorsInfo(algoNum: string) {
   };
 }
 /**
- *　オペレーターごとの周波数、変調指数を設定
+ * オペレーターごとの周波数、変調指数を設定
  *
  * @param {operatorParams} operatorParams
  * @param {fmParamsType} fmParams
@@ -100,7 +99,7 @@ function setParams(operatorParams: operatorParams, fmParams: fmParamsType) {
     // operatorParams.oscillatorNode.frequency.value = 440;
     operatorParams.oscillatorNode.frequency.value =
       fmParams.frequency * fmParams.ratioToFoundamentalFrequency;
-    //   オペレーターがモジュレータの場合、変調指数を変更　＝＞振幅を変える
+    //   オペレーターがモジュレータの場合、変調指数を変更=>振幅を変える
     for (const gainNodeToDestinaion of Object.values(
       operatorParams.destination
     )) {
@@ -111,9 +110,12 @@ function setParams(operatorParams: operatorParams, fmParams: fmParamsType) {
 }
 
 function setEnvelop(t0: number, gainNode: GainNode, envelopParams: any) {
+  console.log("setenvelop", envelopParams);
+
   const t1 = t0 + envelopParams.attack;
   const decay = envelopParams.decay;
   const sustain = envelopParams.sustain;
+  const sustainTime = envelopParams.sustainTime;
   const release = envelopParams.release;
   const gainValue = gainNode.gain.value;
 
@@ -122,8 +124,11 @@ function setEnvelop(t0: number, gainNode: GainNode, envelopParams: any) {
   gainNode.gain.linearRampToValueAtTime(gainValue, t1);
   // sustainまでゲインを線形的に減少
   gainNode.gain.setTargetAtTime(sustain * gainValue, t1, decay);
+  // sustainTime中はsustainで値を固定
+  gainNode.gain.setTargetAtTime(sustain * gainValue, t1 + decay, sustainTime);
   // sustainからゲインを0まで減少
-  gainNode.gain.setTargetAtTime(0, t1 + decay, release);
+  gainNode.gain.setTargetAtTime(0, t1 + decay + sustainTime, release);
+  // gainNode.gain.setTargetAtTime(0, t1 + decay, release);
 }
 
 function setAlgorithm(
@@ -132,7 +137,6 @@ function setAlgorithm(
   audioContext: AudioContext,
   operatorsInfo: { [key: string]: operatorParams | GainNode }
 ) {
-  algoNum = "4";
   console.log("algoNum", algoNum);
 
   if (algoNum == "0") {
