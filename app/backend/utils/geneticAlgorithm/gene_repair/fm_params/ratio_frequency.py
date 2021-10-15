@@ -3,5 +3,6 @@ def repair_frequency_ratio(ratio:float):
         ratio = 1.0
     ratio = str(ratio)
     if len(ratio) >=2:
-        ratio = ratio[0:3]
+        # ratio = ratio[0:3]
+        ratio = ratio[0:1]
     return float(ratio)

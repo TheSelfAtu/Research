@@ -3,7 +3,7 @@ from utils.geneticAlgorithm.make_chromosome_params import make_chromosome_params
 from utils.geneticAlgorithm.selection.tournament_selection import exec_tournament_selection
 from utils.geneticAlgorithm.selection.elite_selection import exec_elite_selection
 from utils.geneticAlgorithm.crossover.blx_alpha import exec_blx_alpha
-from utils.geneticAlgorithm.gene_repair.fm_params.repair import repair_fm_parms
+from utils.geneticAlgorithm.gene_repair.fm_params.repair import repair_fm_params
 from schemas.chromosome import ChromosomesParams
 
 router = APIRouter()
@@ -34,7 +34,7 @@ async def gene_manipulation(chromosomes_params: ChromosomesParams)->ChromosomesP
     # 交叉による次世代個体の追加
     for i in range(len(next_generation_chromosomes),generation_chromosome_num):
         parents = exec_tournament_selection(dict(chromosomes_params))
-        offspring = exec_blx_alpha(parents,repair_fm_parms)
+        offspring = exec_blx_alpha(parents,repair_fm_params)
         offspring["fitness"]=""
         offspring["algorithmNum"]= "1"
         next_generation_chromosomes.append(offspring)
