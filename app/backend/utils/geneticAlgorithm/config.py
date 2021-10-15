@@ -1,6 +1,12 @@
-initial_population = 10
-threshold=1.0,
-max_generations=1000,
-mutation_probability=0.7,
-crossover_probability=0.2,
-selection_type=GeneticAlgorithm.SELECTION_TYPE_ROULETTE_WHEEL)
+# 遺伝子型の最小値、最大値を保持
+from app.backend.utils.geneticAlgorithm.gene_candidate.candidates_tmp import RATIO_CANDIDATE
+
+ATTACK_RANGE = (0, 0.5)
+DECAY_RANGE = (0, 0.5)
+SUSTAIN_RANGE = (0, 0.5)
+SUSTAIN_TIME_RANGE = (0, 0.5)
+RELEASE_RANGE = (0, 0.5)
+FREQUENCY_RANGE = (440, 880)
+FREQUENCY_RANGE = (440, 880)
+RATIO_TO_CARRIER_FREQUENCY_RANGE = (1, 4)
+MODULATION_INDEX_RANGE = (0, 500)

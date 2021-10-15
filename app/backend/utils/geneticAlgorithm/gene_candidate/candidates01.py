@@ -1,5 +1,6 @@
 import math
 import random
+from ..config import *
 
 # MODULATION_INDEX_CANDIDATE = list(range(0, 2000, 50))
 # FREQUENCY_CANDIDATE = [440, 880]
@@ -15,13 +16,13 @@ RELEASE_CANDIDATE = [0.1, 0.2, 0.3, 0.4, 0.5]
 
 def make_fm_params():
     return {
-        "attack": random.uniform(0, 0.5),
-        "decay": DECAY_CANDIDATE[math.floor(random.random() * len(DECAY_CANDIDATE))],
-        "sustain": SUSTAIN_CANDIDATE[math.floor(random.random() * len(SUSTAIN_CANDIDATE))],
-        "sustainTime": random.uniform(0, 0.5),
-        "release": random.uniform(0, 0.5),
-        "frequency": random.uniform(300, 880),
-        "ratioToFoundamentalFrequency": RATIO_CANDIDATE[math.floor(random.random() * len(RATIO_CANDIDATE))],
-        "modulationIndex": random.uniform(0, 200)
+        "attack": random.uniform(ATTACK_RANGE[0], ATTACK_RANGE[1]),
+        "decay": random.uniform(DECAY_RANGE[0], DECAY_RANGE[1]),
+        "sustain": random.uniform(SUSTAIN_RANGE[0], SUSTAIN_RANGE[1]),
+        "sustainTime": random.uniform(SUSTAIN_TIME_RANGE[0], SUSTAIN_TIME_RANGE[1]),
+        "release": random.uniform(RELEASE_RANGE[0], RELEASE_RANGE[1]),
+        "frequency": random.uniform(FREQUENCY_RANGE[0], FREQUENCY_RANGE[1]),
+        "ratioToFoundamentalFrequency": random.uniform(RATIO_TO_CARRIER_FREQUENCY_RANGE[0], RATIO_TO_CARRIER_FREQUENCY_RANGE[1]),
+        "modulationIndex": random.uniform(MODULATION_INDEX_RANGE[0], MODULATION_INDEX_RANGE[1])
         # "modulationIndex": random.uniform(0, 2000)
     }
