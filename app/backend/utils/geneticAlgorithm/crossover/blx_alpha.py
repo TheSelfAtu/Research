@@ -15,7 +15,7 @@ def exec_blx_alpha(parents_chromosomes: list, func_repair_gene) -> dict:
             chromosome2_operator_param_value = chromosome2_operator_params[1]
             offspring_param_range:tuple = culc_offspring_param_range(chromosome1_operator_param_value,chromosome2_operator_param_value)
             # 子孫のパラメータを範囲内からランダムに決定
-            offspring_param = random.uniform(offspring_param_range[0], offspring_param_range[1])
+            offspring_param:float = random.uniform(offspring_param_range[0], offspring_param_range[1])
             # パラメータの修正
             offspring_param = func_repair_gene(param_name,offspring_param)
             operator_param = {param_name:offspring_param}
