@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI,Response,Cookie
 from typing import List  # ネストされたBodyを定義するために必要
 from starlette.middleware.cors import CORSMiddleware  # CORSを回避するために必要
 from db import session  # DBと接続するためのセッション
@@ -27,7 +27,9 @@ app.add_middleware(
 # ----------APIの実装------------
 
 @app.get("/")
-async def main():
-    return FileResponse(template_file_path)
+async def main(cookie=Cookie(None)):
+    response = FileResponse(template_file_path,{})
+    response.set_cookie(key="research", value="research-cookie-session-value")
+    return FileResponse(template_file_path,cookie)
 
 app.include_router(manipulation.router)
