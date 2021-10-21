@@ -5,6 +5,7 @@ import { Option } from "../organisms/Option";
 import { chromosomesParams } from "../../@types/chromosomesParams";
 
 import axios from "axios";
+import { scrollToTop } from "../../Common/scrollToTop";
 
 export function ResearchIGA(): JSX.Element {
   // 被験者指名、ニックネーム
@@ -30,6 +31,10 @@ export function ResearchIGA(): JSX.Element {
       .catch((err) => {
         alert("データの送信に失敗しました");
       });
+    const answerPosition = document.getElementById("answer");
+    if (answerPosition) {
+      scrollToTop(answerPosition);
+    }
   }, [chromosomesParams, name]);
 
   {
@@ -93,20 +98,21 @@ export function ResearchIGA(): JSX.Element {
           setName(e.target.value);
         }}
       />
-      <h1>{generationCount}世代目</h1>
-
-      {/* 各遺伝子コンポーネントの描画 */}
-      {OptionsEL()}
-      {/* 遺伝子の評価を送信 */}
-      <Button
-        variant="contained"
-        color="primary"
-        onClick={() => {
-          postResult();
-        }}
-      >
-        回答を送信
-      </Button>
+      <div id="answer">
+        <h1>{generationCount}世代目</h1>
+        {/* 各遺伝子コンポーネントの描画 */}
+        {OptionsEL()}
+        {/* 遺伝子の評価を送信 */}
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={() => {
+            postResult();
+          }}
+        >
+          回答を送信
+        </Button>
+      </div>
     </div>
   );
 }
