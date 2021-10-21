@@ -137,3 +137,6 @@ mysql*
 
 # bundle js file
 main.js
+
+# 実験結果
+results/

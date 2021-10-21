@@ -1,14 +1,11 @@
-from fastapi import FastAPI,Response,Cookie
-from typing import List  # ネストされたBodyを定義するために必要
+from fastapi import FastAPI, Response, Cookie
 from starlette.middleware.cors import CORSMiddleware  # CORSを回避するために必要
-from db import session  # DBと接続するためのセッション
-from model import UserTable, User, Research1Table, Research1  # 今回使うモデルをインポート
-from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
 from routers import manipulation
-
-from utils.geneticAlgorithm.make_chromosome_params import make_chromosome_params
+import random
+import string
+# from utils.log import log
 
 
 app = FastAPI()
@@ -26,10 +23,14 @@ app.add_middleware(
 
 # ----------APIの実装------------
 
+
 @app.get("/")
-async def main(cookie=Cookie(None)):
-    response = FileResponse(template_file_path,{})
-    response.set_cookie(key="research", value="research-cookie-session-value")
-    return FileResponse(template_file_path,cookie)
+async def main():
+    random_strings = [random.choice(string.ascii_letters + string.digits)
+                      for i in range(7)]
+    cookie_value = ''.join(random_strings)
+    response = FileResponse(template_file_path)
+    response.set_cookie(key="session", value=cookie_value)
+    return response
 
 app.include_router(manipulation.router)

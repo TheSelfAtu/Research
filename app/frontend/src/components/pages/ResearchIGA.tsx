@@ -17,6 +17,8 @@ export function ResearchIGA(): JSX.Element {
 
   // 世代の適応度、および音生成パラメータを送信。次世代の音生成パラメータの格納
   const postResult = useCallback(async () => {
+    // 被験者名とパラメータを結合する
+    // Object.assign(chromosomesParams, { name: name });
     // 結果を送信する
     axios
       .post("/manipulation", chromosomesParams)
@@ -73,7 +75,26 @@ export function ResearchIGA(): JSX.Element {
 
   return (
     <div>
+      <h1>実験概要</h1>
+      <ul>
+        <li>実験前に下記の名前入力欄に名前を入力してください</li>
+        <li>名前は英小文字、英大文字での記入としてください</li>
+        <li>
+          名前は本名でなくても構いませんが、今後の実験で同じ名前を使用してください
+        </li>
+      </ul>
+      {/* 被験者名 */}
+      <p>名前を入力して下さい(ローマ字で入力してください)</p>
+      <TextField
+        id="name"
+        label="名前"
+        variant="outlined"
+        onChange={(e) => {
+          setName(e.target.value);
+        }}
+      />
       <h1>{generationCount}世代目</h1>
+
       {/* 各遺伝子コンポーネントの描画 */}
       {OptionsEL()}
       {/* 遺伝子の評価を送信 */}
