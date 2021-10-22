@@ -7,7 +7,6 @@ import random
 import string
 # from utils.log import log
 
-
 app = FastAPI()
 template_file_path = "./static/templates/index.html"
 app.mount("/static", StaticFiles(directory="static"), name="static")
@@ -22,7 +21,9 @@ app.add_middleware(
 )
 
 # ----------APIの実装------------
-
+# @app.get("/items/")
+# async def read_items(ads_id: Optional[str] = Cookie(None)):
+#     return {"ads_id": ads_id}
 
 @app.get("/")
 async def main():

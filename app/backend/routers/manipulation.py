@@ -1,3 +1,5 @@
+from typing import Optional
+from typing import Optional
 from schemas.chromosome import ChromosomeParams, ChromosomesParams
 from utils.geneticAlgorithm.gene_repair.fm_params.repair import repair_fm_params
 from utils.geneticAlgorithm.crossover.blx_alpha import exec_blx_alpha
@@ -31,7 +33,7 @@ async def make_generation_chromosomes():
 
 
 @router.post("/manipulation")
-async def gene_manipulation(chromosomes_params: ChromosomesParams, cookie=Cookie(None)) -> ChromosomesParams:
+async def gene_manipulation(chromosomes_params: ChromosomesParams, session: Optional[str] = Cookie(None)) -> ChromosomesParams:
     # 被験者名
     # name = chromosomes_params.dict().pop('name')
     # print(cookie, dir(chromosomes_params.dict()))
