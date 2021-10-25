@@ -27,6 +27,7 @@ export function makeFMSounds(
         const fmParams = fmParamsList[key];
         const startTime = operatorsInfo[key].startTime;
         const gainNode = operatorsInfo[key].destination[gainNodeDestination];
+        // キャリアにがADSRを付与
         if (gainNodeDestination == "gainNodeToSpeaker") {
           setEnvelop(startTime, gainNode, fmParams);
         }
@@ -96,7 +97,6 @@ function setParams(operatorParams: operatorParams, fmParams: fmParamsType) {
 
   if (!operatorParams.destination.hasOwnProperty("gainNodeToSpeaker")) {
     // モジュレーターの周波数を設定
-    // operatorParams.oscillatorNode.frequency.value = 440;
     operatorParams.oscillatorNode.frequency.value =
       fmParams.frequency * fmParams.ratioToFoundamentalFrequency;
     //   オペレーターがモジュレータの場合、変調指数を変更=>振幅を変える
@@ -104,7 +104,6 @@ function setParams(operatorParams: operatorParams, fmParams: fmParamsType) {
       operatorParams.destination
     )) {
       gainNodeToDestinaion.gain.value = fmParams.modulationIndex;
-      // operatorParams.gainNode.gain.value = 1000;
     }
   }
 }

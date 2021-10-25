@@ -39,9 +39,9 @@ def repair_fm_params(param_name: str, fm_param: Union[float]):
     return fm_param
 
 
-def repair_lethal_gene(min, max, fm_param):
-    if fm_param <= min:
+def repair_lethal_gene(min, max, param):
+    if param <= min:
         return min
-    if fm_param >= max:
+    if param >= max:
         return max
-    return fm_param
+    return param
