@@ -1,4 +1,4 @@
-import { fmParamsType, fmParamsList } from "../../@types/fmParams";
+import { fmParamsList } from "../../@types/fmParams";
 
 interface ParametersTableProps {
   fmParamsList: fmParamsList;
@@ -13,6 +13,7 @@ export function ParametersTable(props: ParametersTableProps) {
           <th>attack</th>
           <th>decay</th>
           <th>sustain</th>
+          <th>sustainTime</th>
           <th>release</th>
           <th>frequency</th>
           <th>ratioToFrequency</th>
@@ -32,6 +33,7 @@ export function ParametersTable(props: ParametersTableProps) {
               <td>{props.fmParamsList[key].attack}</td>
               <td>{props.fmParamsList[key].decay}</td>
               <td>{props.fmParamsList[key].sustain}</td>
+              <td>{props.fmParamsList[key].sustainTime}</td>
               <td>{props.fmParamsList[key].release}</td>
               <td>{props.fmParamsList[key].frequency}</td>
               <td>{props.fmParamsList[key].ratioToFoundamentalFrequency}</td>

@@ -37,7 +37,7 @@ async def make_generation_chromosomes():
 async def gene_manipulation(chromosomes_params: ChromosomesParams, session: Optional[str] = Cookie(None)) -> ChromosomesParams:
     # 被験者名
     # name = chromosomes_params.dict().pop('name')
-    # print(cookie, dir(chromosomes_params.dict()))
+    # print(type(chromosomes_params))
     # 回答を記録
     # log_path = "../results/" + name + cookie
     # log(log_path, chromosomes_params)
