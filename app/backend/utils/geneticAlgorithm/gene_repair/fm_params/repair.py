@@ -3,7 +3,7 @@ from .ratio_frequency import repair_frequency_ratio
 from ...config import *
 
 
-def repair_fm_params(param_name: str, fm_param: Union[float]):
+def repair_fm_params(param_name: str, fm_param: float):
     if param_name == "attack":
         fm_param = repair_lethal_gene(
             ATTACK_RANGE[0], ATTACK_RANGE[1], fm_param)
