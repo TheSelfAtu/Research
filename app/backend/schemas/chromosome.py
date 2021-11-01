@@ -17,14 +17,14 @@ class ChromosomeParams(BaseModel):
 
 
 class ChromosomesParams(BaseModel):
-    chromosome1: Dict[]
-    chromosome2: ChromosomeParams
-    chromosome3: ChromosomeParams
-    chromosome4: ChromosomeParams
-    chromosome5: ChromosomeParams
-    chromosome6: ChromosomeParams
-    chromosome7: ChromosomeParams
-    chromosome8: ChromosomeParams
-    chromosome9: ChromosomeParams
-    chromosome10: ChromosomeParams
+    chromosome1: dict
+    chromosome2: dict
+    chromosome3: dict
+    chromosome4: dict
+    chromosome5: dict
+    chromosome6: dict
+    chromosome7: dict
+    chromosome8: dict
+    chromosome9: dict
+    chromosome10: dict
     # name: str

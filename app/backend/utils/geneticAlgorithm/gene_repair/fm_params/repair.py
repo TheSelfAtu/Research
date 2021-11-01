@@ -1,5 +1,5 @@
 from typing import Union
-from .ratio_frequency import repair_frequency_ratio
+from .ratio_frequency import round_off_to_one
 from ...config import *
 
 
@@ -30,7 +30,7 @@ def repair_fm_params(param_name: str, fm_param: float):
     if param_name == "ratioToFoundamentalFrequency":
         fm_param = repair_lethal_gene(
             RATIO_TO_CARRIER_FREQUENCY_RANGE[0], RATIO_TO_CARRIER_FREQUENCY_RANGE[1], fm_param)
-        return repair_frequency_ratio(fm_param)
+        return round_off_to_one(fm_param)
     if param_name == "modulationIndex":
         fm_param = repair_lethal_gene(
             MODULATION_INDEX_RANGE[0], MODULATION_INDEX_RANGE[1], fm_param)

@@ -270,7 +270,7 @@ function setAlgorithm(
       startTime: startTime,
       oscillatorNode: new OscillatorNode(audioContext),
       analyserNode: new AnalyserNode(audioContext),
-      destination: { operator1: new GainNode(audioContext) },
+      destination: { operator2: new GainNode(audioContext) },
     };
     operatorsInfo["operator4"] = {
       audioContext: audioContext,

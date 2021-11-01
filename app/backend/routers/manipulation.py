@@ -1,5 +1,6 @@
 from typing import Optional
 from typing import Optional
+from utils.geneticAlgorithm.config import ALGORITHM_NUM, GENERATION_CHROMOSOME_NUM
 from schemas.chromosome import ChromosomeParams, ChromosomesParams
 from utils.geneticAlgorithm.gene_repair.fm_params.repair import repair_fm_params
 from utils.geneticAlgorithm.mutate.mutate_fm_params.mutate import mutate
@@ -43,17 +44,16 @@ async def gene_manipulation(chromosomes_params: ChromosomesParams, session: Opti
     # log(log_path, chromosomes_params)
     # 次世代の染色体用配列
     next_generation_chromosomes: list[dict] = []
-    generation_chromosome_num: int = 10
     # エリート個体を次世代に残す
     elite_chromosome = exec_elite_selection(dict(chromosomes_params))
     elite_chromosome["fitness"] = ""
     next_generation_chromosomes.append(elite_chromosome)
     # 交叉による次世代個体の追加
-    for i in range(len(next_generation_chromosomes), generation_chromosome_num):
+    for i in range(len(next_generation_chromosomes), GENERATION_CHROMOSOME_NUM):
         parents = exec_tournament_selection(dict(chromosomes_params))
         offspring = exec_blx_alpha(parents, repair_fm_params, mutate)
         offspring["fitness"] = ""
-        offspring["algorithmNum"] = chromosomes_params.chromosome1.algorithmNum
+        offspring["algorithmNum"] = ALGORITHM_NUM
         next_generation_chromosomes.append(offspring)
     return {
         "chromosome1": next_generation_chromosomes[0],
