@@ -22,6 +22,6 @@ def make_chromosome_params():
             "operator3": make_fm_params(),
             "operator4": make_fm_params(),
         },
-        "algorithmNum": 1,
+        "algorithmNum": 3,
         "fitness": ""
     }

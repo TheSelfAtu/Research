@@ -51,9 +51,9 @@ async def gene_manipulation(chromosomes_params: ChromosomesParams, session: Opti
     # 交叉による次世代個体の追加
     for i in range(len(next_generation_chromosomes), generation_chromosome_num):
         parents = exec_tournament_selection(dict(chromosomes_params))
-        offspring = exec_blx_alpha(parents, repair_fm_params,mutate)
+        offspring = exec_blx_alpha(parents, repair_fm_params, mutate)
         offspring["fitness"] = ""
-        offspring["algorithmNum"] = "1"
+        offspring["algorithmNum"] = chromosomes_params.chromosome1.algorithmNum
         next_generation_chromosomes.append(offspring)
     return {
         "chromosome1": next_generation_chromosomes[0],

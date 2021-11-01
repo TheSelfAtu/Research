@@ -27,7 +27,7 @@ export function makeFMSounds(
         const fmParams = fmParamsList[key];
         const startTime = operatorsInfo[key].startTime;
         const gainNode = operatorsInfo[key].destination[gainNodeDestination];
-        // キャリアにがADSRを付与
+        // キャリアにADSRを付与
         if (gainNodeDestination == "gainNodeToSpeaker") {
           setEnvelop(startTime, gainNode, fmParams);
         }
