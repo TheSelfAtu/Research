@@ -1,6 +1,5 @@
-from typing import Union
-from .ratio_frequency import round_off_to_one
 from ...config import *
+from ...utils.round_off import round_off_to_one
 
 
 def repair_fm_params(param_name: str, fm_param: float):
