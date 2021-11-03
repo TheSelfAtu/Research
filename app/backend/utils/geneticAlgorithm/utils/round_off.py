@@ -1,7 +1,7 @@
 from decimal import Decimal, ROUND_HALF_UP
 
 
-def round_off_to_one(number: float) -> float:
+def round_off_to_digit(number: float) -> float:
     """整数に四捨五入する
 
     Args:

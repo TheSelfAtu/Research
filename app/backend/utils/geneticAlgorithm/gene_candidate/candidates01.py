@@ -19,7 +19,7 @@ def make_fm_params():
         "sustainTime": random.uniform(SUSTAIN_TIME_RANGE[0], SUSTAIN_TIME_RANGE[1]),
         "release": random.uniform(RELEASE_RANGE[0], RELEASE_RANGE[1]),
         "frequency": random.uniform(FREQUENCY_RANGE[0], FREQUENCY_RANGE[1]),
-        "ratioToFoundamentalFrequency":  round_off_to_one(random.uniform(RATIO_TO_CARRIER_FREQUENCY_RANGE[0], RATIO_TO_CARRIER_FREQUENCY_RANGE[1])),
+        "ratioToFoundamentalFrequency":  round_off_to_digit(random.uniform(RATIO_TO_CARRIER_FREQUENCY_RANGE[0], RATIO_TO_CARRIER_FREQUENCY_RANGE[1])),
         "modulationIndex": random.uniform(MODULATION_INDEX_RANGE[0], MODULATION_INDEX_RANGE[1])
     }
 

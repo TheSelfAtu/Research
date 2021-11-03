@@ -6,12 +6,12 @@ class Repair(unittest.TestCase):
     """
     """
 
-    def test_round_off_to_one(self):
+    def test_round_off_to_digit(self):
         """四捨五入を行える 
         """
         ratio = 1.0
         expected = 1.0
-        actual = round_off_to_one(1.0)
+        actual = round_off_to_digit(1.0)
         self.assertEqual(-0.5, 1)
         self.assertEqual(1, 1)
         self.assertEqual(1.4, 1)
