@@ -25,13 +25,14 @@ app.add_middleware(
 # async def read_items(ads_id: Optional[str] = Cookie(None)):
 #     return {"ads_id": ads_id}
 
+
 @app.get("/")
 async def main():
     random_strings = [random.choice(string.ascii_letters + string.digits)
                       for i in range(7)]
     cookie_value = ''.join(random_strings)
     response = FileResponse(template_file_path)
-    response.set_cookie(key="session", value=cookie_value)
+    response.set_cookie(key="random_strings", value=cookie_value)
     return response
 
 app.include_router(manipulation.router)

@@ -13,6 +13,5 @@ def log_answer(file_path, answer):
 
 def log(file_path: str, answer):
     print(file_path, answer)
-    name = answer.pop('name')
-    log_answer(name+file_path, answer)
-    return answer
+    log_answer(file_path, answer)
+    return

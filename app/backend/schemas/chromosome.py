@@ -1,5 +1,5 @@
 # モデルの定義
-from typing import Dict
+from typing import Any, Dict
 from pydantic import BaseModel
 
 
@@ -27,4 +27,4 @@ class ChromosomesParams(BaseModel):
     chromosome8: dict
     chromosome9: dict
     chromosome10: dict
-    # name: str
+    name: Any

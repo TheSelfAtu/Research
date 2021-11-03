@@ -1,4 +1,4 @@
-from typing import Optional
+from typing import Dict, Optional, Union
 from typing import Optional
 from utils.geneticAlgorithm.config import ALGORITHM_NUM, GENERATION_CHROMOSOME_NUM
 from schemas.chromosome import ChromosomeParams, ChromosomesParams
@@ -8,8 +8,8 @@ from utils.geneticAlgorithm.crossover.blx_alpha import exec_blx_alpha
 from utils.geneticAlgorithm.selection.elite_selection import exec_elite_selection
 from utils.geneticAlgorithm.selection.tournament_selection import exec_tournament_selection
 from utils.geneticAlgorithm.make_chromosome_params import make_chromosome_params
+from utils.log.log import log
 from fastapi import APIRouter, Cookie
-# from utils.log import log
 import sys
 import pathlib
 # current_dir = pathlib.Path(__file__).resolve().parent
@@ -35,22 +35,28 @@ async def make_generation_chromosomes():
 
 
 @router.post("/manipulation")
-async def gene_manipulation(chromosomes_params: ChromosomesParams, session: Optional[str] = Cookie(None)) -> ChromosomesParams:
+async def gene_manipulation(chromosomes_params: ChromosomesParams, random_strings: Optional[str] = Cookie(None)) -> ChromosomesParams:
     # 被験者名
-    # name = chromosomes_params.dict().pop('name')
-    # print(type(chromosomes_params))
+    chromosomes_params = chromosomes_params.dict()
+    name = chromosomes_params.pop('name')
     # 回答を記録
-    # log_path = "../results/" + name + cookie
-    # log(log_path, chromosomes_params)
+    print("name", name, "random_str", random_strings)
+    log_path = "../results/" + name + random_strings
+    log(log_path, chromosomes_params)
     # 次世代の染色体用配列
     next_generation_chromosomes: list[dict] = []
+    # オシレーターをソート
+    # for chromosome in chromosomes_params:
+    # oscillator_params = [chromosome.fmParamsList.operator1]
+    # print(type(chromosomes_params), chromosomes_params, chromosome)
     # エリート個体を次世代に残す
     elite_chromosome = exec_elite_selection(dict(chromosomes_params))
     elite_chromosome["fitness"] = ""
     next_generation_chromosomes.append(elite_chromosome)
     # 交叉による次世代個体の追加
     for i in range(len(next_generation_chromosomes), GENERATION_CHROMOSOME_NUM):
-        parents = exec_tournament_selection(dict(chromosomes_params))
+        # parents = exec_tournament_selection(dict(chromosomes_params))
+        parents = exec_tournament_selection(chromosomes_params)
         offspring = exec_blx_alpha(parents, repair_fm_params, mutate)
         offspring["fitness"] = ""
         offspring["algorithmNum"] = ALGORITHM_NUM
