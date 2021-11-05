@@ -9,6 +9,8 @@ from utils.geneticAlgorithm.selection.elite_selection import exec_elite_selectio
 from utils.geneticAlgorithm.selection.tournament_selection import exec_tournament_selection
 from utils.geneticAlgorithm.make_chromosome_params import make_chromosome_params
 from utils.log.log import log
+from utils.sort_modulator import sort_modulators
+
 from fastapi import APIRouter, Cookie
 import sys
 import pathlib
@@ -37,19 +39,23 @@ async def make_generation_chromosomes():
 @router.post("/manipulation")
 async def gene_manipulation(chromosomes_params: ChromosomesParams,giongo: Optional[str] = Cookie(None), random_strings: Optional[str] = Cookie(None)) -> ChromosomesParams:
     # 被験者名
-    chromosomes_params = chromosomes_params.dict()
+    chromosomes_params:dict = chromosomes_params.dict()
     name = chromosomes_params.pop('name')
     # 回答を記録
     # 呼び出し元ファイルからの相対パスを渡す（今回はbackend）
     log_path = "./results/" + f"{giongo}/" + name + random_strings + ".txt"
     log(log_path, chromosomes_params)
-    # 次世代の染色体用配列
+    # 次世代の染色体を入れる配列
     next_generation_chromosomes: list[dict] = []
-    # オシレーターをソート
-    # for chromosome in chromosomes_params:
-    # oscillator_params = [chromosome.fmParamsList.operator1]
-    # print(type(chromosomes_params), chromosomes_params, chromosome)
-    # エリート個体を次世代に残す
+    # モジュレーターをソート(FMのアルゴリズム上ソートが必要な場合がある)
+    for chromosome in chromosomes_params.values():
+        modulators_params = [chromosome["fmParamsList"]["operator1"],chromosome["fmParamsList"]["operator2"],chromosome["fmParamsList"]["operator3"]]
+        sorted_modulators_params = sort_modulators(modulators_params)
+        chromosome["fmParamsList"]["operator1"] = sorted_modulators_params[0]  
+        chromosome["fmParamsList"]["operator2"] = sorted_modulators_params[1]
+        chromosome["fmParamsList"]["operator3"] = sorted_modulators_params[2]   
+        print(chromosome["fmParamsList"]["operator1"],chromosome["fmParamsList"]["operator2"],chromosome["fmParamsList"]["operator3"])
+    # 適応度が最も高い個体を保存（エリート保存）
     elite_chromosome = exec_elite_selection(dict(chromosomes_params))
     elite_chromosome["fitness"] = ""
     next_generation_chromosomes.append(elite_chromosome)

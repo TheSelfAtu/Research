@@ -49,3 +49,9 @@ DB に保存される型式
 # Issue
 
 - 入力を行わずに回答を送信すると世代数が変わらない（実験には影響ない）
+
+# 実験 URL
+
+http://localhost:8000/pi
+http://localhost:8000/bu-
+http://localhost:8000/fa-n
