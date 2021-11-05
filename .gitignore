@@ -139,5 +139,5 @@ mysql*
 main.js
 
 # 実験結果
-results/
+results/**/*.txt
 

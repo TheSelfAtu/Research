@@ -35,13 +35,13 @@ async def make_generation_chromosomes():
 
 
 @router.post("/manipulation")
-async def gene_manipulation(chromosomes_params: ChromosomesParams, random_strings: Optional[str] = Cookie(None)) -> ChromosomesParams:
+async def gene_manipulation(chromosomes_params: ChromosomesParams,giongo: Optional[str] = Cookie(None), random_strings: Optional[str] = Cookie(None)) -> ChromosomesParams:
     # 被験者名
     chromosomes_params = chromosomes_params.dict()
     name = chromosomes_params.pop('name')
     # 回答を記録
     # 呼び出し元ファイルからの相対パスを渡す（今回はbackend）
-    log_path = "./results/" + name + random_strings + ".txt"
+    log_path = "./results/" + f"{giongo}/" + name + random_strings + ".txt"
     log(log_path, chromosomes_params)
     # 次世代の染色体用配列
     next_generation_chromosomes: list[dict] = []
