@@ -40,8 +40,8 @@ async def gene_manipulation(chromosomes_params: ChromosomesParams, random_string
     chromosomes_params = chromosomes_params.dict()
     name = chromosomes_params.pop('name')
     # 回答を記録
-    print("name", name, "random_str", random_strings)
-    log_path = "../results/" + name + random_strings
+    # 呼び出し元ファイルからの相対パスを渡す（今回はbackend）
+    log_path = "./results/" + name + random_strings + ".txt"
     log(log_path, chromosomes_params)
     # 次世代の染色体用配列
     next_generation_chromosomes: list[dict] = []

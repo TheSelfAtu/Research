@@ -109,8 +109,6 @@ function setParams(operatorParams: operatorParams, fmParams: fmParamsType) {
 }
 
 function setEnvelop(t0: number, gainNode: GainNode, envelopParams: any) {
-  console.log("setenvelop", envelopParams);
-
   const t1 = t0 + envelopParams.attack;
   const decay = envelopParams.decay;
   const sustain = envelopParams.sustain;

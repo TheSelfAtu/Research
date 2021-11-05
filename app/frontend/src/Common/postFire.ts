@@ -13,7 +13,6 @@ export function postFire(
     } else {
       params = new URLSearchParams();
     }
-    console.log("params",params)
     Object.keys(info).forEach((key) => {
       params.append(key, info[key]);
     });
