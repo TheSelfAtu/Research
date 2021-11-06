@@ -11,7 +11,7 @@ from utils.geneticAlgorithm.make_chromosome_params import make_chromosome_params
 from utils.log.log import log
 from utils.sort_modulator import sort_modulators
 
-from fastapi import APIRouter, Cookie
+from fastapi import APIRouter, Cookie, HTTPException
 import sys
 import pathlib
 # current_dir = pathlib.Path(__file__).resolve().parent
@@ -38,9 +38,16 @@ async def make_generation_chromosomes():
 
 @router.post("/manipulation")
 async def gene_manipulation(chromosomes_params: ChromosomesParams,giongo: Optional[str] = Cookie(None), random_strings: Optional[str] = Cookie(None)) -> ChromosomesParams:
-    # 被験者名
     chromosomes_params:dict = chromosomes_params.dict()
+    # 被験者名
     name = chromosomes_params.pop('name')
+    if name == "":
+        raise HTTPException(status_code=422, detail="名前が入力されていません")
+
+    for chromosome in chromosomes_params.values():
+        if chromosome["fitness"] == "":
+            raise HTTPException(status_code=422, detail="未入力の適応度があります")
+    
     # 回答を記録
     # 呼び出し元ファイルからの相対パスを渡す（今回はbackend）
     log_path = "./results/" + f"{giongo}/" + name + random_strings + ".txt"
@@ -56,7 +63,8 @@ async def gene_manipulation(chromosomes_params: ChromosomesParams,giongo: Option
         chromosome["fmParamsList"]["operator3"] = sorted_modulators_params[2]   
         print(chromosome["fmParamsList"]["operator1"],chromosome["fmParamsList"]["operator2"],chromosome["fmParamsList"]["operator3"])
     # 適応度が最も高い個体を保存（エリート保存）
-    elite_chromosome = exec_elite_selection(dict(chromosomes_params))
+    elite_chromosome = exec_elite_selection(chromosomes_params)
+    # エリート個体の適応度を初期化して次世代用配列に格納
     elite_chromosome["fitness"] = ""
     next_generation_chromosomes.append(elite_chromosome)
     # 交叉による次世代個体の追加

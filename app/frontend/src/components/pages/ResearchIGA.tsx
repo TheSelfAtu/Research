@@ -11,7 +11,7 @@ import { getCookie } from "../../Common/getCookie";
 export function ResearchIGA(): JSX.Element {
   // 被験者指名、ニックネーム
   const [name, setName] = useState("");
-  // 被験者指名、ニックネーム
+  // 生成する擬音語
   const [gion, setGion] = useState("");
   // 世代数
   const [generationCount, setGenerationCount] = useState(1);
@@ -37,7 +37,8 @@ export function ResearchIGA(): JSX.Element {
         }
       })
       .catch((err) => {
-        alert("データの送信に失敗しました");
+        alert("データの送信に失敗しました" + "\n" + err.response.data.detail);
+        console.log(chromosomesParams);
       });
   }, [chromosomesParams, name]);
 
