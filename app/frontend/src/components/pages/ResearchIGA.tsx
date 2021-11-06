@@ -6,10 +6,13 @@ import { chromosomesParams } from "../../@types/chromosomesParams";
 
 import axios from "axios";
 import { scrollToTop } from "../../Common/scrollToTop";
+import { getCookie } from "../../Common/getCookie";
 
 export function ResearchIGA(): JSX.Element {
   // 被験者指名、ニックネーム
   const [name, setName] = useState("");
+  // 被験者指名、ニックネーム
+  const [gion, setGion] = useState("");
   // 世代数
   const [generationCount, setGenerationCount] = useState(1);
   // １つの世代に存在する遺伝子の情報
@@ -48,6 +51,7 @@ export function ResearchIGA(): JSX.Element {
         .then((response) => {
           const firstGenerationParams: chromosomesParams = response.data;
           setChromosomesParams(firstGenerationParams);
+          setGion(getAimGiongo());
         })
         .catch((err) => {
           alert("データの受信に失敗しました");
@@ -83,6 +87,7 @@ export function ResearchIGA(): JSX.Element {
     <div>
       <h1>実験概要</h1>
       <ul>
+        <li>{gion}</li>
         <li>実験前に下記の名前入力欄に名前を入力してください</li>
         <li>名前は英小文字、英大文字での記入としてください</li>
         <li>
@@ -116,4 +121,18 @@ export function ResearchIGA(): JSX.Element {
       </div>
     </div>
   );
+}
+
+function getAimGiongo() {
+  const aimedGiongo = getCookie("giongo");
+  if (aimedGiongo == "pi") {
+    return "ピッ";
+  }
+  if (aimedGiongo == "bu-") {
+    return "ブー";
+  }
+  if (aimedGiongo == "fa-n") {
+    return "ファーン";
+  }
+  return "適切なURLを使用してください";
 }
