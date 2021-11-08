@@ -19,7 +19,7 @@ interface OptionProps {
 
 export function Option(props: OptionProps) {
   return (
-    <div>
+    <div className="mt--md">
       <SoundButton
         algoNum={props.algorithmNum}
         soundParamsList={props.soundParamsList}

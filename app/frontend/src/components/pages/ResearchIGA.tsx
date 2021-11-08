@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
+import { Description } from "../molecules/Description";
 import { Option } from "../organisms/Option";
 import { chromosomesParams } from "../../@types/chromosomesParams";
 
@@ -88,17 +89,10 @@ export function ResearchIGA(): JSX.Element {
 
   return (
     <div>
-      <h1>実験概要</h1>
-      <ul>
-        <li>{gion}</li>
-        <li>実験前に下記の名前入力欄に名前を入力してください</li>
-        <li>名前は英小文字、英大文字での記入としてください</li>
-        <li>
-          名前は本名でなくても構いませんが、今後の実験で同じ名前を使用してください
-        </li>
-      </ul>
+      {/* 実験説明 */}
+      <Description gion={gion}></Description>
       {/* 被験者名 */}
-      <p>名前を入力して下さい(ローマ字で入力してください)</p>
+      <p>名前を入力して下さい(英小文字、英大文字)</p>
       <TextField
         id="name"
         label="名前"
