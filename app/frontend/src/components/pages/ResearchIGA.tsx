@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import { Option } from "../organisms/Option";
@@ -22,10 +22,10 @@ export function ResearchIGA(): JSX.Element {
   // 世代の適応度、および音生成パラメータを送信。次世代の音生成パラメータの格納
   const postResult = useCallback(async () => {
     // 被験者名とパラメータを結合する
-    Object.assign(chromosomesParams, { name: name });
+    const answer = Object.assign({}, chromosomesParams, { name: name });
     // 結果を送信する
     axios
-      .post("/manipulation", chromosomesParams)
+      .post("/manipulation", answer)
       .then((response) => {
         const nextGenerationParams: chromosomesParams = response.data;
         setChromosomesParams(nextGenerationParams);
@@ -54,7 +54,7 @@ export function ResearchIGA(): JSX.Element {
           setChromosomesParams(firstGenerationParams);
           setGion(getAimGiongo());
         })
-        .catch((err) => {
+        .catch(() => {
           alert("データの受信に失敗しました");
         });
     }
@@ -68,6 +68,8 @@ export function ResearchIGA(): JSX.Element {
       for (const [chromosomeNum, chromosomeParam] of Object.entries(
         chromosomesParams
       )) {
+        console.log("chromosomeNum", chromosomeNum);
+
         Options.push(
           <Option
             key={chromosomeNum}

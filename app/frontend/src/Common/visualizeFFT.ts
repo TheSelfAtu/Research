@@ -20,9 +20,6 @@ export function visualizeFFT(
   canvasContext.lineCap = "round";
   canvasContext.lineJoin = "miter";
 
-  // Flag for starting or stopping sound
-  const isStop = true;
-
   analyserNode.minDecibels = -150; // Default -100 dB
   analyserNode.maxDecibels = 0; // Default  -30 dB
 
@@ -109,5 +106,5 @@ export function visualizeFFT(
       canvasContext.fillText(i + " dB", 3, gy);
     }
   }
-  const timerid = window.setTimeout(drawWave, 500, analyserNode);
+  window.setTimeout(drawWave, 500, analyserNode);
 }
