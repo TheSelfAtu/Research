@@ -41,9 +41,11 @@ async def gene_manipulation(chromosomes_params: ChromosomesParams,giongo: Option
     chromosomes_params:dict = chromosomes_params.dict()
     # 被験者名
     name = chromosomes_params.pop('name')
+    # バリデーション
+    # 名前が未入力の場合エラーを返す
     if name == "":
         raise HTTPException(status_code=422, detail="名前が入力されていません")
-
+    # 未入力の適応度がある場合エラーを返す    
     for chromosome in chromosomes_params.values():
         if chromosome["fitness"] == "":
             raise HTTPException(status_code=422, detail="未入力の適応度があります")
@@ -54,22 +56,20 @@ async def gene_manipulation(chromosomes_params: ChromosomesParams,giongo: Option
     log(log_path, chromosomes_params)
     # 次世代の染色体を入れる配列
     next_generation_chromosomes: list[dict] = []
-    # モジュレーターをソート(FMのアルゴリズム上ソートが必要な場合がある)
-    for chromosome in chromosomes_params.values():
-        modulators_params = [chromosome["fmParamsList"]["operator1"],chromosome["fmParamsList"]["operator2"],chromosome["fmParamsList"]["operator3"]]
-        sorted_modulators_params = sort_modulators(modulators_params)
-        chromosome["fmParamsList"]["operator1"] = sorted_modulators_params[0]  
-        chromosome["fmParamsList"]["operator2"] = sorted_modulators_params[1]
-        chromosome["fmParamsList"]["operator3"] = sorted_modulators_params[2]   
-        print(chromosome["fmParamsList"]["operator1"],chromosome["fmParamsList"]["operator2"],chromosome["fmParamsList"]["operator3"])
     # 適応度が最も高い個体を保存（エリート保存）
     elite_chromosome = exec_elite_selection(chromosomes_params)
     # エリート個体の適応度を初期化して次世代用配列に格納
     elite_chromosome["fitness"] = ""
     next_generation_chromosomes.append(elite_chromosome)
+    # モジュレーターをソート(FMのアルゴリズム上ソートが必要な場合がある)
+    for chromosome in chromosomes_params.values():
+        modulators_params = [chromosome["fmParamsList"]["operator2"],chromosome["fmParamsList"]["operator3"],chromosome["fmParamsList"]["operator4"]]
+        sorted_modulators_params = sort_modulators(modulators_params)
+        chromosome["fmParamsList"]["operator2"] = sorted_modulators_params[0]  
+        chromosome["fmParamsList"]["operator3"] = sorted_modulators_params[1]
+        chromosome["fmParamsList"]["operator4"] = sorted_modulators_params[2]   
     # 交叉による次世代個体の追加
     for i in range(len(next_generation_chromosomes), GENERATION_CHROMOSOME_NUM):
-        # parents = exec_tournament_selection(dict(chromosomes_params))
         parents = exec_tournament_selection(chromosomes_params)
         offspring = exec_blx_alpha(parents, repair_fm_params, mutate)
         offspring["fitness"] = ""
