@@ -21,11 +21,6 @@ app.add_middleware(
 )
 
 # ----------APIの実装------------
-# @app.get("/items/")
-# async def read_items(ads_id: Optional[str] = Cookie(None)):
-#     return {"ads_id": ads_id}
-
-
 @app.get("/{giongo}")
 async def main(giongo:str):
     # 結果記録用ファイル名が被らないための文字列

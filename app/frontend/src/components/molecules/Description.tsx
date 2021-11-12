@@ -24,7 +24,7 @@ export function Description(props: DescriptionProps) {
           </ul>
         </li>
         <li>
-          近いと感じるほど<strong>高い数字</strong>
+          近いと感じる(適応度が高い)ほど<strong>高い数字</strong>
           を選んでください（候補は1から5）
         </li>
         <li>
