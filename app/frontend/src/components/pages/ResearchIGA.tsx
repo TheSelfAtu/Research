@@ -39,7 +39,6 @@ export function ResearchIGA(): JSX.Element {
       })
       .catch((err) => {
         alert("データの送信に失敗しました" + "\n" + err.response.data.detail);
-        console.log(chromosomesParams);
       });
   }, [chromosomesParams, name]);
 
@@ -52,7 +51,9 @@ export function ResearchIGA(): JSX.Element {
         .get("/manipulation/make-ramdom/all")
         .then((response) => {
           const firstGenerationParams: chromosomesParams = response.data;
+          // 遺伝子を初期化
           setChromosomesParams(firstGenerationParams);
+          // 生成する目的の擬音語を設定
           setGion(getAimGiongo());
         })
         .catch(() => {

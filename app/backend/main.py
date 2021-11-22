@@ -21,6 +21,9 @@ app.add_middleware(
 )
 
 # ----------APIの実装------------
+@app.get("/favicon.ico")
+async def main():
+    return 
 @app.get("/{giongo}")
 async def main(giongo:str):
     # 結果記録用ファイル名が被らないための文字列
@@ -29,9 +32,9 @@ async def main(giongo:str):
     random_strings = ''.join(random_strings_list)
     # HTMLファイルを返す
     response = FileResponse(template_file_path)
-    response.set_cookie(key="random_strings", value=random_strings)
     # 目的の擬音語の値
     response.set_cookie(key="giongo", value=giongo)
+    response.set_cookie(key="random_strings", value=random_strings)
     return response
 
 app.include_router(manipulation.router)
