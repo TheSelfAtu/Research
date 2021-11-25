@@ -1,10 +1,14 @@
-import math
 import random
 
 ALGORITHM_NUM = 0
 
-def make_fm_params():
 
+def make_fm_params():
+    """2オペレータで偶数倍音のみが発生することを確認するメソッド
+
+    Returns:
+        [type]: [description]
+    """
     return {
         "attack": 0,
         "decay": 0,

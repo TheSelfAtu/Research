@@ -1,8 +1,8 @@
 import math
 import random
 
-from .config import ALGORITHM_NUM
-from .make_fm_params.make_with_config import make_fm_params
+from ..config import ALGORITHM_NUM
+from ..make_fm_params.make_with_config import make_fm_params
 # from .make_fm_params.make_sawtooth import make_fm_params, ALGORITHM_NUM
 # from .make_fm_params.make_even_overtones import make_fm_params, ALGORITHM_NUM
 

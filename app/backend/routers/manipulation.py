@@ -7,16 +7,12 @@ from utils.geneticAlgorithm.mutate.mutate_fm_params.mutate import mutate
 from utils.geneticAlgorithm.crossover.blx_alpha import exec_blx_alpha
 from utils.geneticAlgorithm.selection.elite_selection import exec_elite_selection
 from utils.geneticAlgorithm.selection.tournament_selection import exec_tournament_selection
-from utils.geneticAlgorithm.make_chromosome_params import make_chromosome_params
+from utils.geneticAlgorithm.make_chromosome_params.make_chromosome_params import make_chromosome_params
 from utils.log.log import log
 from utils.sort_modulator import sort_modulators
 
 from fastapi import APIRouter, Cookie, HTTPException
-import sys
-import pathlib
-# current_dir = pathlib.Path(__file__).resolve().parent
-# モジュールのあるパスを追加
-# sys.path.append(str(current_dir) + '/../')
+
 router = APIRouter()
 
 
@@ -37,19 +33,19 @@ async def make_generation_chromosomes():
 
 
 @router.post("/manipulation")
-async def gene_manipulation(chromosomes_params: ChromosomesParams,giongo: Optional[str] = Cookie(None), random_strings: Optional[str] = Cookie(None)) -> ChromosomesParams:
-    chromosomes_params:dict = chromosomes_params.dict()
+async def gene_manipulation(chromosomes_params: ChromosomesParams, giongo: Optional[str] = Cookie(None), random_strings: Optional[str] = Cookie(None)) -> ChromosomesParams:
+    chromosomes_params: dict = chromosomes_params.dict()
     # 被験者名
     name = chromosomes_params.pop('name')
     # バリデーション
     # 名前が未入力の場合エラーを返す
     if name == "":
         raise HTTPException(status_code=422, detail="名前が入力されていません")
-    # 未入力の適応度がある場合エラーを返す    
+    # 未入力の適応度がある場合エラーを返す
     for chromosome in chromosomes_params.values():
         if chromosome["fitness"] == "":
             raise HTTPException(status_code=422, detail="未入力の適応度があります")
-    
+
     # 回答を記録
     # 呼び出し元ファイルからの相対パスを渡す（今回はbackend）
     log_path = "./results/" + f"{giongo}/" + name + random_strings + ".txt"
@@ -63,11 +59,12 @@ async def gene_manipulation(chromosomes_params: ChromosomesParams,giongo: Option
     next_generation_chromosomes.append(elite_chromosome)
     # モジュレーターをソート(FMのアルゴリズム上ソートが必要な場合がある)
     for chromosome in chromosomes_params.values():
-        modulators_params = [chromosome["fmParamsList"]["operator2"],chromosome["fmParamsList"]["operator3"],chromosome["fmParamsList"]["operator4"]]
+        modulators_params = [chromosome["fmParamsList"]["operator2"],
+                             chromosome["fmParamsList"]["operator3"], chromosome["fmParamsList"]["operator4"]]
         sorted_modulators_params = sort_modulators(modulators_params)
-        chromosome["fmParamsList"]["operator2"] = sorted_modulators_params[0]  
+        chromosome["fmParamsList"]["operator2"] = sorted_modulators_params[0]
         chromosome["fmParamsList"]["operator3"] = sorted_modulators_params[1]
-        chromosome["fmParamsList"]["operator4"] = sorted_modulators_params[2]   
+        chromosome["fmParamsList"]["operator4"] = sorted_modulators_params[2]
     # 交叉による次世代個体の追加
     for i in range(len(next_generation_chromosomes), GENERATION_CHROMOSOME_NUM):
         parents = exec_tournament_selection(chromosomes_params)

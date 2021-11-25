@@ -3,8 +3,9 @@ import random
 
 ALGORITHM_NUM = 0
 
+
 def make_fm_params():
-    """奇数倍音のみが出現することを確認するための関数
+    """2オペレータで奇数倍音のみが発生することを確認するメソッド
 
     Returns:
         [type]: [description]

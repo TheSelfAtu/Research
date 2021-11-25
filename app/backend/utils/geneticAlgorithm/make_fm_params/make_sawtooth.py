@@ -3,7 +3,13 @@ import random
 
 ALGORITHM_NUM = 0
 
+
 def make_fm_params():
+    """2オペレータでノコギリ波発生することを確認するメソッド
+
+    Returns:
+        [type]: [description]
+    """
     return {
         "attack": 0,
         "decay": 0,
