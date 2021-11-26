@@ -21,9 +21,12 @@ app.add_middleware(
 )
 
 # ----------APIの実装------------
+
+# この記述により@app.get("/{giongo}")でfavicon.icoが処理されない
 @app.get("/favicon.ico")
 async def main():
     return 
+
 @app.get("/{giongo}")
 async def main(giongo:str):
     # 結果記録用ファイル名が被らないための文字列
@@ -34,6 +37,7 @@ async def main(giongo:str):
     response = FileResponse(template_file_path)
     # 目的の擬音語の値
     response.set_cookie(key="giongo", value=giongo)
+    # 記録ファイル名を被らせないためのランダム文字列
     response.set_cookie(key="random_strings", value=random_strings)
     return response
 

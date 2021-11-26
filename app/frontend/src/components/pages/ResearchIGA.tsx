@@ -48,7 +48,7 @@ export function ResearchIGA(): JSX.Element {
   useEffect(() => {
     if (generationCount == 1) {
       axios
-        .get("/manipulation/make-ramdom/all")
+        .get("/manipulation/initialize")
         .then((response) => {
           const firstGenerationParams: chromosomesParams = response.data;
           // 遺伝子を初期化

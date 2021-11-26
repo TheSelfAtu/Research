@@ -1,13 +1,13 @@
-from typing import Dict, Optional, Union
 from typing import Optional
 from utils.geneticAlgorithm.config import ALGORITHM_NUM, GENERATION_CHROMOSOME_NUM
-from schemas.chromosome import ChromosomeParams, ChromosomesParams
+from schemas.chromosome import  ChromosomesParams
 from utils.geneticAlgorithm.gene_repair.fm_params.repair import repair_fm_params
 from utils.geneticAlgorithm.mutate.mutate_fm_params.mutate import mutate
 from utils.geneticAlgorithm.crossover.blx_alpha import exec_blx_alpha
 from utils.geneticAlgorithm.selection.elite_selection import exec_elite_selection
 from utils.geneticAlgorithm.selection.tournament_selection import exec_tournament_selection
-from utils.geneticAlgorithm.make_chromosome_params.make_chromosome_params import make_chromosome_params
+from utils.geneticAlgorithm.make_chromosome_params.four_oscillator.make_chromosome_params import make_chromosome_params
+from utils.geneticAlgorithm.make_chromosome_params.two_oscilator.test_odd_overtones import make_chromosome_params
 from utils.log.log import log
 from utils.sort_modulator import sort_modulators
 
@@ -16,8 +16,13 @@ from fastapi import APIRouter, Cookie, HTTPException
 router = APIRouter()
 
 
-@router.get("/manipulation/make-ramdom/all")
+@router.get("/manipulation/initialize")
 async def make_generation_chromosomes():
+    """すべての染色体を初期化する
+
+    Returns:
+        [type]: 染色体を返す
+    """
     return {
         "chromosome1": make_chromosome_params(),
         "chromosome2": make_chromosome_params(),
