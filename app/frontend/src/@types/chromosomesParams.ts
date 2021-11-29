@@ -16,5 +16,5 @@ export type chromosomesParams = {
 type chromosomeParams = {
   fmParamsList: fmParamsList;
   fitness: string;
-  algorithmNum: string;
+  algorithmNum: number;
 };

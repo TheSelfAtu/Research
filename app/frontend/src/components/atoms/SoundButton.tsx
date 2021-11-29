@@ -3,7 +3,7 @@ import { makeFMSounds } from "../../Common/makeFMSounds";
 import { fmParamsList } from "../../@types/fmParams";
 
 interface SoundButtonProps {
-  algoNum: string;
+  algoNum: number;
   soundParamsList: fmParamsList;
   chromosomeNum: string;
 }

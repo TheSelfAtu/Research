@@ -3,12 +3,11 @@ import { operatorParams } from "../@types/operatorParams";
 import { visualizeFFT } from "./visualizeFFT";
 
 export function makeFMSounds(
-  algoNum: string,
+  algorithmNum: number,
   fmParamsList: fmParamsList,
   geneNumber: string
 ) {
   //   アルゴリズムをセット
-  const algorithmNum = algoNum;
   const operatorsInfoWithGainNode = setOperatorsInfo(algorithmNum);
   const operatorsInfo = operatorsInfoWithGainNode["operatorsInfo"];
   const analyzerNodeForSpeaker = operatorsInfoWithGainNode["analyzerNode"];
@@ -46,8 +45,9 @@ export function makeFMSounds(
   return operatorsInfo;
 }
 
-function setOperatorsInfo(algoNum: string) {
+function setOperatorsInfo(algorithmNum: number) {
   const audioContext: AudioContext = new AudioContext();
+  // startTimeは０になる
   const startTime: number = audioContext.currentTime;
   // スピーカに接続するゲインノードを生成（複数のオシレーターからの入力を受け付ける）
   const gainNodeToSpeaker = new GainNode(audioContext);
@@ -61,11 +61,13 @@ function setOperatorsInfo(algoNum: string) {
   } = {};
 
   // オペレーターに関する情報をセット
-  setAlgorithm(algoNum, startTime, audioContext, operatorsInfo);
+  setAlgorithm(algorithmNum, startTime, audioContext, operatorsInfo);
   for (const operatorParams of Object.values(operatorsInfo)) {
     for (const [destinationNode, gainNode] of Object.entries(
       operatorParams.destination
     )) {
+      console.log("op here", destinationNode, gainNode);
+
       operatorParams.oscillatorNode.connect(gainNode);
       if (!(destinationNode == "gainNodeToSpeaker")) {
         // 接続先オペレーターの周波数変調を行うために接続

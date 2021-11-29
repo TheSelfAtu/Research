@@ -1,9 +1,9 @@
-import React from 'react'
+import React from "react";
 import { fmParamsList } from "../../@types/fmParams";
 
 interface ParametersTableProps {
   fmParamsList: fmParamsList;
-  algorithmNum: string;
+  algorithmNum: number;
 }
 export function ParametersTable(props: ParametersTableProps) {
   return (

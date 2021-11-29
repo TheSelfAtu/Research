@@ -13,7 +13,7 @@ interface OptionProps {
   >;
   chromosomeNumber: string;
   soundParamsList: fmParamsList;
-  algorithmNum: string;
+  algorithmNum: number;
   chromosomesFitnessValue: string;
 }
 
