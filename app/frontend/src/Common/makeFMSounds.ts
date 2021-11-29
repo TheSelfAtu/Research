@@ -129,14 +129,14 @@ function setEnvelop(t0: number, gainNode: GainNode, envelopParams: any) {
 }
 
 function setAlgorithm(
-  algoNum: string,
+  algoNum: number,
   startTime: number,
   audioContext: AudioContext,
   operatorsInfo: { [key: string]: operatorParams | GainNode }
 ) {
-  console.log("algoNum", algoNum);
+  console.log("algoNum", algoNum, typeof algoNum);
 
-  if (algoNum == "0") {
+  if (algoNum === 0) {
     //   1オペレータ、1キャリアのアルゴリズム
     operatorsInfo["operator1"] = {
       audioContext: audioContext,
@@ -158,7 +158,7 @@ function setAlgorithm(
       },
     };
   }
-  if (algoNum == "1") {
+  if (algoNum === 1) {
     operatorsInfo["operator1"] = {
       audioContext: audioContext,
       startTime: startTime,
@@ -188,7 +188,7 @@ function setAlgorithm(
       destination: { operator1: new GainNode(audioContext) },
     };
   }
-  if (algoNum == "2") {
+  if (algoNum === 2) {
     operatorsInfo["operator1"] = {
       audioContext: audioContext,
       startTime: startTime,
@@ -218,7 +218,7 @@ function setAlgorithm(
       destination: { operator2: new GainNode(audioContext) },
     };
   }
-  if (algoNum == "3") {
+  if (algoNum === 3) {
     operatorsInfo["operator1"] = {
       audioContext: audioContext,
       startTime: startTime,
@@ -248,7 +248,7 @@ function setAlgorithm(
       destination: { operator1: new GainNode(audioContext) },
     };
   }
-  if (algoNum == "4") {
+  if (algoNum === 4) {
     operatorsInfo["operator1"] = {
       audioContext: audioContext,
       startTime: startTime,
