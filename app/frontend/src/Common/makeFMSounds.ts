@@ -7,15 +7,42 @@ export function makeFMSounds(
   fmParamsList: fmParamsList,
   geneNumber: string
 ) {
-  //   アルゴリズムをセット
+  // アルゴリズムをセット
   const operatorsInfoWithGainNode = setOperatorsInfo(algorithmNum);
   const operatorsInfo = operatorsInfoWithGainNode["operatorsInfo"];
   const analyzerNodeForSpeaker = operatorsInfoWithGainNode["analyzerNode"];
+  // モジュレータの周波数は基音の倍数（非整数倍を含む）
+  let fundamentalFrequency: number;
 
-  // 周波数や変調指数などをセット
+  // 基音を設定;
   Object.keys(operatorsInfo).forEach((key) => {
     const operatorParams = operatorsInfo[key];
     const fmParams = fmParamsList[key];
+    if (!operatorParams.isModulator) {
+      fundamentalFrequency = fmParams.frequency;
+    }
+  });
+
+  // オシレータの周波数、変調指数をセット
+  Object.keys(operatorsInfo).forEach((key) => {
+    const operatorParams = operatorsInfo[key];
+    const fmParams = fmParamsList[key];
+
+    if (operatorParams.isModulator) {
+      // モジュレーターの周波数を設定
+      operatorParams.oscillatorNode.frequency.value =
+        fundamentalFrequency * fmParams.ratioToFoundamentalFrequency;
+      //  モジュレータの変調指数を変更(振幅を変えることと同義)
+      for (const gainNodeToDestinaion of Object.values(
+        operatorParams.destination
+      )) {
+        gainNodeToDestinaion.gain.value = fmParams.modulationIndex;
+      }
+    } else {
+      // キャリアの周波数を設定
+      operatorParams.oscillatorNode.frequency.value = fmParams.frequency;
+    }
+
     setParams(operatorParams, fmParams);
   });
 
@@ -26,7 +53,7 @@ export function makeFMSounds(
         const fmParams = fmParamsList[key];
         const startTime = operatorsInfo[key].startTime;
         const gainNode = operatorsInfo[key].destination[gainNodeDestination];
-        // キャリアにADSRを付与
+        // キャリアにADSRを付与 if文をなくせばモジュレータにもADSRを付与
         if (gainNodeDestination == "gainNodeToSpeaker") {
           setEnvelop(startTime, gainNode, fmParams);
         }
@@ -109,6 +136,29 @@ function setParams(operatorParams: operatorParams, fmParams: fmParamsType) {
     }
   }
 }
+/**
+ * オペレーターごとの周波数、変調指数を設定
+ *
+ * @param {operatorParams} operatorParams
+ * @param {fmParamsType} fmParams
+ */
+function setModulationIndex(
+  operatorParams: operatorParams,
+  fmParams: fmParamsType
+) {
+  //キャリアの周波数を設定
+  operatorParams.oscillatorNode.frequency.value = fmParams.frequency;
+
+  // モジュレーターの周波数を設定
+  operatorParams.oscillatorNode.frequency.value =
+    fmParams.frequency * fmParams.ratioToFoundamentalFrequency;
+  // オペレーターがモジュレータの場合、変調指数を変更=>振幅を変える
+  for (const gainNodeToDestinaion of Object.values(
+    operatorParams.destination
+  )) {
+    gainNodeToDestinaion.gain.value = fmParams.modulationIndex;
+  }
+}
 
 function setEnvelop(t0: number, gainNode: GainNode, envelopParams: any) {
   const t1 = t0 + envelopParams.attack;
@@ -148,6 +198,7 @@ function setAlgorithm(
       destination: {
         gainNodeToSpeaker: new GainNode(audioContext),
       },
+      isModulator: false,
     };
 
     operatorsInfo["operator2"] = {
@@ -158,15 +209,18 @@ function setAlgorithm(
       destination: {
         operator1: new GainNode(audioContext),
       },
+      isModulator: true,
     };
   }
   if (algoNum === 1) {
+    // 1つのキャリアに対して並列に3つのモジュレータ
     operatorsInfo["operator1"] = {
       audioContext: audioContext,
       startTime: startTime,
       oscillatorNode: new OscillatorNode(audioContext),
       analyserNode: new AnalyserNode(audioContext),
       destination: { gainNodeToSpeaker: new GainNode(audioContext) },
+      isModulator: false,
     };
     operatorsInfo["operator2"] = {
       audioContext: audioContext,
@@ -174,6 +228,7 @@ function setAlgorithm(
       oscillatorNode: new OscillatorNode(audioContext),
       analyserNode: new AnalyserNode(audioContext),
       destination: { operator1: new GainNode(audioContext) },
+      isModulator: true,
     };
     operatorsInfo["operator3"] = {
       audioContext: audioContext,
@@ -181,6 +236,7 @@ function setAlgorithm(
       oscillatorNode: new OscillatorNode(audioContext),
       analyserNode: new AnalyserNode(audioContext),
       destination: { operator1: new GainNode(audioContext) },
+      isModulator: true,
     };
     operatorsInfo["operator4"] = {
       audioContext: audioContext,
@@ -188,6 +244,7 @@ function setAlgorithm(
       oscillatorNode: new OscillatorNode(audioContext),
       analyserNode: new AnalyserNode(audioContext),
       destination: { operator1: new GainNode(audioContext) },
+      isModulator: true,
     };
   }
   if (algoNum === 2) {
@@ -197,6 +254,7 @@ function setAlgorithm(
       oscillatorNode: new OscillatorNode(audioContext),
       analyserNode: new AnalyserNode(audioContext),
       destination: { gainNodeToSpeaker: new GainNode(audioContext) },
+      isModulator: false,
     };
     operatorsInfo["operator2"] = {
       audioContext: audioContext,
@@ -204,6 +262,7 @@ function setAlgorithm(
       oscillatorNode: new OscillatorNode(audioContext),
       analyserNode: new AnalyserNode(audioContext),
       destination: { operator1: new GainNode(audioContext) },
+      isModulator: true,
     };
     operatorsInfo["operator3"] = {
       audioContext: audioContext,
@@ -211,6 +270,7 @@ function setAlgorithm(
       oscillatorNode: new OscillatorNode(audioContext),
       analyserNode: new AnalyserNode(audioContext),
       destination: { operator2: new GainNode(audioContext) },
+      isModulator: true,
     };
     operatorsInfo["operator4"] = {
       audioContext: audioContext,
@@ -218,6 +278,7 @@ function setAlgorithm(
       oscillatorNode: new OscillatorNode(audioContext),
       analyserNode: new AnalyserNode(audioContext),
       destination: { operator2: new GainNode(audioContext) },
+      isModulator: true,
     };
   }
   if (algoNum === 3) {
@@ -227,6 +288,7 @@ function setAlgorithm(
       oscillatorNode: new OscillatorNode(audioContext),
       analyserNode: new AnalyserNode(audioContext),
       destination: { gainNodeToSpeaker: new GainNode(audioContext) },
+      isModulator: false,
     };
     operatorsInfo["operator2"] = {
       audioContext: audioContext,
@@ -234,6 +296,7 @@ function setAlgorithm(
       oscillatorNode: new OscillatorNode(audioContext),
       analyserNode: new AnalyserNode(audioContext),
       destination: { operator1: new GainNode(audioContext) },
+      isModulator: true,
     };
     operatorsInfo["operator3"] = {
       audioContext: audioContext,
@@ -241,6 +304,7 @@ function setAlgorithm(
       oscillatorNode: new OscillatorNode(audioContext),
       analyserNode: new AnalyserNode(audioContext),
       destination: { operator2: new GainNode(audioContext) },
+      isModulator: true,
     };
     operatorsInfo["operator4"] = {
       audioContext: audioContext,
@@ -248,15 +312,18 @@ function setAlgorithm(
       oscillatorNode: new OscillatorNode(audioContext),
       analyserNode: new AnalyserNode(audioContext),
       destination: { operator1: new GainNode(audioContext) },
+      isModulator: true,
     };
   }
   if (algoNum === 4) {
+    // 1つのキャリアに対して、直列に三つのモジュレータ
     operatorsInfo["operator1"] = {
       audioContext: audioContext,
       startTime: startTime,
       oscillatorNode: new OscillatorNode(audioContext),
       analyserNode: new AnalyserNode(audioContext),
       destination: { gainNodeToSpeaker: new GainNode(audioContext) },
+      isModulator: false,
     };
     operatorsInfo["operator2"] = {
       audioContext: audioContext,
@@ -264,6 +331,7 @@ function setAlgorithm(
       oscillatorNode: new OscillatorNode(audioContext),
       analyserNode: new AnalyserNode(audioContext),
       destination: { operator1: new GainNode(audioContext) },
+      isModulator: true,
     };
     operatorsInfo["operator3"] = {
       audioContext: audioContext,
@@ -271,6 +339,7 @@ function setAlgorithm(
       oscillatorNode: new OscillatorNode(audioContext),
       analyserNode: new AnalyserNode(audioContext),
       destination: { operator2: new GainNode(audioContext) },
+      isModulator: true,
     };
     operatorsInfo["operator4"] = {
       audioContext: audioContext,
@@ -278,127 +347,7 @@ function setAlgorithm(
       oscillatorNode: new OscillatorNode(audioContext),
       analyserNode: new AnalyserNode(audioContext),
       destination: { operator3: new GainNode(audioContext) },
+      isModulator: true,
     };
   }
-  // 以下は現在の実装ではアルゴリズムが組めない
-  // if (algoNum == "5") {
-  //   operatorsInfo["operator1"] = {
-  //     audioContext: audioContext,
-  //     startTime: startTime,
-  //     oscillatorNode: new OscillatorNode(audioContext),
-  //     analyserNode: new AnalyserNode(audioContext),
-  //     destination: "speaker",
-  //   };
-  //   operatorsInfo["operator2"] = {
-  //     audioContext: audioContext,
-  //     startTime: startTime,
-  //     oscillatorNode: new OscillatorNode(audioContext),
-  //     analyserNode: new AnalyserNode(audioContext),
-  //     destination: "operator1",
-  //   };
-  //   operatorsInfo["operator3"] = {
-  //     audioContext: audioContext,
-  //     startTime: startTime,
-  //     oscillatorNode: new OscillatorNode(audioContext),
-  //     analyserNode: new AnalyserNode(audioContext),
-  //     destination: "operator2",
-  //   };
-  //   operatorsInfo["operator4"] = {
-  //     audioContext: audioContext,
-  //     startTime: startTime,
-  //     oscillatorNode: new OscillatorNode(audioContext),
-  //     analyserNode: new AnalyserNode(audioContext),
-  //     destination: "operator1",
-  //   };
-  // }
-  // if (algoNum == "6") {
-  //   operatorsInfo["operator1"] = {
-  //     audioContext: audioContext,
-  //     startTime: startTime,
-  //     oscillatorNode: new OscillatorNode(audioContext),
-  //     analyserNode: new AnalyserNode(audioContext),
-  //     destination: "speaker",
-  //   };
-  //   operatorsInfo["operator2"] = {
-  //     audioContext: audioContext,
-  //     startTime: startTime,
-  //     oscillatorNode: new OscillatorNode(audioContext),
-  //     analyserNode: new AnalyserNode(audioContext),
-  //     destination: "operator1",
-  //   };
-  //   operatorsInfo["operator3"] = {
-  //     audioContext: audioContext,
-  //     startTime: startTime,
-  //     oscillatorNode: new OscillatorNode(audioContext),
-  //     analyserNode: new AnalyserNode(audioContext),
-  //     destination: "operator2",
-  //   };
-  //   operatorsInfo["operator4"] = {
-  //     audioContext: audioContext,
-  //     startTime: startTime,
-  //     oscillatorNode: new OscillatorNode(audioContext),
-  //     analyserNode: new AnalyserNode(audioContext),
-  //     destination: "operator1",
-  //   };
-  // }
-  // if (algoNum == "7") {
-  //   operatorsInfo["operator1"] = {
-  //     audioContext: audioContext,
-  //     startTime: startTime,
-  //     oscillatorNode: new OscillatorNode(audioContext),
-  //     analyserNode: new AnalyserNode(audioContext),
-  //     destination: "speaker",
-  //   };
-  //   operatorsInfo["operator2"] = {
-  //     audioContext: audioContext,
-  //     startTime: startTime,
-  //     oscillatorNode: new OscillatorNode(audioContext),
-  //     analyserNode: new AnalyserNode(audioContext),
-  //     destination: "operator1",
-  //   };
-  //   operatorsInfo["operator3"] = {
-  //     audioContext: audioContext,
-  //     startTime: startTime,
-  //     oscillatorNode: new OscillatorNode(audioContext),
-  //     analyserNode: new AnalyserNode(audioContext),
-  //     destination: "operator2",
-  //   };
-  //   operatorsInfo["operator4"] = {
-  //     audioContext: audioContext,
-  //     startTime: startTime,
-  //     oscillatorNode: new OscillatorNode(audioContext),
-  //     analyserNode: new AnalyserNode(audioContext),
-  //     destination: "operator1",
-  //   };
-  // }
-  // if (algoNum == "8") {
-  //   operatorsInfo["operator1"] = {
-  //     audioContext: audioContext,
-  //     startTime: startTime,
-  //     oscillatorNode: new OscillatorNode(audioContext),
-  //     analyserNode: new AnalyserNode(audioContext),
-  //     destination: "speaker",
-  //   };
-  //   operatorsInfo["operator2"] = {
-  //     audioContext: audioContext,
-  //     startTime: startTime,
-  //     oscillatorNode: new OscillatorNode(audioContext),
-  //     analyserNode: new AnalyserNode(audioContext),
-  //     destination: "operator1",
-  //   };
-  //   operatorsInfo["operator3"] = {
-  //     audioContext: audioContext,
-  //     startTime: startTime,
-  //     oscillatorNode: new OscillatorNode(audioContext),
-  //     analyserNode: new AnalyserNode(audioContext),
-  //     destination: "operator2",
-  //   };
-  //   operatorsInfo["operator4"] = {
-  //     audioContext: audioContext,
-  //     startTime: startTime,
-  //     oscillatorNode: new OscillatorNode(audioContext),
-  //     analyserNode: new AnalyserNode(audioContext),
-  //     destination: "operator1",
-  //   };
-  // }
 }
