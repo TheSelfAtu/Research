@@ -42,8 +42,6 @@ export function makeFMSounds(
       // キャリアの周波数を設定
       operatorParams.oscillatorNode.frequency.value = fmParams.frequency;
     }
-
-    setParams(operatorParams, fmParams);
   });
 
   // エンベロープをセット;
@@ -113,51 +111,6 @@ function setOperatorsInfo(algorithmNum: number) {
     gainNodeToSpeaker: gainNodeToSpeaker,
     analyzerNode: analyzerNode,
   };
-}
-/**
- * オペレーターごとの周波数、変調指数を設定
- *
- * @param {operatorParams} operatorParams
- * @param {fmParamsType} fmParams
- */
-function setParams(operatorParams: operatorParams, fmParams: fmParamsType) {
-  //キャリアの周波数を設定
-  operatorParams.oscillatorNode.frequency.value = fmParams.frequency;
-
-  if (!operatorParams.destination.hasOwnProperty("gainNodeToSpeaker")) {
-    // モジュレーターの周波数を設定
-    operatorParams.oscillatorNode.frequency.value =
-      fmParams.frequency * fmParams.ratioToFoundamentalFrequency;
-    //   オペレーターがモジュレータの場合、変調指数を変更=>振幅を変える
-    for (const gainNodeToDestinaion of Object.values(
-      operatorParams.destination
-    )) {
-      gainNodeToDestinaion.gain.value = fmParams.modulationIndex;
-    }
-  }
-}
-/**
- * オペレーターごとの周波数、変調指数を設定
- *
- * @param {operatorParams} operatorParams
- * @param {fmParamsType} fmParams
- */
-function setModulationIndex(
-  operatorParams: operatorParams,
-  fmParams: fmParamsType
-) {
-  //キャリアの周波数を設定
-  operatorParams.oscillatorNode.frequency.value = fmParams.frequency;
-
-  // モジュレーターの周波数を設定
-  operatorParams.oscillatorNode.frequency.value =
-    fmParams.frequency * fmParams.ratioToFoundamentalFrequency;
-  // オペレーターがモジュレータの場合、変調指数を変更=>振幅を変える
-  for (const gainNodeToDestinaion of Object.values(
-    operatorParams.destination
-  )) {
-    gainNodeToDestinaion.gain.value = fmParams.modulationIndex;
-  }
 }
 
 function setEnvelop(t0: number, gainNode: GainNode, envelopParams: any) {

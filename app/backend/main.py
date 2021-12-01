@@ -5,7 +5,6 @@ from fastapi.responses import FileResponse
 from routers import manipulation
 import random
 import string
-# from utils.log import log
 
 app = FastAPI()
 template_file_path = "./static/templates/index.html"

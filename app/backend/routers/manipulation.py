@@ -7,7 +7,7 @@ from utils.geneticAlgorithm.crossover.blx_alpha import exec_blx_alpha
 from utils.geneticAlgorithm.selection.elite_selection import exec_elite_selection
 from utils.geneticAlgorithm.selection.tournament_selection import exec_tournament_selection
 from utils.geneticAlgorithm.make_chromosome_params.four_oscillator.make_chromosome_params import make_chromosome_params
-from utils.geneticAlgorithm.make_chromosome_params.three_oscilator.test_int_overtones import make_chromosome_params
+# from utils.geneticAlgorithm.make_chromosome_params.three_oscilator.test_int_overtones import make_chromosome_params
 from utils.log.log import log
 from utils.sort_modulator import sort_modulators
 
