@@ -10,7 +10,7 @@ export type fmParamsType = {
   release: number;
   frequency: number;
   // キャリア周波数に対するモジュレータの周波数の比率
-  ratioToFoundamentalFrequency: number;
+  ratioToFundamentalFrequency: number;
   //   変調指数
   modulationIndex: number;
 };

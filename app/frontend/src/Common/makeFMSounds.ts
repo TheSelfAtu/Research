@@ -31,7 +31,7 @@ export function makeFMSounds(
     if (operatorParams.isModulator) {
       // モジュレーターの周波数を設定
       operatorParams.oscillatorNode.frequency.value =
-        fundamentalFrequency * fmParams.ratioToFoundamentalFrequency;
+        fundamentalFrequency * fmParams.ratioToFundamentalFrequency;
       //  モジュレータの変調指数を変更(振幅を変えることと同義)
       for (const gainNodeToDestinaion of Object.values(
         operatorParams.destination

@@ -34,7 +34,7 @@ export function Description(props: DescriptionProps) {
       </ul>
       <h2>注意</h2>
       <ul>
-        <li>実験前に下記の名前入力欄に名前を入力してください</li>
+        <li>実験前に下記の名前、年齢、性別入力欄に入力をしてください</li>
         <li>名前は英小文字、英大文字での記入としてください</li>
         <li>
           名前は本名でなくても構いませんが、

@@ -1,5 +1,8 @@
 import React, { useState, useEffect, useCallback } from "react";
 import TextField from "@material-ui/core/TextField";
+import Select from "@mui/material/Select";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
 import Button from "@material-ui/core/Button";
 import { Description } from "../molecules/Description";
 import { Option } from "../organisms/Option";
@@ -12,6 +15,10 @@ import { getCookie } from "../../Common/getCookie";
 export function ResearchIGA(): JSX.Element {
   // 被験者指名、ニックネーム
   const [name, setName] = useState("");
+  // 被験者年齢
+  const [age, setAge] = useState("");
+  // 被験者性別
+  const [gender, setGender] = useState("");
   // 生成する擬音語
   const [gion, setGion] = useState("");
   // 世代数
@@ -23,7 +30,13 @@ export function ResearchIGA(): JSX.Element {
   // 世代の適応度、および音生成パラメータを送信。次世代の音生成パラメータの格納
   const postResult = useCallback(async () => {
     // 被験者名とパラメータを結合する
-    const answer = Object.assign({}, chromosomesParams, { name: name });
+    const answer = Object.assign(
+      {},
+      chromosomesParams,
+      { name: name },
+      { age: age },
+      { gender: gender }
+    );
     // 結果を送信する
     axios
       .post("/manipulation", answer)
@@ -40,7 +53,7 @@ export function ResearchIGA(): JSX.Element {
       .catch((err) => {
         alert("データの送信に失敗しました" + "\n" + err.response.data.detail);
       });
-  }, [chromosomesParams, name]);
+  }, [chromosomesParams, name, age, gender]);
 
   {
     /* 1世代目はランダムにパラメータを生成 */
@@ -70,8 +83,6 @@ export function ResearchIGA(): JSX.Element {
       for (const [chromosomeNum, chromosomeParam] of Object.entries(
         chromosomesParams
       )) {
-        console.log("chromosomeNum", chromosomeNum);
-
         Options.push(
           <Option
             key={chromosomeNum}
@@ -102,6 +113,34 @@ export function ResearchIGA(): JSX.Element {
           setName(e.target.value);
         }}
       />
+      <p>年齢を入力して下さい</p>
+      <TextField
+        id="age"
+        value={age}
+        label="年齢"
+        variant="outlined"
+        onChange={(e) => {
+          console.log("onchange age", e.target.value);
+
+          setAge(e.target.value);
+        }}
+      />
+      <p>性別を選択して下さい</p>
+      <InputLabel id="gender-label">性別</InputLabel>
+      <Select
+        labelId="gender-label"
+        id="gender-select"
+        value={gender}
+        label="性別"
+        onChange={(e) => {
+          setGender(e.target.value);
+        }}
+      >
+        <MenuItem value={""}>-</MenuItem>
+        <MenuItem value={"男性"}>男性</MenuItem>
+        <MenuItem value={"女性"}>女性</MenuItem>
+      </Select>
+
       <div id="answer">
         <h1>{generationCount}世代目</h1>
         {/* 各遺伝子コンポーネントの描画 */}

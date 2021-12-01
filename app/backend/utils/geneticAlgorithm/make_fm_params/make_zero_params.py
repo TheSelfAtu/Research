@@ -14,6 +14,6 @@ def make_zero_params():
         "sustainTime": 1,
         "release": 0,
         "frequency": 440,
-        "ratioToFoundamentalFrequency": 1,
+        "ratioToFundamentalFrequency": 1,
         "modulationIndex": 0
     }

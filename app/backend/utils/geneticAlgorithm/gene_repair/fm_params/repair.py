@@ -26,10 +26,11 @@ def repair_fm_params(param_name: str, fm_param: float):
         fm_param = repair_lethal_gene(
             FREQUENCY_RANGE[0], FREQUENCY_RANGE[1], fm_param)
         return fm_param
-    if param_name == "ratioToFoundamentalFrequency":
+    if param_name == "ratioToFundamentalFrequency":
         fm_param = repair_lethal_gene(
             RATIO_TO_CARRIER_FREQUENCY_RANGE[0], RATIO_TO_CARRIER_FREQUENCY_RANGE[1], fm_param)
-        return round_off_to_digit(fm_param)
+        return fm_param
+        # return round_off_to_digit(fm_param)
     if param_name == "modulationIndex":
         fm_param = repair_lethal_gene(
             MODULATION_INDEX_RANGE[0], MODULATION_INDEX_RANGE[1], fm_param)

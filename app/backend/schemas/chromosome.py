@@ -27,4 +27,7 @@ class ChromosomesParams(BaseModel):
     chromosome8: dict
     chromosome9: dict
     chromosome10: dict
-    name: Any
+    # 被験者情報
+    name: str
+    age: str
+    gender: str

@@ -42,10 +42,19 @@ async def gene_manipulation(chromosomes_params: ChromosomesParams, giongo: Optio
     chromosomes_params: dict = chromosomes_params.dict()
     # 被験者名
     name = chromosomes_params.pop('name')
+    age = chromosomes_params.pop('age')
+    gender = chromosomes_params.pop('gender')
+
     # バリデーション
     # 名前が未入力の場合エラーを返す
     if name == "":
         raise HTTPException(status_code=422, detail="名前が入力されていません")
+    # 年齢が未入力の場合エラーを返す
+    if age == "":
+        raise HTTPException(status_code=422, detail="年齢が入力されていません")
+    # 性別が未入力の場合エラーを返す
+    if gender == "":
+        raise HTTPException(status_code=422, detail="性別が入力されていません")
     # 未入力の適応度がある場合エラーを返す
     for chromosome in chromosomes_params.values():
         if chromosome["fitness"] == "":

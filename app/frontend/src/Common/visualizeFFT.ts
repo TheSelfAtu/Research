@@ -34,7 +34,6 @@ export function visualizeFFT(
     const innerHeight = height - paddingTop - paddingBottom;
 
     const range = analyserNode.maxDecibels - analyserNode.minDecibels;
-    console.log("analyze", audioContext, analyserNode.fftSize);
 
     // 周波数分解能
     // default サンプリングレート 48000Hz

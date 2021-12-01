@@ -37,7 +37,7 @@ export function ParametersTable(props: ParametersTableProps) {
               <td>{props.fmParamsList[key].sustainTime}</td>
               <td>{props.fmParamsList[key].release}</td>
               <td>{props.fmParamsList[key].frequency}</td>
-              <td>{props.fmParamsList[key].ratioToFoundamentalFrequency}</td>
+              <td>{props.fmParamsList[key].ratioToFundamentalFrequency}</td>
               <td>{props.fmParamsList[key].modulationIndex}</td>
               <td>{props.algorithmNum}</td>
             </tr>

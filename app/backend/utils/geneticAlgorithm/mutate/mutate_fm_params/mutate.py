@@ -25,7 +25,7 @@ def mutate(param_name: str):
         fm_param = choice_from_all_range(
             FREQUENCY_RANGE[0], FREQUENCY_RANGE[1])
         return fm_param
-    if param_name == "ratioToFoundamentalFrequency":
+    if param_name == "ratioToFundamentalFrequency":
         fm_param = choice_from_all_range(
             RATIO_TO_CARRIER_FREQUENCY_RANGE[0], RATIO_TO_CARRIER_FREQUENCY_RANGE[1])
         return fm_param
