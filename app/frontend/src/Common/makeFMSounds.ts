@@ -1,16 +1,13 @@
-import { fmParamsType, fmParamsList } from "../@types/fmParams";
+import { fmParamsList } from "../@types/fmParams";
 import { operatorParams } from "../@types/operatorParams";
-import { visualizeFFT } from "./visualizeFFT";
 
-export function makeFMSounds(
-  algorithmNum: number,
-  fmParamsList: fmParamsList,
-  geneNumber: string
-) {
+export function makeFMModel(algorithmNum: number, fmParamsList: fmParamsList) {
   // アルゴリズムをセット
   const operatorsInfoWithGainNode = setOperatorsInfo(algorithmNum);
   const operatorsInfo = operatorsInfoWithGainNode["operatorsInfo"];
   const analyzerNodeForSpeaker = operatorsInfoWithGainNode["analyzerNode"];
+  const streamDestinationNode =
+    operatorsInfoWithGainNode["streamDestinationNode"];
   // モジュレータの周波数は基音の倍数（非整数倍を含む）
   let fundamentalFrequency: number;
 
@@ -59,15 +56,11 @@ export function makeFMSounds(
     );
   });
 
-  // アナライザーをセット
-  const audioContext = new AudioContext();
-  visualizeFFT(audioContext, analyzerNodeForSpeaker, geneNumber);
-
-  //   音を再生
-  Object.keys(operatorsInfo).forEach((key) => {
-    operatorsInfo[key].oscillatorNode.start();
-  });
-  return operatorsInfo;
+  return {
+    operatorsInfo: operatorsInfo,
+    analyzerNodeForSpeaker: analyzerNodeForSpeaker,
+    streamDestinationNode: streamDestinationNode,
+  };
 }
 
 function setOperatorsInfo(algorithmNum: number) {
@@ -80,6 +73,9 @@ function setOperatorsInfo(algorithmNum: number) {
   // アナライザーノードに接続
   const analyzerNode = new AnalyserNode(audioContext);
   gainNodeToSpeaker.connect(analyzerNode);
+
+  const streamDestinationNode = audioContext.createMediaStreamDestination();
+  gainNodeToSpeaker.connect(streamDestinationNode);
 
   const operatorsInfo: {
     [key: string]: operatorParams;
@@ -110,6 +106,7 @@ function setOperatorsInfo(algorithmNum: number) {
     operatorsInfo: operatorsInfo,
     gainNodeToSpeaker: gainNodeToSpeaker,
     analyzerNode: analyzerNode,
+    streamDestinationNode: streamDestinationNode,
   };
 }
 

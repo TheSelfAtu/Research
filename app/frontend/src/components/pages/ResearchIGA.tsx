@@ -120,8 +120,6 @@ export function ResearchIGA(): JSX.Element {
         label="年齢"
         variant="outlined"
         onChange={(e) => {
-          console.log("onchange age", e.target.value);
-
           setAge(e.target.value);
         }}
       />

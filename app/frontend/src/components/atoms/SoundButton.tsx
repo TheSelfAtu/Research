@@ -1,6 +1,8 @@
 import Button from "@material-ui/core/Button";
-import { makeFMSounds } from "../../Common/makeFMSounds";
+import { makeFMModel } from "../../Common/makeFMSounds";
 import { fmParamsList } from "../../@types/fmParams";
+
+import { visualizeFFT } from "../../Common/visualizeFFT";
 
 interface SoundButtonProps {
   algoNum: number;
@@ -13,7 +15,21 @@ export function SoundButton(props: SoundButtonProps) {
       variant="contained"
       color="primary"
       onClick={() => {
-        makeFMSounds(props.algoNum, props.soundParamsList, props.chromosomeNum);
+        const soundData = makeFMModel(props.algoNum, props.soundParamsList);
+        const operatorsInfo = soundData.operatorsInfo;
+        const analyzerNodeForSpeaker = soundData.analyzerNodeForSpeaker;
+
+        // 音を再生
+        Object.keys(operatorsInfo).forEach((key) => {
+          operatorsInfo[key].oscillatorNode.start();
+        });
+
+        // 出力音の周波数スペクトルを描画
+        visualizeFFT(
+          new AudioContext(),
+          analyzerNodeForSpeaker,
+          props.chromosomeNum
+        );
       }}
     >
       クリックすると音が鳴ります
