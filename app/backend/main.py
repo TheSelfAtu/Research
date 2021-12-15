@@ -22,15 +22,18 @@ app.add_middleware(
 # ----------APIの実装------------
 
 # この記述により@app.get("/{giongo}")でfavicon.icoが処理されない
+
+
 @app.get("/favicon.ico")
-async def main():
-    return 
+async def deal_favicon():
+    return
+
 
 @app.get("/{giongo}")
-async def main(giongo:str):
+async def main(giongo: str):
     # 結果記録用ファイル名が被らないための文字列
-    random_strings_list:list = [random.choice(string.ascii_letters + string.digits)
-                      for i in range(7)]
+    random_strings_list: list = [random.choice(string.ascii_letters + string.digits)
+                                 for i in range(7)]
     random_strings = ''.join(random_strings_list)
     # HTMLファイルを返す
     response = FileResponse(template_file_path)

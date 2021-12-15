@@ -69,13 +69,12 @@ function setOperatorsInfo(algorithmNum: number) {
   const startTime: number = audioContext.currentTime;
   // スピーカに接続するゲインノードを生成（複数のオシレーターからの入力を受け付ける）
   const gainNodeToSpeaker = new GainNode(audioContext);
+  const streamDestinationNode = audioContext.createMediaStreamDestination();
+  gainNodeToSpeaker.connect(streamDestinationNode);
   gainNodeToSpeaker.connect(audioContext.destination);
   // アナライザーノードに接続
   const analyzerNode = new AnalyserNode(audioContext);
   gainNodeToSpeaker.connect(analyzerNode);
-
-  const streamDestinationNode = audioContext.createMediaStreamDestination();
-  gainNodeToSpeaker.connect(streamDestinationNode);
 
   const operatorsInfo: {
     [key: string]: operatorParams;
@@ -87,8 +86,6 @@ function setOperatorsInfo(algorithmNum: number) {
     for (const [destinationNode, gainNode] of Object.entries(
       operatorParams.destination
     )) {
-      console.log("op here", destinationNode, gainNode);
-
       operatorParams.oscillatorNode.connect(gainNode);
       if (!(destinationNode == "gainNodeToSpeaker")) {
         // 接続先オペレーターの周波数変調を行うために接続

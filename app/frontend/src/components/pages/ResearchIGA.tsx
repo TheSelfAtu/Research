@@ -84,15 +84,18 @@ export function ResearchIGA(): JSX.Element {
         chromosomesParams
       )) {
         Options.push(
-          <Option
-            key={chromosomeNum}
-            chromosomesParams={chromosomesParams}
-            setChromosomesParameters={setChromosomesParams}
-            chromosomeNumber={chromosomeNum}
-            algorithmNum={chromosomeParam.algorithmNum}
-            chromosomesFitnessValue={chromosomeParam.fitness}
-            soundParamsList={chromosomeParam.fmParamsList}
-          ></Option>
+          <div>
+            <Option
+              key={chromosomeNum}
+              chromosomesParams={chromosomesParams}
+              setChromosomesParameters={setChromosomesParams}
+              chromosomeNumber={chromosomeNum}
+              algorithmNum={chromosomeParam.algorithmNum}
+              chromosomesFitnessValue={chromosomeParam.fitness}
+              soundParamsList={chromosomeParam.fmParamsList}
+            ></Option>
+            <audio id={chromosomeNum + "audio"} controls></audio>
+          </div>
         );
       }
     }
@@ -163,11 +166,23 @@ function getAimGiongo() {
   if (aimedGiongo == "pi") {
     return "ピッ";
   }
+  if (aimedGiongo == "pu") {
+    return "プッ";
+  }
   if (aimedGiongo == "bu-") {
     return "ブー";
   }
+  if (aimedGiongo == "bi") {
+    return "ビィ";
+  }
+  if (aimedGiongo == "ti-n") {
+    return "チーン";
+  }
   if (aimedGiongo == "fa-n") {
     return "ファーン";
+  }
+  if (aimedGiongo == "ga-n") {
+    return "ガーン";
   }
   return "適切なURLを使用してください";
 }
