@@ -27,8 +27,10 @@ export function makeFMModel(algorithmNum: number, fmParamsList: fmParamsList) {
 
     if (operatorParams.isModulator) {
       // モジュレーターの周波数を設定
-      operatorParams.oscillatorNode.frequency.value =
-        fundamentalFrequency * fmParams.ratioToFundamentalFrequency;
+      // operatorParams.oscillatorNode.frequency.value =
+      fundamentalFrequency * fmParams.ratioToFundamentalFrequency;
+      // それぞれの周波数パラメータに倍率をかけた周波数をモジュレータ周波数とする
+      fmParams.frequency * fmParams.ratioToFundamentalFrequency;
       //  モジュレータの変調指数を変更(振幅を変えることと同義)
       for (const gainNodeToDestinaion of Object.values(
         operatorParams.destination
@@ -124,7 +126,6 @@ function setEnvelop(t0: number, gainNode: GainNode, envelopParams: any) {
   gainNode.gain.setTargetAtTime(sustain * gainValue, t1 + decay, sustainTime);
   // sustainからゲインを0まで減少
   gainNode.gain.setTargetAtTime(0, t1 + decay + sustainTime, release);
-  // gainNode.gain.setTargetAtTime(0, t1 + decay, release);
 }
 
 function setAlgorithm(
