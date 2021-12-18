@@ -1,5 +1,4 @@
-import math
-import random
+import uuid
 
 from ...config import ALGORITHM_NUM
 from ...make_fm_params.make_with_config import make_fm_params
@@ -18,5 +17,6 @@ def make_chromosome_params():
             "operator4": make_fm_params(),
         },
         "algorithmNum": ALGORITHM_NUM,
-        "fitness": ""
+        "fitness": "",
+        "chromosomeId": uuid.uuid4()
     }

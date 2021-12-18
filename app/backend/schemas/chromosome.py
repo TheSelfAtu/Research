@@ -10,6 +10,7 @@ from pydantic import BaseModel
 class ChromosomeParams(BaseModel):
     algorithmNum: int
     fitness: int
+    chromosomeId: str
     operator1: dict
     operator2: dict
     operator3: dict

@@ -17,4 +17,5 @@ type chromosomeParams = {
   fmParamsList: fmParamsList;
   fitness: string;
   algorithmNum: number;
+  chromosomeId: number;
 };

@@ -21,7 +21,7 @@ export function Evaluation(): JSX.Element {
   // 生成する擬音語
   const [gion, setGion] = useState("");
   // 初回のみ実行するメソッド用
-  const [count, setCount] = useState(1);
+  const [count, _setCount] = useState(1);
 
   // １つの世代に存在する遺伝子の情報
   const [chromosomesParams, setChromosomesParams] =
