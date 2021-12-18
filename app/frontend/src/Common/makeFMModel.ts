@@ -27,10 +27,10 @@ export function makeFMModel(algorithmNum: number, fmParamsList: fmParamsList) {
 
     if (operatorParams.isModulator) {
       // モジュレーターの周波数を設定
-      // operatorParams.oscillatorNode.frequency.value =
-      fundamentalFrequency * fmParams.ratioToFundamentalFrequency;
+      operatorParams.oscillatorNode.frequency.value =
+        fundamentalFrequency * fmParams.ratioToFundamentalFrequency;
       // それぞれの周波数パラメータに倍率をかけた周波数をモジュレータ周波数とする
-      fmParams.frequency * fmParams.ratioToFundamentalFrequency;
+      // fmParams.frequency * fmParams.ratioToFundamentalFrequency;
       //  モジュレータの変調指数を変更(振幅を変えることと同義)
       for (const gainNodeToDestinaion of Object.values(
         operatorParams.destination
