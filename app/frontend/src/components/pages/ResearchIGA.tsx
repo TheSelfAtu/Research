@@ -41,6 +41,15 @@ export function ResearchIGA(): JSX.Element {
     axios
       .post("/manipulation", answer)
       .then((response) => {
+        // 終了条件を満たして入ればアルゴリズムを終了する
+        if (generationCount === 12) {
+          alert(
+            "実験へのご協力ありがとうございました。" +
+              "\n" +
+              "ページを閉じていただいて構いません"
+          );
+          return;
+        }
         const nextGenerationParams: chromosomesParams = response.data;
         setChromosomesParams(nextGenerationParams);
         setGenerationCount(generationCount + 1);
