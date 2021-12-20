@@ -37,7 +37,9 @@ export function SoundButton(props: SoundButtonProps) {
             props.soundParamsList[key].decay +
             props.soundParamsList[key].sustainTime +
             props.soundParamsList[key].release;
-          operatorsInfo[key].oscillatorNode.stop(currentTime + soundLength);
+          operatorsInfo[key].oscillatorNode.stop(currentTime + soundLength + 1);
+          console.log("sound button", currentTime + soundLength);
+
           // 音をaudio要素に記録 実験時にはコメントアウト
           if (!operatorsInfo[key].isModulator) {
             recorder.start();

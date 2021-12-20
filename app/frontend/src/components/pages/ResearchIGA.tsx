@@ -42,7 +42,7 @@ export function ResearchIGA(): JSX.Element {
       .post("/manipulation", answer)
       .then((response) => {
         // 終了条件を満たして入ればアルゴリズムを終了する
-        if (generationCount === 12) {
+        if (generationCount === 13) {
           alert(
             "実験へのご協力ありがとうございました。" +
               "\n" +

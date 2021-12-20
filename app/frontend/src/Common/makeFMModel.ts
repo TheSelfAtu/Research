@@ -8,6 +8,7 @@ export function makeFMModel(algorithmNum: number, fmParamsList: fmParamsList) {
   const analyzerNodeForSpeaker = operatorsInfoWithGainNode["analyzerNode"];
   const streamDestinationNode =
     operatorsInfoWithGainNode["streamDestinationNode"];
+  const audioContext = operatorsInfoWithGainNode["audioContext"];
   // モジュレータの周波数は基音の倍数（非整数倍を含む）
   let fundamentalFrequency: number;
 
@@ -28,9 +29,9 @@ export function makeFMModel(algorithmNum: number, fmParamsList: fmParamsList) {
     if (operatorParams.isModulator) {
       // モジュレーターの周波数を設定
       operatorParams.oscillatorNode.frequency.value =
-        fundamentalFrequency * fmParams.ratioToFundamentalFrequency;
-      // それぞれの周波数パラメータに倍率をかけた周波数をモジュレータ周波数とする
-      // fmParams.frequency * fmParams.ratioToFundamentalFrequency;
+        // fundamentalFrequency * fmParams.ratioToFundamentalFrequency;
+        // それぞれの周波数パラメータに倍率をかけた周波数をモジュレータ周波数とする
+        fmParams.frequency * fmParams.ratioToFundamentalFrequency;
       //  モジュレータの変調指数を変更(振幅を変えることと同義)
       for (const gainNodeToDestinaion of Object.values(
         operatorParams.destination
@@ -102,6 +103,7 @@ function setOperatorsInfo(algorithmNum: number) {
   }
 
   return {
+    audioContext: audioContext,
     operatorsInfo: operatorsInfo,
     gainNodeToSpeaker: gainNodeToSpeaker,
     analyzerNode: analyzerNode,
@@ -110,22 +112,46 @@ function setOperatorsInfo(algorithmNum: number) {
 }
 
 function setEnvelop(t0: number, gainNode: GainNode, envelopParams: any) {
-  const t1 = t0 + envelopParams.attack;
+  const attack = t0 + envelopParams.attack;
   const decay = envelopParams.decay;
   const sustain = envelopParams.sustain;
   const sustainTime = envelopParams.sustainTime;
   const release = envelopParams.release;
   const gainValue = gainNode.gain.value;
 
+  // ゲインが0から始めるように初期化
   gainNode.gain.setValueAtTime(0, t0);
+  // // ゲインの最大までゲインを線形的に増加
+  // gainNode.gain.linearRampToValueAtTime(gainValue, t0 + attack);
+  // // sustainまでゲインを線形的に減少
+  // gainNode.gain.linearRampToValueAtTime(
+  //   gainValue * sustain,
+  //   t0 + attack + decay
+  // );
+  // // sustainTime中はsustainで値を固定
+  // gainNode.gain.linearRampToValueAtTime(
+  //   gainValue * sustain,
+  //   t0 + attack + decay + sustainTime
+  // );
+  // // sustainからゲインを0まで減少
+  // gainNode.gain.linearRampToValueAtTime(
+  //   0,
+  //   t0 + attack + decay + sustainTime + release
+  // );
+
   // ゲインの最大までゲインを線形的に増加
-  gainNode.gain.linearRampToValueAtTime(gainValue, t1);
+  gainNode.gain.setTargetAtTime(gainValue, t0, attack);
   // sustainまでゲインを線形的に減少
-  gainNode.gain.setTargetAtTime(sustain * gainValue, t1, decay);
+  gainNode.gain.setTargetAtTime(sustain * gainValue, t0 + attack, decay);
   // sustainTime中はsustainで値を固定
-  gainNode.gain.setTargetAtTime(sustain * gainValue, t1 + decay, sustainTime);
+  gainNode.gain.setTargetAtTime(
+    sustain * gainValue,
+    t0 + attack + decay,
+    sustainTime
+  );
   // sustainからゲインを0まで減少
-  gainNode.gain.setTargetAtTime(0, t1 + decay + sustainTime, release);
+  gainNode.gain.setTargetAtTime(0, t0 + attack + decay + sustainTime, release);
+  console.log("gainNode.gain", gainNode.gain, "gainValue");
 }
 
 function setAlgorithm(
