@@ -46,9 +46,10 @@ async def gene_manipulation(chromosomes_params: ChromosomesParams, giongo: Optio
     name = chromosomes_params.pop('name')
     age = chromosomes_params.pop('age')
     gender = chromosomes_params.pop('gender')
+    hearing = chromosomes_params.pop('hearing')
 
     # # 入力のバリデーション
-    validation(name,age,gender,chromosomes_params)
+    validation(name,age,gender,hearing,chromosomes_params)
     # 回答を記録
     # 呼び出し元ファイルからの相対パスを渡す（今回はbackend）
     log_path = "./results/" + f"{giongo}/" + name + random_strings + ".txt"

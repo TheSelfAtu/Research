@@ -32,3 +32,4 @@ class ChromosomesParams(BaseModel):
     name: str
     age: str
     gender: str
+    hearing: str
