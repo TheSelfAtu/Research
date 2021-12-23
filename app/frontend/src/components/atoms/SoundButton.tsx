@@ -23,10 +23,10 @@ export function SoundButton(props: SoundButtonProps) {
         const streamDestinationNode = soundData.streamDestinationNode;
 
         // 再生音を記録する 実験時はコメントアウト
-        const recorder = new MediaRecorder(streamDestinationNode.stream);
-        recorder.addEventListener("dataavailable", function (evt) {
-          saveAudio(evt.data, props.chromosomeNum);
-        });
+        // const recorder = new MediaRecorder(streamDestinationNode.stream);
+        // recorder.addEventListener("dataavailable", function (evt) {
+        //   saveAudio(evt.data, props.chromosomeNum);
+        // });
 
         // 音を再生
         Object.keys(operatorsInfo).forEach((key) => {
@@ -38,23 +38,22 @@ export function SoundButton(props: SoundButtonProps) {
             props.soundParamsList[key].sustainTime +
             props.soundParamsList[key].release;
           operatorsInfo[key].oscillatorNode.stop(currentTime + soundLength + 1);
-          console.log("sound button", currentTime + soundLength);
 
           // 音をaudio要素に記録 実験時にはコメントアウト
-          if (!operatorsInfo[key].isModulator) {
-            recorder.start();
-            operatorsInfo[key].oscillatorNode.onended = () => {
-              recorder.stop();
-            };
-          }
+          // if (!operatorsInfo[key].isModulator) {
+          //   recorder.start();
+          //   operatorsInfo[key].oscillatorNode.onended = () => {
+          //     recorder.stop();
+          //   };
+          // }
         });
 
         // 出力音の周波数スペクトルを描画
-        visualizeFFT(
-          new AudioContext(),
-          analyzerNodeForSpeaker,
-          props.chromosomeNum
-        );
+        // visualizeFFT(
+        //   new AudioContext(),
+        //   analyzerNodeForSpeaker,
+        //   props.chromosomeNum
+        // );
       }}
     >
       クリックすると音が鳴ります
