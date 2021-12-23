@@ -150,8 +150,8 @@ export function ResearchIGA(): JSX.Element {
         }}
       >
         <MenuItem value={""}>-</MenuItem>
-        <MenuItem value={"男性"}>男性</MenuItem>
-        <MenuItem value={"女性"}>女性</MenuItem>
+        <MenuItem value={"male"}>男性</MenuItem>
+        <MenuItem value={"female"}>女性</MenuItem>
       </Select>
       <p>聞こえにくい音や聞こえない音などはありますか</p>
       <Select
@@ -164,8 +164,8 @@ export function ResearchIGA(): JSX.Element {
         }}
       >
         <MenuItem value={""}>-</MenuItem>
-        <MenuItem value={"健聴"}>ない</MenuItem>
-        <MenuItem value={"聞こえにくさがある"}>聞こえにくい音がある</MenuItem>
+        <MenuItem value={"0"}>ない</MenuItem>
+        <MenuItem value={"1"}>聞こえにくい音がある</MenuItem>
       </Select>
 
       <div id="answer">

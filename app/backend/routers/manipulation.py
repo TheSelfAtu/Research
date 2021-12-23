@@ -52,7 +52,9 @@ async def gene_manipulation(chromosomes_params: ChromosomesParams, giongo: Optio
     validation(name,age,gender,hearing,chromosomes_params)
     # 回答を記録
     # 呼び出し元ファイルからの相対パスを渡す（今回はbackend）
-    log_path = "./results/" + f"{giongo}/" + name + random_strings + ".txt"
+    log_dirPath = "./results/" + f"{giongo}/"
+    log_file_name = name+"-"+age+"-"+gender+"-"+hearing+"-" + random_strings + ".json"
+    log_path = log_dirPath + log_file_name
     log(log_path, chromosomes_params)
     # 次世代の染色体を入れる配列
     next_generation_chromosomes: list[dict] = []
