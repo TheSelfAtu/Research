@@ -10,6 +10,13 @@ export function Description(props: DescriptionProps) {
       <h1>実験概要</h1>
       <h2>実験手順</h2>
       <ul>
+        <li>
+          実験を開始する前にページを一回リロードしてください（URLの末尾と実験手順の目的の擬音語が一致していれば問題ないです。）
+        </li>
+        <ul>
+          <li>例:URLの末尾が[pi]のときは【ピッ】</li>
+          <li>例:URLの末尾が[bu-]のときは【ブー】</li>
+        </ul>
         <li>ボタンを押すと音が再生されます。</li>
         <li className="font-size--md">
           再生された音が「{props.gion}
