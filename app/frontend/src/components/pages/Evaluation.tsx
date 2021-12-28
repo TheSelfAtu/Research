@@ -57,13 +57,16 @@ export function Evaluation(): JSX.Element {
     /* 1世代目はランダムにパラメータを生成 */
   }
   useEffect(() => {
+    const url = `${location.pathname}/initialize`;
+    console.log("location", location.pathname, url);
+
     if (count == 1) {
       axios
-        .get("/manipulation/initialize")
+        .get(url)
         .then((response) => {
-          const firstGenerationParams: chromosomesParams = response.data;
+          const bestFitChromosomes: chromosomesParams = response.data;
           // 遺伝子を初期化
-          setChromosomesParams(firstGenerationParams);
+          setChromosomesParams(bestFitChromosomes);
           // 生成する目的の擬音語を設定
           setGion(getAimGiongo());
         })
