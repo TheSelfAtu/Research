@@ -12,7 +12,7 @@ router = APIRouter()
 
 @router.get("/evaluation/{gion}/create")
 async def create_json_for_evaluate(gion:str):
-    create_fit_chromosome_json(gion)
+    create_fit_chromosome_json(gion,f"./best_fit_chromosomes/{gion}/best_fit.json")
     return {"result":"jsonファイルが作成されました"}
 
 @router.post("/evaluation/log")
