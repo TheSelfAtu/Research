@@ -18,6 +18,8 @@ export function Evaluation(): JSX.Element {
   const [age, setAge] = useState("");
   // 被験者性別
   const [gender, setGender] = useState("");
+  // 健聴など（聞こえ方）
+  const [hearing, setHearing] = useState("");
   // 生成する擬音語
   const [gion, setGion] = useState("");
   // 初回のみ実行するメソッド用
@@ -35,13 +37,14 @@ export function Evaluation(): JSX.Element {
       chromosomesParams,
       { name: name },
       { age: age },
-      { gender: gender }
+      { gender: gender },
+      { hearing: hearing }
     );
     // 送信先URL
     // 結果を送信する
     axios
-      .post(`/evaluation/${gion}`, answer)
-      .then((response) => {
+      .post(`/evaluation/log`, answer)
+      .then((_response) => {
         alert(
           "ご協力ありがとうございました。" +
             "\n" +
@@ -51,7 +54,7 @@ export function Evaluation(): JSX.Element {
       .catch((err) => {
         alert("データの送信に失敗しました" + "\n" + err.response.data.detail);
       });
-  }, [chromosomesParams, name, age, gender]);
+  }, [chromosomesParams, name, age, gender, hearing]);
 
   {
     /* 1世代目はランダムにパラメータを生成 */
@@ -140,6 +143,20 @@ export function Evaluation(): JSX.Element {
         <MenuItem value={""}>-</MenuItem>
         <MenuItem value={"男性"}>男性</MenuItem>
         <MenuItem value={"女性"}>女性</MenuItem>
+      </Select>
+      <p>聞こえにくい音や聞こえない音などはありますか</p>
+      <Select
+        labelId="hearing-label"
+        id="hearing-select"
+        value={hearing}
+        label="聞こえ方"
+        onChange={(e) => {
+          setHearing(e.target.value);
+        }}
+      >
+        <MenuItem value={""}>-</MenuItem>
+        <MenuItem value={"0"}>ない</MenuItem>
+        <MenuItem value={"1"}>聞こえにくい音がある</MenuItem>
       </Select>
 
       <div id="answer">

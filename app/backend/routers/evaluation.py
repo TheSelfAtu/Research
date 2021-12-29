@@ -2,7 +2,6 @@ import os
 import json
 from typing import Optional
 from schemas.chromosome import  ChromosomesParams
-from utils.log.log import log
 from utils.create_fit_chromosome_json import create_fit_chromosome_json
 from utils.validation.validation import validation
 
@@ -16,19 +15,24 @@ async def create_json_for_evaluate(gion:str):
     return {"result":"jsonファイルが作成されました"}
 
 @router.post("/evaluation/log")
-async def gene_manipulation(chromosomes_params: ChromosomesParams, giongo: Optional[str] = Cookie(None), random_strings: Optional[str] = Cookie(None)) -> ChromosomesParams:
-    chromosomes_params: dict = chromosomes_params.dict()
+async def log_chromosomes_fitness(chromosomes_params: dict, giongo: Optional[str] = Cookie(None), random_strings: Optional[str] = Cookie(None)) -> ChromosomesParams:
     # 被験者名
     name = chromosomes_params.pop('name')
     age = chromosomes_params.pop('age')
     gender = chromosomes_params.pop('gender')
+    hearing = chromosomes_params.pop('hearing')
 
     # # 入力のバリデーション
-    validation(name,age,gender,chromosomes_params)
+    validation(name,age,gender,hearing,chromosomes_params)
     # 回答を記録
     # 呼び出し元ファイルからの相対パスを渡す（今回はbackend）
-    log_path = "./results/" + f"{giongo}/" + name + random_strings + ".txt"
-    log(log_path, chromosomes_params)
+    log_dirPath = "./evaluation_results/" + f"{giongo}/"
+    log_file_name = name+"-"+age+"-"+gender+"-"+hearing+"-" + random_strings + ".json"
+    log_path = log_dirPath + log_file_name
+    # 実験の結果を記録
+    if os.path.exists(log_path) == False:
+        with open(log_path, 'w') as f:
+            json.dump(chromosomes_params, f)
     return {"greeting":"実験へのご協力ありがとうございます。"}
 
 @router.get("/evaluation/{gion}/initialize")
