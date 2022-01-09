@@ -26,9 +26,9 @@ async def log_chromosomes_fitness(chromosomes_params: dict, giongo: Optional[str
     validation(name,age,gender,hearing,chromosomes_params)
     # 回答を記録
     # 呼び出し元ファイルからの相対パスを渡す（今回はbackend）
-    log_dirPath = "./evaluation_results/" + f"{giongo}/"
+    log_dir_path = "./evaluation_results/" + f"{giongo}/"
     log_file_name = name+"-"+age+"-"+gender+"-"+hearing+"-" + random_strings + ".json"
-    log_path = log_dirPath + log_file_name
+    log_path = log_dir_path + log_file_name
     # 実験の結果を記録
     if os.path.exists(log_path) == False:
         with open(log_path, 'w') as f:

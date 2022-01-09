@@ -32,7 +32,7 @@ export function SelectFitness(props: SelectFitnessProps) {
   return (
     <div>
       <FormControl className={classes.formControl}>
-        <InputLabel id="fitness">擬音語への近さ</InputLabel>
+        <InputLabel id="fitness">擬音語のふさわしさ</InputLabel>
         <Select
           labelId="fitness"
           defaultValue="-"
@@ -51,11 +51,11 @@ export function SelectFitness(props: SelectFitnessProps) {
           }}
         >
           <MenuItem value="">-</MenuItem>
-          <MenuItem value="1">擬音語とまったく近くない</MenuItem>
-          <MenuItem value="2">擬音語とあまり近くない</MenuItem>
-          <MenuItem value="3">擬音語と少し近い</MenuItem>
-          <MenuItem value="4">擬音語とほとんど一致している</MenuItem>
-          <MenuItem value="5">擬音語と一致している</MenuItem>
+          <MenuItem value="1">1</MenuItem>
+          <MenuItem value="2">2</MenuItem>
+          <MenuItem value="3">3</MenuItem>
+          <MenuItem value="4">4</MenuItem>
+          <MenuItem value="5">5</MenuItem>
         </Select>
       </FormControl>
     </div>

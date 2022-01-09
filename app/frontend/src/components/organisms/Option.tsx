@@ -1,6 +1,7 @@
 import React from "react";
 import { SoundButton } from "../atoms/SoundButton";
-import { SelectFitness } from "../atoms/SelectFitness";
+import { SelectFitness } from "../atoms/SelectAbsoluteFitness";
+// import { SelectFitness } from "../atoms/SelectFitness";
 import { Canvas } from "../molecules/Canvas";
 import { ParametersTable } from "../molecules/ParametersTable";
 import { fmParamsList } from "../../@types/fmParams";
