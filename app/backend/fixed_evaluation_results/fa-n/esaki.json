@@ -42,7 +42,7 @@
         "modulationIndex": 289.5287990474614
       }
     },
-    "fitness": "4",
+    "fitness": "5",
     "chromosomeId": "c47d6637-9441-4398-bcba-b2ac9d751a4c",
     "algorithmNum": 1
   },
@@ -89,7 +89,7 @@
         "modulationIndex": 282.1694557955649
       }
     },
-    "fitness": "2",
+    "fitness": "3",
     "chromosomeId": "1fafbac4-876b-44f2-9d23-bbe1ab2615d0",
     "algorithmNum": 1
   },
@@ -183,7 +183,7 @@
         "modulationIndex": 126.30377294521357
       }
     },
-    "fitness": "3",
+    "fitness": "4",
     "chromosomeId": "3bb8f5dc-506c-4d12-bce8-960d5681da22",
     "algorithmNum": 1
   },
@@ -230,7 +230,7 @@
         "modulationIndex": 20.010956151933122
       }
     },
-    "fitness": "5",
+    "fitness": "3",
     "chromosomeId": "18850d43-3224-4175-a490-c859435f487b",
     "algorithmNum": 1
   },
@@ -277,7 +277,7 @@
         "modulationIndex": 92.09246294670979
       }
     },
-    "fitness": "2",
+    "fitness": "3",
     "chromosomeId": "2b25ba73-1dd8-4a9d-a7ee-fd4c1c9b4c62",
     "algorithmNum": 1
   },
@@ -324,7 +324,7 @@
         "modulationIndex": 77.4434457953566
       }
     },
-    "fitness": "4",
+    "fitness": "3",
     "chromosomeId": "518c3be8-d1ac-4820-ab64-c7f329c16bca",
     "algorithmNum": 1
   },
@@ -371,7 +371,7 @@
         "modulationIndex": 136.4695616042642
       }
     },
-    "fitness": "1",
+    "fitness": "4",
     "chromosomeId": "03e63424-d6a7-46e6-bceb-73845f21619e",
     "algorithmNum": 1
   },
@@ -418,7 +418,7 @@
         "modulationIndex": 227.3578876188137
       }
     },
-    "fitness": "3",
+    "fitness": "5",
     "chromosomeId": "ff310fe6-19bd-45dc-8f21-ee1e7aca639d",
     "algorithmNum": 1
   },
@@ -465,7 +465,7 @@
         "modulationIndex": 0
       }
     },
-    "fitness": "2",
+    "fitness": "3",
     "chromosomeId": "4c11af69-06af-4027-8f90-4082a28801f5",
     "algorithmNum": 1
   },
@@ -512,7 +512,7 @@
         "modulationIndex": 271.1064717815587
       }
     },
-    "fitness": "1",
+    "fitness": "3",
     "chromosomeId": "6dae9cd8-fcff-4703-9df7-f90602027b50",
     "algorithmNum": 1
   },
@@ -559,7 +559,7 @@
         "modulationIndex": 291.64854952495045
       }
     },
-    "fitness": "4",
+    "fitness": "2",
     "chromosomeId": "6c771409-713a-4ab1-99a9-f012a22ced33",
     "algorithmNum": 1
   }

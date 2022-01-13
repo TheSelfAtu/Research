@@ -42,7 +42,7 @@
         "modulationIndex": 0
       }
     },
-    "fitness": "1",
+    "fitness": "4",
     "chromosomeId": "34f8c125-3207-4ee1-a4b1-401de6bc49e5",
     "algorithmNum": 1
   },
@@ -89,7 +89,7 @@
         "modulationIndex": 114.62646096723702
       }
     },
-    "fitness": "4",
+    "fitness": "5",
     "chromosomeId": "b853b077-bc0a-4d2b-ae24-e97cba01fde1",
     "algorithmNum": 1
   },
@@ -136,7 +136,7 @@
         "modulationIndex": 167.95558850848303
       }
     },
-    "fitness": "5",
+    "fitness": "3",
     "chromosomeId": "04dd73d5-fbad-47db-90e2-19e497ce0f8e",
     "algorithmNum": 1
   },
@@ -183,7 +183,7 @@
         "modulationIndex": 0
       }
     },
-    "fitness": "2",
+    "fitness": "4",
     "chromosomeId": "19f3b3fd-662c-4b48-ab41-163c8a905649",
     "algorithmNum": 1
   },
@@ -230,7 +230,7 @@
         "modulationIndex": 300
       }
     },
-    "fitness": "1",
+    "fitness": "2",
     "chromosomeId": "2e43fc79-305c-4c6f-916a-116d49fa102e",
     "algorithmNum": 1
   },
@@ -324,7 +324,7 @@
         "modulationIndex": 192.80785221881052
       }
     },
-    "fitness": "2",
+    "fitness": "3",
     "chromosomeId": "a72483b8-9098-429e-84a6-995e3185e3ea",
     "algorithmNum": 1
   },
@@ -418,7 +418,7 @@
         "modulationIndex": 300
       }
     },
-    "fitness": "3",
+    "fitness": "2",
     "chromosomeId": "7b61e682-1e6d-4881-a42a-a8133618ba1b",
     "algorithmNum": 1
   },
@@ -465,7 +465,7 @@
         "modulationIndex": 48.31794750275937
       }
     },
-    "fitness": "2",
+    "fitness": "1",
     "chromosomeId": "0570aa84-564b-4cd8-a29d-c9ac54d4bae9",
     "algorithmNum": 1
   },
@@ -512,7 +512,7 @@
         "modulationIndex": 216.30780286317145
       }
     },
-    "fitness": "2",
+    "fitness": "1",
     "chromosomeId": "9e34fce1-eb4c-4405-9442-a677296f7163",
     "algorithmNum": 1
   },
