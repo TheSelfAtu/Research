@@ -1,6 +1,6 @@
 ALGORITHM_NUM = 0
 
-def make_fm_params(
+def make_fm_params_with_args(
         attack:float,
         decay:float,
         sustain:float,

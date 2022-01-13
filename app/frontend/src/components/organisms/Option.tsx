@@ -32,11 +32,11 @@ export function Option(props: OptionProps) {
         setChromosomesParams={props.setChromosomesParameters}
         fitnessValue={props.chromosomesFitnessValue}
       ></SelectFitness>
-      {/* <Canvas chromosomeNumber={props.chromosomeNumber}></Canvas> */}
-      {/* <ParametersTable
+      <Canvas chromosomeNumber={props.chromosomeNumber}></Canvas>
+      <ParametersTable
         fmParamsList={props.soundParamsList}
         algorithmNum={props.algorithmNum}
-      ></ParametersTable> */}
+      ></ParametersTable>
     </div>
   );
 }

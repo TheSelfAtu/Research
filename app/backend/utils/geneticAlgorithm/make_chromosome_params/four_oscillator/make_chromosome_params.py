@@ -2,6 +2,8 @@ import uuid
 
 from ...config import ALGORITHM_NUM
 from ...make_fm_params.make_with_config import make_fm_params
+from ...make_fm_params.make_with_args import make_fm_params_with_args
+from ...make_fm_params.make_zero_params import make_zero_params
 
 def make_chromosome_params():
     """ランダムな値を持つ個体を生成する(実験に使用)
@@ -11,12 +13,29 @@ def make_chromosome_params():
     """
     return {
         "fmParamsList": {
-            "operator1": make_fm_params(),
-            "operator2": make_fm_params(),
-            "operator3": make_fm_params(),
-            "operator4": make_fm_params(),
+            "operator1": make_fm_params_with_args(0,0,1,10,0,440,1,10),
+            "operator2": make_fm_params_with_args(0,0,1,10,0,88,1,10),
+            "operator3": make_fm_params_with_args(0,0,1,10,0,2200,1,10),
+            "operator4": make_zero_params(),
         },
         "algorithmNum": ALGORITHM_NUM,
         "fitness": "",
         "chromosomeId": uuid.uuid4()
     }
+# def make_chromosome_params():
+#     """ランダムな値を持つ個体を生成する(実験に使用)
+
+#     Returns:
+#         [type]: [description]
+#     """
+#     return {
+#         "fmParamsList": {
+#             "operator1": make_fm_params(),
+#             "operator2": make_fm_params(),
+#             "operator3": make_fm_params(),
+#             "operator4": make_fm_params(),
+#         },
+#         "algorithmNum": ALGORITHM_NUM,
+#         "fitness": "",
+#         "chromosomeId": uuid.uuid4()
+#     }

@@ -106,7 +106,7 @@ export function ResearchIGA(): JSX.Element {
               chromosomesFitnessValue={chromosomeParam.fitness}
               soundParamsList={chromosomeParam.fmParamsList}
             ></Option>
-            {/* <audio id={chromosomeNum + "audio"} controls></audio> */}
+            <audio id={chromosomeNum + "audio"} controls></audio>
           </div>
         );
       }
