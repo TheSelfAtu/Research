@@ -16,10 +16,11 @@ def create_analyze_file():
             with open(personal_result_path, 'r') as f:
                 read_data:dict = json.load(f)
                 for sound_path, each_sound_result in read_data.items():
+                    personal_result.extend(each_sound_result["fitness"])
                     splited_sound_path = sound_path.split("/")[-1]
                     splited_sound_path = splited_sound_path.split("-")
-                    sound_generator.append(splited_sound_path[0]+".json")
-                    personal_result.extend(each_sound_result["fitness"])
+                    if len(sound_generator) <= 48:
+                        sound_generator.append(splited_sound_path[0]+".json")
         all_result.append(personal_result)
     all_result.insert(0,sound_generator)
     with open("./analyzation/fitness.csv", 'w') as f:
