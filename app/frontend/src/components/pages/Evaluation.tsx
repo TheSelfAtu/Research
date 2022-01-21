@@ -98,6 +98,7 @@ export function Evaluation(): JSX.Element {
               chromosomesFitnessValue={chromosomeParam.fitness}
               soundParamsList={chromosomeParam.fmParamsList}
             ></Option>
+            <audio id={chromosomeNum + "audio"} controls></audio>
           </div>
         );
       }
